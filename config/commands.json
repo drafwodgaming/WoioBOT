@@ -1,0 +1,10 @@
+{
+    "userOption": "user",
+    "channelOption": "channel",
+    "setup": {
+      "name": "setup"
+    },
+    "disable": {
+      "name": "disable"
+    }
+}

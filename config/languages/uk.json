@@ -1,0 +1,129 @@
+{
+  "commands": {
+    "help": {
+      "title": "Меню команд",
+      "description": "Показати команди бота"
+    },
+    "serverInfo": {
+      "title": "Про сервер",
+      "description": "Показати інформацію про сервер",
+      "generalLabel": "Основне",
+      "guildName": "Назва: {{guildName}}",
+      "owner": "Творець: {{ownerId}}",
+      "createdAt": "Створений: {{guildCreatedAt}}",
+      "guildDescription": "Опис: {{guildDescription}}",
+      "totalGuildMembersCount": "Учасники [ {{memberCount}} ]",
+      "guildMembersCount": "Користувачі: {{guildMembers}}",
+      "guildBotsCount": "Боти: {{botsNumber}}",
+      "totalChannelsCount": "Канали [ {{guildChannels}} ]",
+      "guildTextChannelsCount": "Текстові: {{textChannels}}",
+      "guildVoiceChannelsCount": "Голосові: {{voiceChannels}}",
+      "guildCategoriesCount": "Категорії: {{guildCategories}}",
+      "totlaEmojisCount": "Емодзі [ {{emojiCount}} ]",
+      "animatedEmojisCount": "Анімовані: {{emojisAnimate}}",
+      "staticEmojisCount": "Статичні: {{emojisStatic}}",
+      "rolesCount": "Ролі [ {{guildRolesLength}} ]"
+    },
+    "userInfo": {
+      "description": "Показати інформацію про користувача",
+      "userOption": "Користувач",
+      "title": "Про Користувача",
+      "createdAt": "Створений",
+      "createdTime": "{{createdAt}}",
+      "statusLabel": "Статус",
+      "userStatus": "{{statusList}}",
+      "badges": "{{userBadges}}",
+      "joinedAt": "Увійшов",
+      "joinedTime": "{{memberJoinedTime}}",
+      "memberRoles": "Ролі",
+      "emptyRolesList": "немає ролей",
+      "online": "В мережi",
+      "idle": "Вiдiйшов",
+      "offline": "Не в мережі",
+      "dnd": "Не турбувати"
+    },
+    "welcomeChannel": {
+      "editedChannel": "Привітальний канал було змінено на <#{{channelId}}>",
+      "installedChannel": "Привітальний канал було встановлено на <#{{channelId}}>. Для відключення введіть /welcomechannel disable",
+      "noChannel": "{{warning}} Канал ще не встановлено",
+      "deletedChannel": "Привітальний канал було видалено",
+      "selectWelcomeChannel": "Вибери канал для привітальних повідомлень",
+      "setupChannel": "Встановіть канал для привітальних повідомлень",
+      "disableChannel": "Вимкніть канал для привітальних повідомлень",
+      "channelOption": "Встановіть канал для привітальних повідомлень"
+    },
+    "leaveChannel": {
+      "editedChannel": "Прощальний канал було змінено на <#{{channelId}}>",
+      "installedChannel": "Прощальний канал було встановлено на <#{{channelId}}>. Для відключення введіть /leavechannel disable",
+      "noChannel": "{{warning}} Канал ще не встановлено",
+      "deletedChannel": "Прощальний канал було видалено",
+      "selectLeaveChannel": "Вибери канал для прощальних повідомлень",
+      "setupChannel": "Встановіть канал для прощальних повідомлень",
+      "disableChannel": "Вимкніть канал для прощальних повідомлень",
+      "channelOption": "Встановіть канал для прощальних повідомлень"
+    },
+    "logChannel": {
+      "editedChannel": "Канал для логів було змінено на <#{{channelId}}>",
+      "installedChannel": "Канал для логів було встановлено на <#{{channelId}}>. Для відключення введіть /logchannel disable",
+      "noChannel": "{{warning}} Канал ще не встановлено",
+      "deletedChannel": "Канал для логів було видалено",
+      "selectLogChannel": "Вибери канал для логів",
+      "setupChannel": "Встановіть канал для логів",
+      "disableChannel": "Вимкніть канал для логів",
+      "channelOption": "Встановіть канал для логів"
+    },
+    "bugReport":{
+      "description": "Розповісти про баг"
+    }
+  },
+  "components": {
+    "modals": {
+      "customBackground": {
+        "label": "BACKGROUND",
+        "placeholder": "Custom Background"
+      },
+      "bugReport": {
+        "title": "ПОШУК БАГІВ",
+        "reportSent": "Ваш репорт успішно надіслано розробнику",
+        "bugCommandInput": {
+          "label": "Причина відправлення репорту",
+          "placeholder": "Ввести команду бота, яка працює з помилкою"
+        },
+        "bugDescriptionInput": {
+          "label": "Детальний опис проблеми",
+          "placeholder": "Будь ласка, надайте докладний опис того, що некоректно працює в цій команді"
+        }
+      }
+    }
+  },
+  "events": {
+    "developerOnly": "Ця команда доступна тільки розробнику",
+    "logChannelWelcome": {
+      "title": "User Joined",
+      "description": "User : %userName",
+      "createdAt": "Created at : %guildCreatedAt"
+    },
+    "logMessageDelete": {
+      "title": "Message deleted",
+      "description": {
+        "channelName": "Channel : %channelName (%channelId)",
+        "deletedBy": "Deleted by : %executor"
+      },
+      "fields": {
+        "name": "Message"
+      }
+    }
+  },
+  "time": {
+    "moment": {
+      "momentLocale": "en",
+      "momentWeekList": "Неділя_Понеділок_Вівторок_Середа_Четвер_П'ятниця_Субота"
+    },
+    "defaultTimeFormat": "dddd, DD.MM.YYYY HH:mm"
+  },
+  "logs": {
+    "errors": {
+      "errorCallCommand": "There was an error while executing this command! If this error continues, please contact us!"
+    }
+  }
+}

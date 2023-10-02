@@ -1,0 +1,136 @@
+{
+  "commands": {
+    "help": {
+      "name": "help",
+      "title": "Commands menu",
+      "description": "Get the commands for Lusty"
+    },
+    "serverInfo": {
+      "name": "serverinfo",
+      "title": "About Server",
+      "description": "View the server information",
+      "generalLabel": "General",
+      "guildName": "Name: {{guildName}}",
+      "owner": "Owner: {{ownerId}}",
+      "createdAt": "Created at: {{guildCreatedAt}}",
+      "guildDescription": "Description: {{guildDescription}}",
+      "totalGuildMembersCount": "Members [ {{memberCount}} ]",
+      "guildMembersCount": "Users: {{guildMembers}}",
+      "guildBotsCount": "Bots: {{botsNumber}}",
+      "totalChannelsCount": "Channels [ {{guildChannels}} ]",
+      "guildTextChannelsCount": "Text: {{textChannels}}",
+      "guildVoiceChannelsCount": "Voice: {{voiceChannels}}",
+      "guildCategoriesCount": "Categories: {{guildCategories}}",
+      "totlaEmojisCount": "Emojis [ {{emojiCount}} ]",
+      "animatedEmojisCount": "Animate: {{emojisAnimate}}",
+      "staticEmojisCount": "Static: {{emojisStatic}}",
+      "rolesCount": "Roles [ {{guildRolesLength}} ]"
+    },
+    "userInfo": {
+      "name": "userinfo",
+      "description": "View the user information",
+      "userOption": "Users",
+      "title": "About User",
+      "createdAt": "Created",
+    "createdTime": "{{createdAt}}",
+      "statusLabel": "Status",
+      "userStatus": "{{statusList}}",
+      "badges": "{{userBadges}}",
+      "joinedAt": "Joined",
+      "joinedTime": "{{memberJoinedTime}}",
+      "memberRoles": "Roles",
+      "emptyRolesList": "no roles",
+      "online": "Online",
+      "idle": "Idle",
+      "offline": "Offline",
+      "dnd": "Do not Disturb"
+    },
+    "welcomeChannel": {
+      "name": "welcomechannel",
+      "editedChannel": "Welcome channel was changed at <#{{channelId}}>",
+      "installedChannel": "Welcome channel was set at <#{{channelId}}>. To disable run /welcomechannel disable",
+      "noChannel": "{{warning}} Channel has not been set yet",
+      "deletedChannel": "Welcome channel was deleted",
+      "selectWelcomeChannel": "Select channel for welcome message",
+      "setupChannel": "Setup channel for welcome message",
+      "disableChannel": "Disable channel for welcome message",
+      "channelOption": "Setup channel for welcome message"
+    },
+    "leaveChannel": {
+      "name": "leavechannel",
+      "editedChannel": "Leave channel was changed at <#{{channelId}}>",
+      "installedChannel": "Leave channel was set at <#{{channelId}}>. To disabled run /leavechannel disable",
+      "noChannel": "{{warning}} Channel has not been set yet",
+      "deletedChannel": "Leave channel was deleted",
+      "selectLeaveChannel": "Select channel for leave message",
+      "setupChannel": "Setup channel for leave message",
+      "disableChannel": "Disable channel for leave message",
+      "channelOption": "Setup channel for leave message"
+    },
+    "logChannel": {
+      "name": "logchannel",
+      "editedChannel": "Log channel was changed at <#{{channelId}}>",
+      "installedChannel": "Log channel was set at <#{{channelId}}>. To disable run /logchannel disable",
+      "noChannel": "{{warning}} Channel has not been set yet",
+      "deletedChannel": "Log channel was deleted",
+      "selectLogChannel": "Select channel for log message",
+      "setupChannel": "Setup channel for log message",
+      "disableChannel": "Disable channel for log message",
+      "channelOption": "Setup channel for log message"
+    },
+    "bugReport":{
+      "name": "report",
+      "description": "Tell me about the bug"
+    }
+  },
+  "components": {
+    "modals": {
+      "customBackground": {
+        "label": "BACKGROUND",
+        "placeholder": "Custom Background"
+      },
+      "bugReport": {
+        "title": "BUG FINDER",
+        "reportSent": "Your report has been successfully sent to the developer",
+        "bugCommandInput": {
+          "label": "Reason for reporting bug",
+          "placeholder": "Enter the name of the bot command with the error"
+        },
+        "bugDescriptionInput": {
+          "label": "Detailed description of the problem",
+          "placeholder": "Please provide a detailed description of what is not working correctly in this command"
+        }
+      }
+    }
+  },
+  "events": {
+    "developerOnly": "This command may only be used by the developer",
+    "logChannelWelcome": {
+      "title": "User Joined",
+      "description": "User : %userName",
+      "createdAt": "Created at : %guildCreatedAt"
+    },
+    "logMessageDelete": {
+      "title": "Message deleted",
+      "description": {
+        "channelName": "Channel : %channelName (%channelId)",
+        "deletedBy": "Deleted by : %executor"
+      },
+      "fields": {
+        "name": "Message"
+      }
+    }
+  },
+  "time": {
+    "moment": {
+      "momentLocale": "en",
+      "momentWeekList": "Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday"
+    },
+    "defaultTimeFormat": "dddd, DD.MM.YYYY HH:mm"
+  },
+  "logs": {
+    "errors": {
+      "errorCallCommand": "There was an error while executing this command! If this error continues, please contact us!"
+    }
+  }
+}

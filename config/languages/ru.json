@@ -1,0 +1,129 @@
+{
+  "commands": {
+    "help": {
+      "title": "Меню команд",
+      "description": "Показать команды бота"
+    },
+    "serverInfo": {
+      "title": "О сервере",
+      "description": "Показать информацию о сервере",
+      "generalLabel": "Основное",
+      "guildName": "Название: {{guildName}}",
+      "owner": "Создатель: <@{{ownerId}}>",
+      "createdAt": "Cоздан: {{guildCreatedAt}}",
+      "guildDescription": "Описание: {{guildDescription}}",
+      "totalGuildMembersCount": "Участники [ {{memberCount}} ]",
+      "guildMembersCount": "Пользователи: {{guildMembers}}",
+      "guildBotsCount": "Боты: {{botsNumber}}",
+      "totalChannelsCount": "Каналы [ {{guildChannels}} ]",
+      "guildTextChannelsCount": "Текстовые: {{textChannels}}",
+      "guildVoiceChannelsCount": "Голосовые: {{voiceChannels}}",
+      "guildCategoriesCount": "Категории: {{guildCategories}}",
+      "totlaEmojisCount": "Эмодзи [ {{emojiCount}} ]",
+      "animatedEmojisCount": "Анимированные: {{emojisAnimate}}",
+      "staticEmojisCount": "Статичные: {{emojisStatic}}",
+      "rolesCount": "Роли [ {{guildRolesLength}} ]"
+    },
+    "userInfo": {
+      "description": "Показать информацию о пользователе",
+      "userOption": "Пользователь",
+      "title": "О Пользователе",
+      "createdAt": "Создан",
+    "createdTime": "{{createdAt}}",
+      "statusLabel": "Статус",
+      "userStatus": "{{statusList}}",
+      "badges": "{{userBadges}}",
+      "joinedAt": "Вошёл",
+      "joinedTime": "{{memberJoinedTime}}",
+      "memberRoles": "Роли",
+      "emptyRolesList": "нет ролей",
+      "online": "В сети",
+      "idle": "Отошёл",
+      "offline": "Не в сети",
+      "dnd": "Не беспокоить"
+    },
+    "welcomeChannel": {
+      "editedChannel": "Приветственный канал был изменён на <#{{channelId}}>",
+      "installedChannel": "Приветственный канал был установлен на <#{{channelId}}>. Для отключения введите /welcomechannel disable",
+      "noChannel": "{{warning}} Канал ещё не установлен",
+      "deletedChannel": "Приветственный канал был удалён",
+      "selectWelcomeChannel": "Выбери канал для приветственных сообщений",
+      "setupChannel": "Установи канал для приветственных сообщений",
+      "disableChannel": "Отключи канал для приветственных сообщений",
+      "channelOption": "Установи канал для приветственных сообщений"
+    },
+    "leaveChannel": {
+      "editedChannel": "Прощальный канал был изменен на <#{{channelId}}>",
+      "installedChannel": "Прощальный канал был установлен на <#{{channelId}}>. Для отключения введите /leavechannel disable",
+      "noChannel": "{{warning}} Канал ещё не установлен",
+      "deletedChannel": "Прощальный канал был удалён",
+      "selectLeaveChannel": "Выбери канал для прощальных сообщений",
+      "setupChannel": "Установи  канал для прощальных сообщений",
+      "disableChannel": "Отключи канал для прощальных сообщений",
+      "channelOption": "Установи  канал для прощальных сообщений"
+    },
+    "logChannel": {
+      "editedChannel": "Канал для логов был изменён на <#{{channelId}}>",
+      "installedChannel": "Канал для логов быз установлен на <#{{channelId}}>. Для отключения введите /logchannel disable",
+      "noChannel": "{{warning}} Канал ещё не установлен",
+      "deletedChannel": "Канал для логов был удалён",
+      "selectLogChannel": "Выбери канал для логов",
+      "setupChannel": "Установи канал для логов",
+      "disableChannel": "Отключи канал для логов",
+      "channelOption": "Установи канал для логов"
+    },
+    "bugReport":{
+      "description": "Рассказать про баг"
+    }
+  },
+  "components": {
+    "modals": {
+      "customBackground": {
+        "label": "BACKGROUND",
+        "placeholder": "Custom Background"
+      },
+      "bugReport": {
+        "title": "ПОИСК БАГОВ",
+        "reportSent": "Ваш репорт успешно отправлен разработчику",
+        "bugCommandInput": {
+          "label": "Причина отправления репорта",
+          "placeholder": "Введите команду бота, которая работает с ошибкой"
+        },
+        "bugDescriptionInput": {
+          "label": "Подробное описание проблемы",
+          "placeholder": "Пожалуйста, предоставьте подробное описание того, что некорректно работает в этой команде"
+        }
+      }
+    }
+  },
+  "events": {
+    "developerOnly": "Эта команда доступна только разработчику",
+    "logChannelWelcome": {
+      "title": "User Joined",
+      "description": "User : %userName",
+      "createdAt": "Created at : %guildCreatedAt"
+    },
+    "logMessageDelete": {
+      "title": "Message deleted",
+      "description": {
+        "channelName": "Channel : %channelName (%channelId)",
+        "deletedBy": "Deleted by : %executor"
+      },
+      "fields": {
+        "name": "Message"
+      }
+    }
+  },
+  "time": {
+    "moment": {
+      "momentLocale": "ru",
+      "momentWeekList": "Воскресенье_Понедельник_Вторник_Среда_Четверг_Пятница_Суббота"
+    },
+    "defaultTimeFormat": "dddd, DD.MM.YYYY HH:mm"
+  },
+  "logs": {
+    "errors": {
+      "errorCallCommand": "There was an error while executing this command! If this error continues, please contact us!"
+    }
+  }
+}
