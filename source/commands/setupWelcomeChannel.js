@@ -5,7 +5,7 @@ const {
   ChatInputCommandInteraction,
 } = require("discord.js");
 const { i18n } = require("../../config/i18nConfig");
-const { emojis } = require("../../config/botConfig.json");
+const { emojis } = require("../../config/emojis.json");
 const welcomeChannelSchema = require("../models/welcomeChannel");
 const botColors = require("../../config/botColors.json");
 const settings = require("../../config/commands.json");
