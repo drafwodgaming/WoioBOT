@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, bold } = require("discord.js");
 const { i18n } = require("../../config/i18nConfig");
-const botColors = require("../../config/botColors.json");
+const { colors } = require("../../config/botConfig.json");
+const { getUserLocale } = require("../functions/locale/userLocale");
 const en = require("../../config/languages/en.json");
 const ru = require("../../config/languages/ru.json");
 const uk = require("../../config/languages/uk.json");
@@ -19,7 +20,7 @@ module.exports = {
         .map((command) => `/${bold(command.name)} \n ${command.description}\n`)
         .join("\n");
 
-    const botColor = parseInt(botColors.default);
+    const botColor = parseInt(colors.default);
     const embedTitle = i18n.__("commands.help.title");
     const embedDescription = buildCommandDescription(
       interaction.client.commandsArray

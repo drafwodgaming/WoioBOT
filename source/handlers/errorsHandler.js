@@ -1,5 +1,5 @@
 const { Client } = require("discord.js");
-const consoleLogs = require("../../config/consoleLogs.json");
+const en = require("../../config/languages/en.json");
 const chalk = require("chalk");
 
 /**
@@ -7,10 +7,10 @@ const chalk = require("chalk");
  */
 module.exports = async (client) => {
   process.on("unhandledRejection", (error) => {
-    console.log(chalk.red(consoleLogs.unhandledRejection), `${error}`);
+    console.log(chalk.red(en.logs.unhandledRejection), `${error}`);
   });
 
   process.on("uncaughtException", (error) => {
-    console.log(chalk.red(consoleLogs.uncaughtException), `${error}`);
+    console.log(chalk.red(en.logs.uncaughtException), `${error}`);
   });
 };

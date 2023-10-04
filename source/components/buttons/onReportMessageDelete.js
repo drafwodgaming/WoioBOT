@@ -1,8 +1,8 @@
-const customId = require("../../../config/customId.json");
+const { buttons } = require("../../../config/componentsId.json");
 
 module.exports = {
   data: {
-    name: customId.buttons.deleteReport,
+    name: buttons.deleteReport,
   },
   async execute(interaction, client) {
     const { channelId, message } = interaction;

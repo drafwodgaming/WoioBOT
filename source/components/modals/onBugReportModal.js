@@ -1,16 +1,16 @@
 const { sendBugReport } = require("../../functions/sendBugReport");
-const customId = require("../../../config/customId.json");
+const { modals } = require("../../../config/componentsId.json");
 
 module.exports = {
   data: {
-    name: customId.modals.bugReport,
+    name: modals.bugReport,
   },
   async execute(interaction, client) {
     const bugCommandInput = interaction.fields.getTextInputValue(
-      customId.modals.bugCommand
+      modals.bugCommand
     );
     const bugDescriptionInput = interaction.fields.getTextInputValue(
-      customId.modals.bugDescription
+      modals.bugDescription
     );
 
     await sendBugReport(

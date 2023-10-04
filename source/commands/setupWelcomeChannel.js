@@ -5,18 +5,13 @@ const {
   ChatInputCommandInteraction,
 } = require("discord.js");
 const { i18n } = require("../../config/i18nConfig");
-const { emojis } = require("../../config/emojis.json");
+const { colors } = require("../../config/botConfig.json");
 const welcomeChannelSchema = require("../models/welcomeChannel");
-const botColors = require("../../config/botColors.json");
+const emojis = require("../../config/emojis.json");
 const settings = require("../../config/commands.json");
 const en = require("../../config/languages/en.json");
 const ru = require("../../config/languages/ru.json");
 const uk = require("../../config/languages/uk.json");
-
-const localize = (key, locale, placeholders) => {
-  const template = locales[locale].commands.welcomeChannel[key];
-  return template.replace(/%\w+/g, (match) => placeholders[match] || match);
-};
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -63,10 +58,10 @@ module.exports = {
   async execute(interaction) {
     const { guild, locale, options } = interaction;
     const subCommand = options.getSubcommand();
-    const botColor = parseInt(botColors.default);
-    const installColor = parseInt(botColors.succesGreen);
-    const editColor = parseInt(botColors.editBlue);
-    const errorColor = parseInt(botColors.errorRed);
+    const botColor = parseInt(colors.default);
+    const installColor = parseInt(colors.succesGreen);
+    const editColor = parseInt(colors.editBlue);
+    const errorColor = parseInt(colors.errorRed);
     const interactionChannel = options.getChannel("channel");
     const interactionGuildId = guild.id;
     const warning = emojis.goldWarning;

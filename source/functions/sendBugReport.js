@@ -1,13 +1,12 @@
 const { i18n } = require("../../config/i18nConfig");
 const { reportDelete } = require("../functions/buttons/setUpReportSave");
-const customId = require("../../config/customId.json");
-const botColors = require("../../config/botColors.json");
-const botConfig = require("../../config/botConfig.json");
+const { buttons } = require("../../config/componentsId.json");
+const { colors, onwerId } = require("../../config/botConfig.json");
 
 async function sendBugReport(interaction, client, bugCommand, bugDescription) {
   const { user } = interaction;
-  const botOwnerId = botConfig.onwerId;
-  const botColor = parseInt(botColors.editBlue);
+  const botOwnerId = onwerId;
+  const botColor = parseInt(colors.editBlue);
   const reportSent = i18n.__("components.modals.bugReport.reportSent");
   const embedTitle = `Report from ${user.displayName}`;
   const embedFields = [
@@ -15,7 +14,7 @@ async function sendBugReport(interaction, client, bugCommand, bugDescription) {
     { name: "Description", value: bugDescription },
   ];
   const botOwner = await client.users.fetch(botOwnerId);
-  const idButton = customId.buttons.deleteReport;
+  const idButton = buttons.deleteReport;
 
   await botOwner.send({
     embeds: [{ color: botColor, title: embedTitle, fields: embedFields }],
