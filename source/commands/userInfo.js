@@ -7,7 +7,7 @@ const {
 const { i18n } = require("../../config/i18nConfig");
 const { profileImage } = require("discord-arts");
 const { addBadges } = require("../functions/userBadges");
-const botColors = require("../../config/botColors.json");
+const { colors } = require("../../config/botConfig.json");
 const settings = require("../../config/commands.json");
 const moment = require("moment");
 const en = require("../../config/languages/en.json");
@@ -106,7 +106,7 @@ module.exports = {
         value: memberRoles || i18n.__("commands.userInfo.emptyRolesList"),
       },
     ];
-    const botColor = parseInt(botColors.default);
+    const botColor = parseInt(colors.default);
 
     const imageEmbed = {
       url: "attachment://profile.png",

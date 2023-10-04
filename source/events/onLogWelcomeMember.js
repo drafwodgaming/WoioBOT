@@ -1,10 +1,9 @@
 const { Events } = require("discord.js");
-
+const { colors } = require("../../config/botConfig.json");
 const { stripIndents } = require("common-tags");
 const logChannelSchema = require("../models/logChannel");
 const mustache = require("mustache");
 const moment = require("moment");
-const botColors = require("../../config/botColors.json");
 const en = require("../../config/languages/en");
 
 module.exports = {
@@ -38,7 +37,7 @@ module.exports = {
       guildCreatedAt: guildCreatedAt,
     })}
     `;
-    const botColor = parseInt(botColors.default);
+    const botColor = parseInt(colors.default);
     const embedThumbnailImage = {
       url: member.user.avatarURL(),
     };

@@ -1,10 +1,8 @@
 const { AttachmentBuilder } = require("discord.js");
 const { createCanvas, loadImage } = require("@napi-rs/canvas");
 const { registerFont } = require("canvas");
+const { fonts, memberCard, colors } = require("../../../config/botConfig.json");
 const memberCardBackground = require("../../../config/memberBackground.json");
-const botFonts = require("../../../config/botFonts.json");
-const botColors = require("../../../config/botColors.json");
-const botConfig = require("../../../config/botConfig.json");
 
 async function cardLeaveMessage(member) {
   const { user } = member;
@@ -14,7 +12,7 @@ async function cardLeaveMessage(member) {
     dynamic: "false",
   });
   let fontSize = 45;
-  const canvasColor = botColors.canvasWhite;
+  const canvasColor = colors.canvasWhite;
 
   //#region Welcome Canvas
   let canvas = createCanvas(1024, 450);
@@ -25,15 +23,15 @@ async function cardLeaveMessage(member) {
   context.drawImage(background, 0, 0, canvas.width, canvas.height);
 
   //Username
-  registerFont(botFonts.luckiestGuyRegular.path, {
-    family: botFonts.luckiestGuyRegular.family,
+  registerFont(fonts.luckiestGuyRegular.path, {
+    family: fonts.luckiestGuyRegular.family,
   });
 
   var textDimensions,
     text = `Goodbye ${username}`;
   do {
     context.fillStyle = canvasColor;
-    context.font = `${fontSize} ${botFonts.luckiestGuyRegular.family}`;
+    context.font = `${fontSize} ${fonts.luckiestGuyRegular.family}`;
     textDimensions = context.measureText(text);
   } while (textDimensions >= canvas.width);
 
@@ -57,7 +55,7 @@ async function cardLeaveMessage(member) {
 
   const imageAttachment = new AttachmentBuilder(
     canvas.toBuffer("image/png"),
-    botConfig.memberCard.leave
+    memberCard.leave
   );
   return imageAttachment;
   //#endregion

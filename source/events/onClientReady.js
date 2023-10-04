@@ -1,7 +1,7 @@
 const { Events, ActivityType } = require("discord.js");
-const botConfig = require("../../config/botConfig.json");
+const { monoDB } = require("../../config/botConfig.json");
 const mongoose = require("mongoose");
-const consoleLogs = require("../../config/consoleLogs.json");
+const en = require("../../config/languages/en.json");
 const chalk = require("chalk");
 
 module.exports = {
@@ -10,17 +10,14 @@ module.exports = {
   async execute(client) {
     mongoose.set("strictQuery", false);
     await mongoose
-      .connect(botConfig.monoDB, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      })
+      .connect(monoDB, { useNewUrlParser: true, useUnifiedTopology: true })
       .then(() =>
         console.log(
-          chalk.blue(consoleLogs.succesMongoDBTitle),
-          chalk.black(consoleLogs.dbConnected)
+          chalk.blue(en.logs.succesMongoDBTitle),
+          chalk.black(en.logs.dbConnected)
         )
       )
-      .catch((error) => console.log(chalk.red(consoleLogs.error), error));
+      .catch((error) => console.log(chalk.red(en.logs.error), error));
 
     client.user.setActivity({
       type: ActivityType.Custom,

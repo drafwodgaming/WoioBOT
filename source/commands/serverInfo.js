@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, ChannelType } = require("discord.js");
 const { i18n } = require("../../config/i18nConfig");
-const botColors = require("../../config/botColors.json");
+const { colors } = require("../../config/botConfig.json");
 const moment = require("moment");
 const en = require("../../config/languages/en.json");
 const ru = require("../../config/languages/ru.json");
@@ -110,7 +110,7 @@ module.exports = {
         value: guildRoles,
       },
     ];
-    const botColor = parseInt(botColors.default);
+    const botColor = parseInt(colors.default);
     const embedThumbnailImage = {
       url: guild.iconURL(),
     };

@@ -5,7 +5,7 @@ const {
   TextInputStyle,
 } = require("discord.js");
 const { i18n } = require("../../../config/i18nConfig");
-const customId = require("../../../config/customId.json");
+const { modals } = require("../../../config/componentsId.json");
 
 function bugReport(bugReportId, bugReportLabel) {
   const modal = new ModalBuilder()
@@ -13,7 +13,7 @@ function bugReport(bugReportId, bugReportLabel) {
     .setTitle(bugReportLabel);
 
   const bugCommandInput = new TextInputBuilder()
-    .setCustomId(customId.modals.bugCommand)
+    .setCustomId(modals.bugCommand)
     .setLabel(i18n.__("components.modals.bugReport.bugCommandInput.label"))
     .setStyle(TextInputStyle.Short)
     .setPlaceholder(
@@ -23,7 +23,7 @@ function bugReport(bugReportId, bugReportLabel) {
   const bugCommandRow = new ActionRowBuilder().addComponents(bugCommandInput);
 
   const bugDescriptionInput = new TextInputBuilder()
-    .setCustomId(customId.modals.bugDescription)
+    .setCustomId(modals.bugDescription)
     .setLabel(i18n.__("components.modals.bugReport.bugDescriptionInput.label"))
     .setStyle(TextInputStyle.Paragraph)
     .setPlaceholder(
