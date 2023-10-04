@@ -1,0 +1,15 @@
+{
+  "modals": {
+    "customBackground": "customBackground",
+    "customTag": "customTag",
+    "bugReport": "bugReport",
+    "bugCommand": "bugCommand",
+    "bugDescription": "bugDescription"
+  },
+  "menus": {
+    "customCreateProfile": "customCreateProfile"
+  },
+  "buttons": {
+    "deleteReport": "deleteReport"
+  }
+}
