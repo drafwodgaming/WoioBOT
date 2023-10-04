@@ -32,7 +32,7 @@
       "userOption": "Users",
       "title": "About User",
       "createdAt": "Created",
-    "createdTime": "{{createdAt}}",
+      "createdTime": "{{createdAt}}",
       "statusLabel": "Status",
       "userStatus": "{{statusList}}",
       "badges": "{{userBadges}}",
@@ -129,8 +129,9 @@
     "defaultTimeFormat": "dddd, DD.MM.YYYY HH:mm"
   },
   "logs": {
-    "errors": {
-      "errorCallCommand": "There was an error while executing this command! If this error continues, please contact us!"
-    }
+    "unhandledRejection": "[ERROR:UNHANDLED PROMISE REJECTION] ❯",
+    "uncaughtException": "[ERROR:UNHANDLED_PROMISE EXCEPTION] ❯",
+    "succesMongoDBTitle": "[DATABASE STATUS] ❯",
+    "dbConnected": "Connected"
   }
 }
