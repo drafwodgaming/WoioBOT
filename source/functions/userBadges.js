@@ -18,7 +18,6 @@ function addBadges(badgeNames) {
     VerifiedBot: emojis.verifiedBot,
   };
 
-  if (badgeNames.includes("NITRO")) badgeNames.push("Nitro"); // Добавляем "Nitro" в массив badgeNames
   return badgeNames.map((badgeName) => badgeMap[badgeName]);
 }
 

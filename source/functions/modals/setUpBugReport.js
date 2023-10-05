@@ -7,12 +7,12 @@ const {
 const { i18n } = require("../../../config/i18nConfig");
 const { modals } = require("../../../config/componentsId.json");
 
-function bugReport(bugReportId, bugReportLabel) {
-  const modal = new ModalBuilder()
+function createBugReportModal(bugReportId, bugReportLabel) {
+  const bugReportModal = new ModalBuilder()
     .setCustomId(bugReportId)
     .setTitle(bugReportLabel);
 
-  const bugCommandInput = new TextInputBuilder()
+  const bugCommandInputField = new TextInputBuilder()
     .setCustomId(modals.bugCommand)
     .setLabel(i18n.__("components.modals.bugReport.bugCommandInput.label"))
     .setStyle(TextInputStyle.Short)
@@ -20,9 +20,11 @@ function bugReport(bugReportId, bugReportLabel) {
       i18n.__("components.modals.bugReport.bugCommandInput.placeholder")
     );
 
-  const bugCommandRow = new ActionRowBuilder().addComponents(bugCommandInput);
+  const bugCommandRow = new ActionRowBuilder().addComponents(
+    bugCommandInputField
+  );
 
-  const bugDescriptionInput = new TextInputBuilder()
+  const bugDescriptionInputField = new TextInputBuilder()
     .setCustomId(modals.bugDescription)
     .setLabel(i18n.__("components.modals.bugReport.bugDescriptionInput.label"))
     .setStyle(TextInputStyle.Paragraph)
@@ -31,11 +33,11 @@ function bugReport(bugReportId, bugReportLabel) {
     );
 
   const bugDescriptionRow = new ActionRowBuilder().addComponents(
-    bugDescriptionInput
+    bugDescriptionInputField
   );
 
-  modal.addComponents(bugCommandRow, bugDescriptionRow);
+  bugReportModal.addComponents(bugCommandRow, bugDescriptionRow);
 
-  return modal;
+  return bugReportModal;
 }
-module.exports = { bugReport };
+module.exports = { createBugReportModal };

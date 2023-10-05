@@ -58,89 +58,71 @@ module.exports = {
   async execute(interaction) {
     const { guild, options } = interaction;
     const subCommand = options.getSubcommand();
-    const botColor = parseInt(colors.default);
-    const installColor = parseInt(colors.succesGreen);
-    const editColor = parseInt(colors.editBlue);
-    const errorColor = parseInt(colors.errorRed);
+    const defaultBotColor = parseInt(colors.default);
+    const installGreenColor = parseInt(colors.succesGreen);
+    const editBlueColor = parseInt(colors.editBlue);
+    const errorRedColor = parseInt(colors.errorRed);
     const interactionChannel = options.getChannel(settings.channelOption);
     const interactionGuildId = guild.id;
-    const warning = emojis.goldWarning;
+    const warningEmoji = emojis.goldWarning;
 
-    const noChannel = i18n.__("commands.leaveChannel.noChannel", { warning });
-    const deletedChannel = i18n.__("commands.leaveChannel.deletedChannel");
+    const noChannelMessage = i18n.__("commands.leaveChannel.noChannel", {
+      warningEmoji,
+    });
+    const deletedChannelMessage = i18n.__(
+      "commands.leaveChannel.deletedChannel"
+    );
+
+    let leaveChannel, responseEmbed;
 
     switch (subCommand) {
       case settings.setup.name:
-        {
-          const leaveChannel = await leaveChannelSchema.findOne({
-            guildId: interactionGuildId,
-          });
+        leaveChannel = await leaveChannelSchema.findOne({
+          guildId: interactionGuildId,
+        });
 
-          const editChannelDescription = i18n.__(
-            "commands.leaveChannel.editedChannel",
-            { channelId: interactionChannel.id }
-          );
+        const editChannelDescription = i18n.__(
+          "commands.leaveChannel.editedChannel",
+          { channelId: interactionChannel.id }
+        );
 
-          const installedChannelDescription = i18n.__(
-            "commands.leaveChannel.installedChannel",
-            { channelId: interactionChannel.id }
-          );
+        const installChannelDescription = i18n.__(
+          "commands.leaveChannel.installedChannel",
+          { channelId: interactionChannel.id }
+        );
 
-          if (leaveChannel) {
-            leaveChannel.channelId = interactionChannel.id;
-            leaveChannel.guildId = interactionGuildId;
-            await leaveChannel.save();
-            await interaction.reply({
-              embeds: [
-                {
-                  color: editColor,
-                  description: editChannelDescription,
-                },
-              ],
-              ephemeral: true,
-            });
-            return;
-          }
+        responseEmbed = {
+          color: leaveChannel ? editBlueColor : installGreenColor,
+          description: leaveChannel
+            ? editChannelDescription
+            : installChannelDescription,
+        };
+
+        if (leaveChannel) {
+          leaveChannel.channelId = interactionChannel.id;
+          leaveChannel.guildId = interactionGuildId;
+          await leaveChannel.save();
+        } else {
           const newChannelId = new leaveChannelSchema({
             channelId: interactionChannel.id,
             guildId: interactionGuildId,
           });
           await newChannelId.save();
-          await interaction.reply({
-            embeds: [
-              {
-                color: installColor,
-                description: installedChannelDescription,
-              },
-            ],
-            ephemeral: true,
-          });
         }
+        await interaction.reply({ embeds: [responseEmbed], ephemeral: true });
         break;
 
       case settings.disable.name:
-        {
-          const leaveChannel = await leaveChannelSchema.findOneAndDelete({
-            guildId: interactionGuildId,
-          });
+        leaveChannel = await leaveChannelSchema.findOneAndDelete({
+          guildId: interactionGuildId,
+        });
 
-          if (leaveChannel) {
-            await interaction.reply({
-              embeds: [
-                {
-                  color: errorColor,
-                  description: deletedChannel,
-                },
-              ],
-              ephemeral: true,
-            });
-            return;
-          }
-          await interaction.reply({
-            embeds: [{ color: botColor, description: noChannel }],
-            ephemeral: true,
-          });
-        }
+        responseEmbed = {
+          color: leaveChannel ? errorRedColor : defaultBotColor,
+          description: leaveChannel ? deletedChannelMessage : noChannelMessage,
+        };
+
+        await interaction.reply({ embeds: [responseEmbed], ephemeral: true });
         break;
     }
   },

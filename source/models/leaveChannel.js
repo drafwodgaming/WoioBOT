@@ -1,8 +1,8 @@
 const { Schema, model } = require("mongoose");
 
-const leaveChannel = new Schema({
+const leaveChannelSchema = new Schema({
   channelId: String,
   guildId: String,
 });
 
-module.exports = model("leavechannels", leaveChannel);
+module.exports = model("leavechannels", leaveChannelSchema);

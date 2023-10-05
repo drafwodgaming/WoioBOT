@@ -6,18 +6,11 @@ module.exports = {
     name: modals.bugReport,
   },
   async execute(interaction, client) {
-    const bugCommandInput = interaction.fields.getTextInputValue(
-      modals.bugCommand
-    );
-    const bugDescriptionInput = interaction.fields.getTextInputValue(
+    const bugCommand = interaction.fields.getTextInputValue(modals.bugCommand);
+    const bugDescription = interaction.fields.getTextInputValue(
       modals.bugDescription
     );
 
-    await sendBugReport(
-      interaction,
-      client,
-      bugCommandInput,
-      bugDescriptionInput
-    );
+    await sendBugReport(interaction, client, bugCommand, bugDescription);
   },
 };

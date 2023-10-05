@@ -20,106 +20,106 @@ module.exports = {
     .setDMPermission(false),
   async execute(interaction) {
     const { guild } = interaction;
-    const {
-      createdAt,
-      ownerId,
-      description,
-      memberCount,
-      channels,
-      emojis,
-      roles,
-    } = guild;
+    const { createdAt, ownerId, name, description, memberCount } = guild;
+    const membersCache = guild.members.cache;
+    const channelsCache = guild.channels.cache;
+    const emojisCache = guild.emojis.cache;
+    const rolesCache = guild.roles.cache;
 
     moment.updateLocale(i18n.__("time.moment.momentLocale"), {
       weekdays: i18n.__("time.moment.momentWeekList").split("_"),
     });
 
-    const guildName = guild.name;
+    const guildName = name;
     const guildCreatedAt = formatDate(createdAt);
-    const guildDescription = description || "";
-    const guildMembers = guild.members.cache.filter(
+    const guildDescription = description;
+    const guildMembersCount = membersCache.filter(
       (member) => !member.user.bot
     ).size;
-    const botsNumber = guild.members.cache.filter(
-      (member) => member.user.bot
-    ).size;
-    const guildChannels = channels.cache.size;
-    const textChannels = channels.cache.filter(
+    const botMembersCount = membersCache.size - guildMembersCount;
+    const guildChannels = channelsCache.size;
+    const textChannels = channelsCache.filter(
       (channel) => channel.type === ChannelType.GuildText
     ).size;
-    const voiceChannels = channels.cache.filter(
+    const voiceChannels = guild.channels.cache.filter(
       (channel) => channel.type === ChannelType.GuildVoice
     ).size;
-    const guildCategories = channels.cache.filter(
+    const guildCategories = channelsCache.filter(
       (channel) => channel.type === ChannelType.GuildCategory
     ).size;
-    const emojiCount = emojis.cache.size;
-    const emojisAnimate = emojis.cache.filter((emoji) => emoji.animated).size;
-    const emojisStatic = emojis.cache.filter((emoji) => !emoji.animated).size;
-    const guildRoles = roles.cache
-      .map((role) => role.toString())
-      .slice(1, 15)
-      .join(" ");
-    const guildRolesLength = roles.cache.map((role) => role.name).length;
 
-    const embedTitle = i18n.__("commands.serverInfo.title");
+    const totalEmojisCount = emojisCache.size;
+    const animatedEmojisCount = emojisCache.filter(
+      (emoji) => emoji.animated
+    ).size;
+    const staticEmojisCount = emojisCache.size - animatedEmojisCount;
+
+    const guildRoles = rolesCache
+      .map((role) => role.toString())
+      .slice(0, 15)
+      .join(" ");
+    const guildRolesCount = guild.roles.cache.map((role) => role.name).length;
+
+    const guildInfoTitle = i18n.__("commands.serverInfo.title");
     const embedFields = [
       {
         name: i18n.__("commands.serverInfo.generalLabel"),
-        value: `${i18n.__("commands.serverInfo.guildName", { guildName })}
-          ${i18n.__("commands.serverInfo.guildDescription", {
-            guildDescription,
-          })}
-          ${i18n.__("commands.serverInfo.owner", { ownerId })}
-          ${i18n.__("commands.serverInfo.createdAt", { guildCreatedAt })}`,
+        value: [
+          i18n.__("commands.serverInfo.guildName", { guildName }),
+          i18n.__("commands.serverInfo.guildDescription", { guildDescription }),
+          i18n.__("commands.serverInfo.owner", { ownerId }),
+          i18n.__("commands.serverInfo.createdAt", { guildCreatedAt }),
+        ].join("\n"),
       },
       {
-        name: i18n.__("commands.serverInfo.totalGuildMembersCount", {
-          memberCount,
-        }),
-        value: `${i18n.__("commands.serverInfo.guildMembersCount", {
-          guildMembers,
-        })}
-          ${i18n.__("commands.serverInfo.guildBotsCount", { botsNumber })}`,
+        name: i18n.__("commands.serverInfo.totalMembersCount", { memberCount }),
+        value: [
+          i18n.__("commands.serverInfo.guildMembersCount", {
+            guildMembersCount,
+          }),
+          i18n.__("commands.serverInfo.guildBotsCount", { botMembersCount }),
+        ].join("\n"),
       },
       {
         name: i18n.__("commands.serverInfo.totalChannelsCount", {
           guildChannels,
         }),
-        value: `${i18n.__("commands.serverInfo.guildTextChannelsCount", {
-          textChannels,
-        })}
-          ${i18n.__("commands.serverInfo.guildVoiceChannelsCount", {
-            voiceChannels,
-          })}
-          ${i18n.__("commands.serverInfo.guildCategoriesCount", {
-            guildCategories,
-          })}`,
+        value: [
+          i18n.__("commands.serverInfo.textChannelsCount", { textChannels }),
+          i18n.__("commands.serverInfo.voiceChannelsCount", { voiceChannels }),
+          i18n.__("commands.serverInfo.categoriesCount", { guildCategories }),
+        ].join("\n"),
       },
       {
-        name: i18n.__("commands.serverInfo.totlaEmojisCount", { emojiCount }),
-        value: `${i18n.__("commands.serverInfo.animatedEmojisCount", {
-          emojisAnimate,
-        })}
-          ${i18n.__("commands.serverInfo.staticEmojisCount", {
-            emojisStatic,
-          })}`,
+        name: i18n.__("commands.serverInfo.totalEmojisCount", {
+          totalEmojisCount,
+        }),
+        value: [
+          i18n.__("commands.serverInfo.animatedEmojisCount", {
+            animatedEmojisCount,
+          }),
+          i18n.__("commands.serverInfo.staticEmojisCount", {
+            staticEmojisCount,
+          }),
+        ].join("\n"),
       },
       {
-        name: i18n.__("commands.serverInfo.rolesCount", { guildRolesLength }),
+        name: i18n.__("commands.serverInfo.guildRolesCount", {
+          guildRolesCount,
+        }),
         value: guildRoles,
       },
     ];
-    const botColor = parseInt(colors.default);
-    const embedThumbnailImage = {
+    const defaultBotColor = parseInt(colors.default);
+    const guildIconThumbnail = {
       url: guild.iconURL(),
     };
     await interaction.reply({
       embeds: [
         {
-          color: botColor,
-          title: embedTitle,
-          thumbnail: embedThumbnailImage,
+          color: defaultBotColor,
+          title: guildInfoTitle,
+          thumbnail: guildIconThumbnail,
           fields: embedFields,
         },
       ],

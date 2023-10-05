@@ -20,8 +20,8 @@ module.exports = {
         .map((command) => `/${bold(command.name)} \n ${command.description}\n`)
         .join("\n");
 
-    const botColor = parseInt(colors.default);
-    const embedTitle = i18n.__("commands.help.title");
+    const defaultBotColor = parseInt(colors.default);
+    const helpTitle = i18n.__("commands.help.title");
     const embedDescription = buildCommandDescription(
       interaction.client.commandsArray
     );
@@ -29,8 +29,8 @@ module.exports = {
     await interaction.reply({
       embeds: [
         {
-          color: botColor,
-          title: embedTitle,
+          color: defaultBotColor,
+          title: helpTitle,
           description: embedDescription,
         },
       ],

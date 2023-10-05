@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
-const { bugReport } = require("../functions/modals/setUpBugReport");
+const { createBugReportModal } = require("../functions/modals/setUpBugReport");
 const { i18n } = require("../../config/i18nConfig");
 const { modals } = require("../../config/componentsId.json");
 const en = require("../../config/languages/en.json");
@@ -15,9 +15,10 @@ module.exports = {
       uk: uk.commands.bugReport.description,
     }),
   async execute(interaction) {
-    const titleModal = i18n.__("components.modals.bugReport.title");
-    const idModal = modals.bugReport;
-
-    await interaction.showModal(bugReport(idModal, titleModal));
+    const modalTitle = i18n.__("components.modals.bugReport.title");
+    const bugReportModalId = modals.bugReport;
+    await interaction.showModal(
+      createBugReportModal(bugReportModalId, modalTitle)
+    );
   },
 };

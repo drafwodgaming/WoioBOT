@@ -4,20 +4,18 @@ const path = require("path");
 
 module.exports = (client, sourcePath) => {
   client.eventsHandler = async () => {
-    const eventsPath = path.join(sourcePath, filePath.eventsPath);
+    const eventsFolderPath = path.join(sourcePath, filePath.eventsPath);
     const eventsFiles = fileSystem
-      .readdirSync(eventsPath)
+      .readdirSync(eventsFolderPath)
       .filter((file) => file.endsWith(filePath.jsFileExtension));
 
     for (const file of eventsFiles) {
-      const eventPath = path.join(eventsPath, file);
-      const event = require(eventPath);
+      const eventFilePath = path.join(eventsFolderPath, file);
+      const event = require(eventFilePath);
 
-      if (event.once) {
+      if (event.once)
         client.once(event.name, (...args) => event.execute(...args, client));
-      } else {
-        client.on(event.name, (...args) => event.execute(...args, client));
-      }
+      else client.on(event.name, (...args) => event.execute(...args, client));
     }
   };
 };
