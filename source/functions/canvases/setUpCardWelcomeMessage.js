@@ -1,56 +1,43 @@
 const { AttachmentBuilder } = require("discord.js");
-const { createCanvas, loadImage } = require("@napi-rs/canvas");
-const { registerFont } = require("canvas");
-const memberCardBackground = require("../../../config/memberBackground.json");
+const { registerFont, createCanvas, loadImage } = require("canvas");
 const { fonts, memberCard, colors } = require("../../../config/botConfig.json");
+const memberCardBackground = require("../../../config/memberBackground.json");
 
 async function cardWelcomeMessage(member) {
   const { user } = member;
-  let username = user.username;
-  let avatarURL = user.displayAvatarURL({
-    format: "png",
-    dynamic: "false",
-  });
-  let fontSize = 45;
+  const { username } = user;
+  const avatarURL = user.displayAvatarURL({ extension: "jpg" });
+  const fontSize = 43;
   const canvasColor = colors.canvasWhite;
 
-  let canvas = createCanvas(1024, 450);
-  let context = canvas.getContext("2d");
-
-  // Image
-  let background = await loadImage(memberCardBackground.welcome);
+  const canvas = createCanvas(1024, 450);
+  const context = canvas.getContext("2d");
+  const background = await loadImage(memberCardBackground.welcome);
   context.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-  //Username
+  const text = `Welcome ${username}!`;
+  const { width, height } = canvas;
+  const textX = width / 2;
+  const textY = height - 90;
+
   registerFont(fonts.luckiestGuyRegular.path, {
     family: fonts.luckiestGuyRegular.family,
   });
 
-  var textDimensions,
-    text = `Welcome ${username}`;
-  do {
-    context.fillStyle = canvasColor;
-    context.font = `${fontSize} ${fonts.luckiestGuyRegular.family}`;
-    textDimensions = context.measureText(text);
-  } while (textDimensions >= canvas.width);
+  context.textAlign = "center";
+  context.fillStyle = canvasColor;
+  context.font = `${fontSize}px ${fonts.luckiestGuyRegular.family}`;
+  context.fillText(text, textX, textY);
 
-  context.fillText(
-    text,
-    canvas.width / 2 - textDimensions.width / 2,
-    canvas.height - 90
-  );
-
-  // Avatar
   context.beginPath();
   context.lineWidth = 10;
-  context.strokeStyle = canvasColor;
-  context.arc(canvas.width / 2, canvas.height - 270, 100, 0, Math.PI * 2, true);
+  context.strokeStyle = colors.canvasWhite;
+  context.arc(width / 2, height - 270, 100, 0, Math.PI * 2, true);
   context.stroke();
-  context.closePath();
   context.clip();
-  const img = await loadImage(avatarURL);
-  context.drawImage(img, 412, 80, 200, 200);
-  context.restore();
+
+  const imageAvatar = await loadImage(avatarURL);
+  context.drawImage(imageAvatar, width / 2 - 100, height - 370, 200, 200);
 
   const imageAttachment = new AttachmentBuilder(
     canvas.toBuffer("image/png"),

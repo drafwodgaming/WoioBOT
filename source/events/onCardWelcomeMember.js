@@ -18,7 +18,7 @@ module.exports = {
     const welcomeChannel = guild.channels.cache.find(
       (channel) => channel.id === interactionChannelId.channelId
     );
-    // if (!welcomeChannel || user.bot) return;
+    if (!welcomeChannel || user.bot) return;
 
     const welcomeMessage = await cardWelcomeMessage(member);
     await welcomeChannel.send({ files: [welcomeMessage] }).catch((err) => {
