@@ -2,52 +2,67 @@ const { Events, ChatInputCommandInteraction } = require("discord.js");
 const { i18n } = require("../../config/i18nConfig");
 const { getUserLocale } = require("../functions/locale/userLocale");
 const { colors, onwerId } = require("../../config/botConfig.json");
+
 /**
  * @param {ChatInputCommandInteraction} interaction
  */
 module.exports = {
   name: Events.InteractionCreate,
   async execute(interaction, client) {
-    if (interaction.isChatInputCommand()) {
-      const command = interaction.client.commands.get(interaction.commandName);
+    const { customId } = interaction;
+    const isChatInputCommand = interaction.isChatInputCommand();
+    const isModalSubmit = interaction.isModalSubmit();
+    const isButton = interaction.isButton();
+    const isStringSelectMenu = interaction.isStringSelectMenu();
 
-      if (!command) return;
+    const userLocale = getUserLocale(interaction);
+    i18n.setLocale(userLocale);
 
-      const developerOnly = i18n.__("events.developerOnly");
-      const botColor = parseInt(colors.default);
-      if (command.developer && interaction.user.id !== onwerId)
-        return interaction.reply({
-          embeds: [{ color: botColor, description: developerOnly }],
-          ephemeral: true,
-        });
+    switch (true) {
+      case isChatInputCommand:
+        const command = interaction.client.commands.get(
+          interaction.commandName
+        );
 
-      const userLocale = getUserLocale(interaction);
-      i18n.setLocale(userLocale);
+        if (!command) return;
 
-      await command.execute(interaction, client);
-    } else if (interaction.isModalSubmit()) {
-      const { modals } = client;
-      const { customId } = interaction;
-      const modal = modals.get(customId);
-      if (!modal) return;
+        const developerOnlyMessage = i18n.__("events.developerOnly");
+        const defaultBotColor = parseInt(colors.default);
+        if (command.developer && interaction.user.id !== onwerId) {
+          return interaction.reply({
+            embeds: [
+              { color: defaultBotColor, description: developerOnlyMessage },
+            ],
+            ephemeral: true,
+          });
+        }
 
-      await modal.execute(interaction, client);
-    } else if (interaction.isButton()) {
-      const { buttons } = client;
-      const { customId } = interaction;
-      const button = buttons.get(customId);
-      if (!button) return;
+        await command.execute(interaction, client);
+        break;
 
-      await button.execute(interaction, client);
-    } else if (interaction.isStringSelectMenu()) {
-      const { selectMenus } = client;
-      const { customId } = interaction;
-      const selectMenu = selectMenus.get(customId);
+      case isModalSubmit:
+        const { modals } = client;
+        const modal = modals.get(customId);
+        if (!modal) return;
 
-      if (!selectMenu) return;
+        await modal.execute(interaction, client);
+        break;
 
-      await selectMenu.execute(interaction, client);
+      case isButton:
+        const { buttons } = client;
+        const button = buttons.get(customId);
+        if (!button) return;
+
+        await button.execute(interaction, client);
+        break;
+
+      case isStringSelectMenu:
+        const { selectMenus } = client;
+        const selectMenu = selectMenus.get(customId);
+        if (!selectMenu) return;
+
+        await selectMenu.execute(interaction, client);
+        break;
     }
   },
-  name: Events.InteractionCreate,
 };

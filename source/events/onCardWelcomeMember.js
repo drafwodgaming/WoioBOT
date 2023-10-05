@@ -8,21 +8,19 @@ module.exports = {
   name: Events.GuildMemberAdd,
   async execute(member) {
     const { guild, user } = member;
+    const channelsCache = guild.channels.cache;
 
     const interactionChannelId = await welcomeChannelSchema.findOne({
       guildId: guild.id,
     });
 
-    if (!interactionChannelId) return;
-
-    const welcomeChannel = guild.channels.cache.find(
+    const welcomeChannel = channelsCache.find(
       (channel) => channel.id === interactionChannelId.channelId
     );
-    if (!welcomeChannel || user.bot) return;
 
-    const welcomeMessage = await cardWelcomeMessage(member);
-    await welcomeChannel.send({ files: [welcomeMessage] }).catch((err) => {
-      return;
-    });
+    if (user.bot || !interactionChannelId || !welcomeChannel) return;
+
+    const welcomeMessageCanvas = await cardWelcomeMessage(member);
+    await welcomeChannel.send({ files: [welcomeMessageCanvas] });
   },
 };

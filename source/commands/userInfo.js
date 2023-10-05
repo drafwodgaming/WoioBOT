@@ -2,7 +2,6 @@ const {
   SlashCommandBuilder,
   ChatInputCommandInteraction,
   AttachmentBuilder,
-  inlineCode,
 } = require("discord.js");
 const { i18n } = require("../../config/i18nConfig");
 const { profileImage } = require("discord-arts");
@@ -14,7 +13,7 @@ const en = require("../../config/languages/en.json");
 const ru = require("../../config/languages/ru.json");
 const uk = require("../../config/languages/uk.json");
 
-const formatDate = (date, locale) =>
+const formatDate = (date) =>
   moment(date).format(i18n.__("time.defaultTimeFormat"));
 
 module.exports = {
@@ -41,47 +40,40 @@ module.exports = {
    */
   async execute(interaction) {
     await interaction.deferReply();
-
     const { options, member } = interaction;
-    const { createdAt, joinedAt } = member;
+    const targetUser = options.getMember(settings.userOption) || member;
+    const rolesCache = targetUser.roles.cache;
 
     moment.updateLocale(i18n.__("time.moment.momentLocale"), {
       weekdays: i18n.__("time.moment.momentWeekList").split("_"),
     });
 
-    const targetUser = options.getMember(settings.userOption) || member;
-    const profileBuffer = await profileImage(targetUser.id, {
+    const profileImageBuffer = await profileImage(targetUser.id, {
       badgesFrame: true,
     });
-    const imageAttachment = new AttachmentBuilder(profileBuffer, {
+    const imageAttachment = new AttachmentBuilder(profileImageBuffer, {
       name: "profile.png",
     });
-    const userCreatedAt = formatDate(createdAt);
-    const memberJoinedTime = formatDate(joinedAt);
+    const userCreatedAt = formatDate(targetUser.user.createdAt);
+    const memberJoinedTime = formatDate(targetUser.joinedAt);
     const statusList = {
       online: i18n.__("commands.userInfo.online"),
       idle: i18n.__("commands.userInfo.idle"),
       offline: i18n.__("commands.userInfo.offline"),
       dnd: i18n.__("commands.userInfo.dnd"),
     };
-    const userBadges = targetUser.user.flags.toArray();
-
-    const memberRoles = targetUser.roles.cache
-      .map((role) => role)
-      .sort((a, b) => b.position - a.position)
+    const userBadgesList = targetUser.user.flags.toArray();
+    const userBadgesDescription = `${addBadges(userBadgesList).join(" ")}`;
+    const memberRolesList = rolesCache
       .map((role) => role)
       .slice(0, 3)
       .join(" ");
 
-    const userBadgesDescription = `${addBadges(userBadges).join(" ")}`;
-
-    const embedTitle = i18n.__("commands.userInfo.title");
+    const userInfoTitle = i18n.__("commands.userInfo.title");
     const embedFields = [
       {
         name: i18n.__("commands.userInfo.createdAt"),
-        value: i18n.__("commands.userInfo.createdTime", {
-          createdAt: userCreatedAt,
-        }),
+        value: i18n.__("commands.userInfo.createdTime", { userCreatedAt }),
         inline: false,
       },
       {
@@ -94,19 +86,17 @@ module.exports = {
         value: i18n.__("commands.userInfo.userStatus", {
           statusList:
             statusList[
-              targetUser.presence
-                ? targetUser.presence.status
-                : locales[locale].bot.presence.offline
+              targetUser.presence ? targetUser.presence.status : "offline"
             ],
         }),
         inline: true,
       },
       {
         name: i18n.__("commands.userInfo.memberRoles"),
-        value: memberRoles || i18n.__("commands.userInfo.emptyRolesList"),
+        value: memberRolesList || i18n.__("commands.userInfo.emptyRolesList"),
       },
     ];
-    const botColor = parseInt(colors.default);
+    const defaultBotColor = parseInt(colors.default);
 
     const imageEmbed = {
       url: "attachment://profile.png",
@@ -114,8 +104,8 @@ module.exports = {
     await interaction.editReply({
       embeds: [
         {
-          color: botColor,
-          title: embedTitle,
+          color: defaultBotColor,
+          title: userInfoTitle,
           description: userBadgesDescription,
           fields: embedFields,
           image: imageEmbed,

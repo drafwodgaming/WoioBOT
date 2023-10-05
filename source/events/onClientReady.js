@@ -25,13 +25,13 @@ module.exports = {
       state: "🧩 LetsGo!",
     });
 
-    const clientData = [
+    const clientStats = [
       {
         Name: client.user.tag,
         Servers: client.guilds.cache.size,
         Channels: client.channels.cache.size,
       },
     ];
-    console.table(clientData);
+    console.table(clientStats);
   },
 };

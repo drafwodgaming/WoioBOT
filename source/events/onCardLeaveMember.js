@@ -8,21 +8,19 @@ module.exports = {
   name: Events.GuildMemberRemove,
   async execute(member) {
     const { guild, user } = member;
+    const channelsCache = guild.channels.cache;
+
     const interactionChannelId = await leaveChannelSchema.findOne({
       guildId: guild.id,
     });
 
-    if (!interactionChannelId) return;
-
-    const leaveChannel = guild.channels.cache.find(
+    const leaveChannel = channelsCache.find(
       (channel) => channel.id === interactionChannelId.channelId
     );
 
-    if (!leaveChannel || user.bot) return;
+    if (user.bot || !interactionChannelId || !leaveChannel) return;
 
-    const leaveMessage = await cardLeaveMessage(member);
-    await leaveChannel.send({ files: [leaveMessage] }).catch((err) => {
-      return;
-    });
+    const leaveMessageCanvas = await cardLeaveMessage(member);
+    await leaveChannel.send({ files: [leaveMessageCanvas] });
   },
 };

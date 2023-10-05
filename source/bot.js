@@ -15,14 +15,14 @@ client.buttons = new Collection();
 client.selectMenus = new Collection();
 client.commandsArray = [];
 
-const handlersPath = path.join(__dirname, botConfig.filePath.handlersPath);
+const handlersDirectory = path.join(__dirname, botConfig.filePath.handlersPath);
 const handlersFiles = fileSystem
-  .readdirSync(handlersPath)
+  .readdirSync(handlersDirectory)
   .filter((file) => file.endsWith(botConfig.filePath.jsFileExtension));
 
 for (const file of handlersFiles) {
-  const filePath = path.join(handlersPath, file);
-  require(filePath)(client, __dirname);
+  const handlerFilePath = path.join(handlersDirectory, file);
+  require(handlerFilePath)(client, __dirname);
 }
 async function setUpBot() {
   client.eventsHandler();

@@ -15,10 +15,10 @@ async function cardWelcomeMessage(member) {
   const background = await loadImage(memberCardBackground.welcome);
   context.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-  const text = `Welcome ${username}!`;
+  const welcomeMessage = `Welcome ${username}!`;
   const { width, height } = canvas;
-  const textX = width / 2;
-  const textY = height - 90;
+  const welcomeMessageX = width / 2;
+  const welcomeMessageY = height - 90;
 
   registerFont(fonts.luckiestGuyRegular.path, {
     family: fonts.luckiestGuyRegular.family,
@@ -27,7 +27,7 @@ async function cardWelcomeMessage(member) {
   context.textAlign = "center";
   context.fillStyle = canvasColor;
   context.font = `${fontSize}px ${fonts.luckiestGuyRegular.family}`;
-  context.fillText(text, textX, textY);
+  context.fillText(welcomeMessage, welcomeMessageX, welcomeMessageY);
 
   context.beginPath();
   context.lineWidth = 10;
@@ -36,14 +36,14 @@ async function cardWelcomeMessage(member) {
   context.stroke();
   context.clip();
 
-  const imageAvatar = await loadImage(avatarURL);
-  context.drawImage(imageAvatar, width / 2 - 100, height - 370, 200, 200);
+  const avatarImage = await loadImage(avatarURL);
+  context.drawImage(avatarImage, width / 2 - 100, height - 370, 200, 200);
 
-  const imageAttachment = new AttachmentBuilder(
+  const leaveMessageAttachment = new AttachmentBuilder(
     canvas.toBuffer("image/png"),
     memberCard.welcome
   );
-  return imageAttachment;
+  return leaveMessageAttachment;
 }
 
 module.exports = { cardWelcomeMessage };
