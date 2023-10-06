@@ -1,5 +1,5 @@
 const { Client } = require("discord.js");
-const en = require("../../config/languages/en.json");
+const en = require("@config/languages/en.json");
 const kleur = require("kleur");
 /**
  * @param {Client} client

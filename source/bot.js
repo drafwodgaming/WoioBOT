@@ -1,6 +1,7 @@
+require("module-alias/register");
 const { Client, REST, Routes, Collection } = require("discord.js");
-const botConfig = require("../config/botConfig.json");
-const botIntents = require("../config/botIntents");
+const botConfig = require("@config/botConfig.json");
+const botIntents = require("@config/botIntents");
 const fileSystem = require("fs");
 const path = require("path");
 

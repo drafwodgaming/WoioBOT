@@ -1,8 +1,8 @@
 const { Events } = require("discord.js");
 const {
   cardLeaveMessage,
-} = require("../functions/canvases/setUpCardLeaveMessage");
-const leaveChannelSchema = require("../models/leaveChannel");
+} = require("@source/functions/canvases/setUpCardLeaveMessage");
+const leaveChannelSchema = require("@source/models/leaveChannel");
 
 module.exports = {
   name: Events.GuildMemberRemove,

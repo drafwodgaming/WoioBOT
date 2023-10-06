@@ -4,8 +4,8 @@ const {
   TextInputBuilder,
   TextInputStyle,
 } = require("discord.js");
-const { i18n } = require("../../../config/i18nConfig");
-const { modals } = require("../../../config/componentsId.json");
+const { i18n } = require("@config/i18nConfig");
+const { modals } = require("@config/componentsId.json");
 
 function createBugReportModal(bugReportId, bugReportLabel) {
   const bugReportModal = new ModalBuilder()

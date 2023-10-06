@@ -1,10 +1,10 @@
 const { Events } = require("discord.js");
-const { colors } = require("../../config/botConfig.json");
+const { colors } = require("@config/botConfig.json");
 const { stripIndents } = require("common-tags");
-const logChannelSchema = require("../models/logChannel");
+const logChannelSchema = require("@source/models/logChannel");
 const mustache = require("mustache");
 const moment = require("moment");
-const en = require("../../config/languages/en");
+const en = require("@config/languages/en");
 
 module.exports = {
   name: Events.GuildMemberAdd,

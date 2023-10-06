@@ -1,5 +1,5 @@
-const { sendBugReport } = require("../../functions/sendBugReport");
-const { modals } = require("../../../config/componentsId.json");
+const { sendBugReport } = require("@source/functions/sendBugReport");
+const { modals } = require("@config/componentsId.json");
 
 module.exports = {
   data: {

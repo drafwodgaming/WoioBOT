@@ -4,14 +4,14 @@ const {
   PermissionFlagsBits,
   ChatInputCommandInteraction,
 } = require("discord.js");
-const { i18n } = require("../../config/i18nConfig");
-const { colors } = require("../../config/botConfig.json");
-const welcomeChannelSchema = require("../models/welcomeChannel");
-const emojis = require("../../config/emojis.json");
-const settings = require("../../config/commands.json");
-const en = require("../../config/languages/en.json");
-const ru = require("../../config/languages/ru.json");
-const uk = require("../../config/languages/uk.json");
+const { i18n } = require("@config/i18nConfig");
+const { colors } = require("@config/botConfig.json");
+const welcomeChannelSchema = require("@source/models/welcomeChannel");
+const emojis = require("@config/emojis.json");
+const settings = require("@config/commands.json");
+const en = require("@config/languages/en.json");
+const ru = require("@config/languages/ru.json");
+const uk = require("@config/languages/uk.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
