@@ -1,0 +1,9 @@
+{
+    "restartable": "rs",
+    "ignore": ["node_modules/*"],
+    "watch": ["source/*"],
+    "env": {
+        "NODE_ENV": "development"
+    },
+    "ext": "js,json,ts"
+}

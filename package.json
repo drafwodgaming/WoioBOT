@@ -5,7 +5,7 @@
   "main": "Source/bot.js",
   "scripts": {
     "start": "node .",
-    "dev": "nodemon ./Source/bot.js"
+    "dev": "nodemon --config nodemon.json ./source/bot.js"
   },
   "_moduleAliases": {
     "@source": "./source",
