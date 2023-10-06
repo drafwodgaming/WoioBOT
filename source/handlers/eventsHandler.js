@@ -1,4 +1,4 @@
-const { filePath } = require("../../config/botConfig.json");
+const { filePath } = require("@config/botConfig.json");
 const fileSystem = require("fs");
 const path = require("path");
 

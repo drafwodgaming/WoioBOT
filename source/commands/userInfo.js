@@ -3,15 +3,15 @@ const {
   ChatInputCommandInteraction,
   AttachmentBuilder,
 } = require("discord.js");
-const { i18n } = require("../../config/i18nConfig");
+const { i18n } = require("@config/i18nConfig");
 const { profileImage } = require("discord-arts");
-const { addBadges } = require("../functions/userBadges");
-const { colors } = require("../../config/botConfig.json");
-const settings = require("../../config/commands.json");
+const { addBadges } = require("@source/functions/userBadges");
+const { colors } = require("@config/botConfig.json");
+const settings = require("@config/commands.json");
 const moment = require("moment");
-const en = require("../../config/languages/en.json");
-const ru = require("../../config/languages/ru.json");
-const uk = require("../../config/languages/uk.json");
+const en = require("@config/languages/en.json");
+const ru = require("@config/languages/ru.json");
+const uk = require("@config/languages/uk.json");
 
 const formatDate = (date) =>
   moment(date).format(i18n.__("time.defaultTimeFormat"));

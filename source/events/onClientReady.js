@@ -1,7 +1,7 @@
 const { Events, ActivityType } = require("discord.js");
-const { monoDB } = require("../../config/botConfig.json");
+const { monoDB } = require("@config/botConfig.json");
 const mongoose = require("mongoose");
-const en = require("../../config/languages/en.json");
+const en = require("@config/languages/en.json");
 const kleur = require("kleur");
 
 module.exports = {

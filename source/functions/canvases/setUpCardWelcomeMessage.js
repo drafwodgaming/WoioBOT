@@ -1,7 +1,7 @@
 const { AttachmentBuilder } = require("discord.js");
 const { registerFont, createCanvas, loadImage } = require("canvas");
-const { fonts, memberCard, colors } = require("../../../config/botConfig.json");
-const memberCardBackground = require("../../../config/memberBackground.json");
+const { fonts, memberCard, colors } = require("@config/botConfig.json");
+const memberCardBackground = require("@config/memberBackground.json");
 
 async function cardWelcomeMessage(member) {
   const { user } = member;

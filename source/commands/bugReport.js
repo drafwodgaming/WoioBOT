@@ -1,10 +1,12 @@
 const { SlashCommandBuilder } = require("discord.js");
-const { createBugReportModal } = require("../functions/modals/setUpBugReport");
-const { i18n } = require("../../config/i18nConfig");
-const { modals } = require("../../config/componentsId.json");
-const en = require("../../config/languages/en.json");
-const ru = require("../../config/languages/ru.json");
-const uk = require("../../config/languages/uk.json");
+const {
+  createBugReportModal,
+} = require("@source/functions/modals/setUpBugReport");
+const { i18n } = require("@config/i18nConfig");
+const { modals } = require("@config/componentsId.json");
+const en = require("@config//languages/en.json");
+const ru = require("@config/languages/ru.json");
+const uk = require("@config/languages/uk.json");
 
 module.exports = {
   data: new SlashCommandBuilder()

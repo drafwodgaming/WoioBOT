@@ -1,4 +1,4 @@
-const emojis = require("../../config/emojis.json");
+const emojis = require("@config/emojis.json");
 
 function addBadges(badgeNames) {
   if (!badgeNames.length) return ["no badges"];

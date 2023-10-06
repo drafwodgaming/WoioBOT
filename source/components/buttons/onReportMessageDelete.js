@@ -1,4 +1,4 @@
-const { buttons } = require("../../../config/componentsId.json");
+const { buttons } = require("@config/componentsId.json");
 
 module.exports = {
   data: {

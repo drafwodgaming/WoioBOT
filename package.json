@@ -8,7 +8,9 @@
     "dev": "nodemon ./Source/bot.js"
   },
   "_moduleAliases": {
-    "@src": "./source"
+    "@source": "./source",
+    "@config": "./config",
+    "@assets": "./assets"
   },
   "keywords": [],
   "author": "",
