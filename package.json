@@ -2,7 +2,7 @@
   "name": "woody",
   "version": "1.0.0",
   "description": "",
-  "main": "Source/bot.js",
+  "main": "source/bot.js",
   "scripts": {
     "start": "node .",
     "dev": "nodemon --config nodemon.json ./source/bot.js"
