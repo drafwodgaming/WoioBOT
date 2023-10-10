@@ -14,11 +14,13 @@ module.exports = {
 			guildId: guild.id,
 		});
 
+		if (!interactionChannelId) return;
+
 		const leaveChannel = channelsCache.find(
 			channel => channel.id === interactionChannelId.channelId
 		);
 
-		if (user.bot || !interactionChannelId || !leaveChannel) return;
+		if (user.bot || !leaveChannel) return;
 
 		const leaveMessageCanvas = await cardLeaveMessage(member);
 		await leaveChannel.send({ files: [leaveMessageCanvas] });
