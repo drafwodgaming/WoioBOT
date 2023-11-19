@@ -3,7 +3,7 @@ const messageLeaderboardSchema = require('@source/models/messageLeaderboard');
 
 module.exports = {
 	name: Events.MessageCreate,
-	execute: async message => {
+	async execute(message) {
 		if (message.author.bot) return;
 
 		const { guild, author } = message;
