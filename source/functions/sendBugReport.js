@@ -1,12 +1,13 @@
 const { i18n } = require('@config/i18nConfig');
 const { reportDelete } = require('@source/functions/buttons/setUpReportDelete');
 const { buttons } = require('@config/componentsId.json');
-const { colors, onwerId } = require('@config/botConfig.json');
+const { onwerId } = require('@config/botConfig.json');
+const { getColor } = require('@source/functions/utils/getColor');
 
 async function sendBugReport(interaction, client, bugCommand, bugDescription) {
 	const { user } = interaction;
 	const botOwnerId = onwerId;
-	const botColor = parseInt(colors.editBlue);
+	const botColor = getColor('editBlue');
 	const reportSentMessage = i18n.__('components.modals.bugReport.reportSent');
 	const reportInfoTitle = `Report from ${user.displayName}`;
 	const embedFields = [

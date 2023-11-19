@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { i18n } = require('../../config/i18nConfig');
-const { colors } = require('@config/botConfig.json');
+const { getColor } = require('@source/functions/utils/getColor');
 const messageLeaderboardSchema = require('@source/models/messageLeaderboard');
 const en = require('@config/languages/en.json');
 const ru = require('@config/languages/ru.json');
@@ -27,7 +27,7 @@ module.exports = {
 			.sort({ messageCount: -1 })
 			.limit(10);
 
-		const defaultBotColor = parseInt(colors.default);
+		const defaultBotColor = getColor('default');
 
 		const leaderboardEmbed = {
 			color: defaultBotColor,

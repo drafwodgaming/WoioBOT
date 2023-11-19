@@ -5,8 +5,12 @@ const {
 	ChatInputCommandInteraction,
 } = require('discord.js');
 const { i18n } = require('@config/i18nConfig');
-const { colors } = require('@config/botConfig.json');
+const { getColor } = require('@source/functions/utils/getColor');
 const leaveChannelSchema = require('@source/models/leaveChannel');
+const { addChannel } = require('@source/functions/utils/addChannelToDB');
+const {
+	deleteChannel,
+} = require('@source/functions/utils/deleteChannelFromDB');
 const emojis = require('@config/emojis.json');
 const settings = require('@config/commands.json');
 const en = require('@config/languages/en.json');
@@ -58,10 +62,10 @@ module.exports = {
 	async execute(interaction) {
 		const { guild, options } = interaction;
 		const subCommand = options.getSubcommand();
-		const defaultBotColor = parseInt(colors.default);
-		const installGreenColor = parseInt(colors.succesGreen);
-		const editBlueColor = parseInt(colors.editBlue);
-		const errorRedColor = parseInt(colors.errorRed);
+		const defaultBotColor = getColor('default');
+		const installGreenColor = getColor('succesGreen');
+		const editBlueColor = getColor('editBlue');
+		const errorRedColor = getColor('errorRed');
 		const interactionChannel = options.getChannel(settings.channelOption);
 		const interactionGuildId = guild.id;
 		const warningEmoji = emojis.goldWarning;
@@ -98,32 +102,27 @@ module.exports = {
 						: installChannelDescription,
 				};
 
-				if (leaveChannel) {
-					leaveChannel.channelId = interactionChannel.id;
-					leaveChannel.guildId = interactionGuildId;
-					await leaveChannel.save();
-				} else {
-					const newChannelId = new leaveChannelSchema({
-						channelId: interactionChannel.id,
-						guildId: interactionGuildId,
-					});
-					await newChannelId.save();
+				if (!leaveChannel) {
+					leaveChannel = await addChannel(
+						interactionGuildId,
+						interactionChannel.id,
+						leaveChannelSchema
+					);
 				}
-				await interaction.reply({ embeds: [responseEmbed], ephemeral: true });
 				break;
 
 			case settings.disable.name:
-				leaveChannel = await leaveChannelSchema.findOneAndDelete({
-					guildId: interactionGuildId,
-				});
+				leaveChannel = await deleteChannel(
+					interactionGuildId,
+					leaveChannelSchema
+				);
 
 				responseEmbed = {
 					color: leaveChannel ? errorRedColor : defaultBotColor,
 					description: leaveChannel ? deletedChannelMessage : noChannelMessage,
 				};
-
-				await interaction.reply({ embeds: [responseEmbed], ephemeral: true });
 				break;
 		}
+		await interaction.reply({ embeds: [responseEmbed], ephemeral: true });
 	},
 };
