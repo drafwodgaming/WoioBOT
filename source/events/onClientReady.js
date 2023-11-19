@@ -10,7 +10,7 @@ module.exports = {
 	async execute(client) {
 		mongoose.set('strictQuery', false);
 		await mongoose
-			.connect(monoDB, { useNewUrlParser: true, useUnifiedTopology: true })
+			.connect(monoDB)
 			.then(() =>
 				console.log(
 					kleur.blue(en.logs.succesMongoDBTitle),
