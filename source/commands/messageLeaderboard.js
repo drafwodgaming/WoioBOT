@@ -7,7 +7,7 @@ const ru = require('@config/languages/ru.json');
 const uk = require('@config/languages/uk.json');
 const {
 	formatLeaderboard,
-} = require('@source/functions/Utils/messageLeaderboardUtils');
+} = require('@source/functions/utils/messageLeaderboardUtils');
 
 module.exports = {
 	data: new SlashCommandBuilder()
