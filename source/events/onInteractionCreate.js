@@ -1,8 +1,8 @@
 const { Events, ChatInputCommandInteraction } = require('discord.js');
 const { i18n } = require('@config/i18nConfig');
 const { getUserLocale } = require('@source/functions/locale/userLocale');
-const { colors, onwerId } = require('@config/botConfig.json');
-
+const { onwerId } = require('@config/botConfig.json');
+const { getColor } = require('@source/functions/utils/getColor');
 /**
  * @param {ChatInputCommandInteraction} interaction
  */
@@ -27,7 +27,7 @@ module.exports = {
 				if (!command) return;
 
 				const developerOnlyMessage = i18n.__('events.developerOnly');
-				const defaultBotColor = parseInt(colors.default);
+				const defaultBotColor = getColor('default');
 				if (command.developer && interaction.user.id !== onwerId) {
 					return interaction.reply({
 						embeds: [
