@@ -1,5 +1,13 @@
 {
 	"commands": {
+		"options": {
+			"userOption": "user",
+			"channelOption": "channel"
+		},
+		"subcommands": {
+			"setup": "setup",
+			"disable": "disable"
+		},
 		"help": {
 			"name": "help",
 			"title": "Commands menu",
@@ -67,6 +75,18 @@
 			"disableChannel": "Disable channel for leave message",
 			"channelOption": "Setup channel for leave message"
 		},
+		"joinToCreateChannel": {
+			"name": "jointocreate",
+			"editedChannel": "\"Join To Create\" channel was changed at <#{{channelId}}>",
+			"installedChannel": "\"Join To Create\" channel was set at <#{{channelId}}>. To disabled run /jointocreate disable",
+			"noChannel": "{{warningEmoji}} Channel has not been set yet",
+			"deletedChannel": "\"Join To Create\" channel was deleted",
+			"selectJoinToCreateChannel": "Select \"Join To Create\"",
+			"setupChannel": "Setup \"Join To Create\" channel",
+			"disableChannel": "\"Join To Create\" channel",
+			"channelOption": "Setup \"Join To Create\" channel"
+		},
+
 		"logChannel": {
 			"name": "logchannel",
 			"editedChannel": "Log channel was changed at <#{{channelId}}>",
@@ -110,22 +130,7 @@
 		}
 	},
 	"events": {
-		"developerOnly": "This command may only be used by the developer",
-		"logChannelWelcome": {
-			"title": "User Joined",
-			"description": "User : %userName",
-			"createdAt": "Created at : %guildCreatedAt"
-		},
-		"logMessageDelete": {
-			"title": "Message deleted",
-			"description": {
-				"channelName": "Channel : %channelName (%channelId)",
-				"deletedBy": "Deleted by : %executor"
-			},
-			"fields": {
-				"name": "Message"
-			}
-		}
+		"developerOnly": "This command may only be used by the developer"
 	},
 	"time": {
 		"moment": {

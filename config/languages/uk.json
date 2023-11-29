@@ -62,6 +62,16 @@
 			"disableChannel": "Вимкніть канал для прощальних повідомлень",
 			"channelOption": "Встановіть канал для прощальних повідомлень"
 		},
+		"joinToCreateChannel": {
+			"editedChannel": "\"Join To Create\" channel was changed at <#{{channelId}}>",
+			"installedChannel": "\"Join To Create\" channel was set at <#{{channelId}}>. To disabled run /jointocreate disable",
+			"noChannel": "{{warningEmoji}} Channel has not been set yet",
+			"deletedChannel": "\"Join To Create\" channel was deleted",
+			"selectJoinToCreateChannel": "Select \"Join To Create\"",
+			"setupChannel": "Setup \"Join To Create\" channel",
+			"disableChannel": "\"Join To Create\" channel",
+			"channelOption": "Setup \"Join To Create\" channel"
+		},
 		"logChannel": {
 			"editedChannel": "Канал для логів було змінено на <#{{channelId}}>",
 			"installedChannel": "Канал для логів було встановлено на <#{{channelId}}>. Для відключення введіть /logchannel disable",
