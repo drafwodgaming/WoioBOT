@@ -12,7 +12,6 @@ const {
 	deleteChannel,
 } = require('@source/functions/utils/deleteChannelFromDB');
 const emojis = require('@config/emojis.json');
-const settings = require('@config/commands.json');
 const en = require('@config/languages/en.json');
 const ru = require('@config/languages/ru.json');
 const uk = require('@config/languages/uk.json');
@@ -29,7 +28,7 @@ module.exports = {
 		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
 		.addSubcommand(subcommand =>
 			subcommand
-				.setName(settings.setup.name)
+				.setName(en.commands.subcommands.setup)
 				.setDescription(en.commands.welcomeChannel.setupChannel)
 				.setDescriptionLocalizations({
 					ru: ru.commands.welcomeChannel.setupChannel,
@@ -37,7 +36,7 @@ module.exports = {
 				})
 				.addChannelOption(option =>
 					option
-						.setName(settings.channelOption)
+						.setName(en.commands.options.channelOption)
 						.setDescription(en.commands.welcomeChannel.channelOption)
 						.setDescriptionLocalizations({
 							ru: ru.commands.welcomeChannel.channelOption,
@@ -49,7 +48,7 @@ module.exports = {
 		)
 		.addSubcommand(subcommand =>
 			subcommand
-				.setName(settings.disable.name)
+				.setName(en.commands.subcommands.disable)
 				.setDescription(en.commands.welcomeChannel.disableChannel)
 				.setDescriptionLocalizations({
 					ru: ru.commands.welcomeChannel.disableChannel,
@@ -66,7 +65,9 @@ module.exports = {
 		const installGreenColor = getColor('succesGreen');
 		const editBlueColor = getColor('editBlue');
 		const errorRedColor = getColor('errorRed');
-		const interactionChannel = options.getChannel('channel');
+		const interactionChannel = options.getChannel(
+			en.commands.options.channelOption
+		);
 		const interactionGuildId = guild.id;
 		const warningEmoji = emojis.goldWarning;
 
@@ -80,7 +81,7 @@ module.exports = {
 		let welcomeChannel, responseEmbed;
 
 		switch (subCommand) {
-			case settings.setup.name:
+			case en.commands.subcommands.setup:
 				welcomeChannel = await welcomeChannelSchema.findOne({
 					guildId: interactionGuildId,
 				});
@@ -102,16 +103,14 @@ module.exports = {
 						: installChannelDescription,
 				};
 
-				if (!welcomeChannel) {
-					welcomeChannel = await addChannel(
-						interactionGuildId,
-						interactionChannel.id,
-						welcomeChannelSchema
-					);
-				}
+				welcomeChannel = await addChannel(
+					interactionGuildId,
+					interactionChannel.id,
+					welcomeChannelSchema
+				);
 				break;
 
-			case settings.disable.name:
+			case en.commands.subcommands.disable:
 				welcomeChannel = await deleteChannel(
 					interactionGuildId,
 					welcomeChannelSchema

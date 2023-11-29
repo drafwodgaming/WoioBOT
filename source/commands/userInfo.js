@@ -7,7 +7,6 @@ const { i18n } = require('@config/i18nConfig');
 const { profileImage } = require('discord-arts');
 const { addBadges } = require('@source/functions/userBadges');
 const { getColor } = require('@source/functions/utils/getColor');
-const settings = require('@config/commands.json');
 const moment = require('moment');
 const en = require('@config/languages/en.json');
 const ru = require('@config/languages/ru.json');
@@ -27,7 +26,7 @@ module.exports = {
 		.setDMPermission(false)
 		.addUserOption(option =>
 			option
-				.setName(settings.userOption)
+				.setName(en.commands.options.userOption)
 				.setDescription(en.commands.userInfo.userOption)
 				.setDescriptionLocalizations({
 					ru: ru.commands.userInfo.userOption,
@@ -41,7 +40,8 @@ module.exports = {
 	async execute(interaction) {
 		await interaction.deferReply();
 		const { options, member } = interaction;
-		const targetUser = options.getMember(settings.userOption) || member;
+		const targetUser =
+			options.getMember(en.commands.subcommands.userOption) || member;
 		const rolesCache = targetUser.roles.cache;
 
 		moment.updateLocale(i18n.__('time.moment.momentLocale'), {
