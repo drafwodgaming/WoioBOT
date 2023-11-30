@@ -1,4 +1,5 @@
 node_modules/
-Config/botConfig.json
+*/botConfig.json
 .vscode
 .prettierrc
+*docker*
