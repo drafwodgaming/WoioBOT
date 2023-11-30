@@ -19,6 +19,23 @@ async function createVoiceChannel(
 				allow: [
 					PermissionFlagsBits.ManageChannels,
 					PermissionFlagsBits.MoveMembers,
+					PermissionFlagsBits.MuteMembers,
+					PermissionFlagsBits.Connect,
+					PermissionFlagsBits.KickMembers,
+					PermissionFlagsBits.Speak,
+					PermissionFlagsBits.SendMessages,
+					PermissionFlagsBits.Stream,
+				],
+			},
+			{
+				id: member.guild.id,
+				allow: [
+					PermissionFlagsBits.Speak,
+					PermissionFlagsBits.SendMessages,
+					PermissionFlagsBits.Connect,
+					PermissionFlagsBits.ReadMessageHistory,
+					PermissionFlagsBits.ViewChannel,
+					PermissionFlagsBits.UseVAD,
 				],
 			},
 		],
