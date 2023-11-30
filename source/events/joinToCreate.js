@@ -4,8 +4,7 @@ const {
 	createVoiceChannel,
 } = require('@source/functions/utils/createVoiceChannel');
 const joinToCreateSchema = require('@source/models/joinToCreate');
-
-const temporaryChannels = new Map();
+const temporaryChannelsSchema = require('@source/models/temporaryChannels');
 
 module.exports = {
 	name: Events.VoiceStateUpdate,
@@ -18,15 +17,20 @@ module.exports = {
 
 		const interactionChannelId = interactionChannelIdData.channelId;
 
-		temporaryChannels.forEach((channel, channelId) => {
-			if (channel.members.size === 0) {
+		const temporaryChannels = await temporaryChannelsSchema.find({
+			guildId: member.guild.id,
+		});
+
+		temporaryChannels.forEach(async tempChannel => {
+			const channel = member.guild.channels.cache.get(tempChannel.channelId);
+			if (channel && channel.members.size === 0) {
+				await temporaryChannelsSchema.findOneAndDelete(tempChannel._id);
 				channel.delete();
-				temporaryChannels.delete(channelId);
 			}
 		});
 
 		if (newState.channelId === interactionChannelId) {
-			const parent = oldState.channel?.parent ?? newState.channel?.parent;
+			const parent = oldState.channel?.parent || newState.channel?.parent;
 			const channelName = `${member.user.username} channel`;
 
 			await createVoiceChannel(
@@ -35,10 +39,13 @@ module.exports = {
 				channelName,
 				0,
 				parent
-			).then(channel => {
+			).then(async channel => {
 				if (channel && newState) {
 					newState.setChannel(channel);
-					temporaryChannels.set(channel.id, channel);
+					await temporaryChannelsSchema.create({
+						guildId: member.guild.id,
+						channelId: channel.id,
+					});
 				}
 			});
 		}
