@@ -26,6 +26,7 @@ async function createVoiceChannel(
 		PermissionFlagsBits.ReadMessageHistory,
 		PermissionFlagsBits.ViewChannel,
 		PermissionFlagsBits.UseVAD,
+		PermissionFlagsBits.Stream,
 	];
 
 	const permissionOverwrites = [
