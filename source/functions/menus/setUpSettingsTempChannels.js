@@ -12,7 +12,7 @@ function settingsTempChannel() {
 	const selectorId = menus.settingTempChannel;
 	const nameMenu = new StringSelectMenuBuilder()
 		.setCustomId(selectorId)
-		.setPlaceholder('Make a selection!')
+		.setPlaceholder(en.components.menus.tempChannel.changeSettings)
 		.addOptions(
 			new StringSelectMenuOptionBuilder()
 				.setLabel(en.components.menus.tempChannel.name.label)
