@@ -1,53 +1,68 @@
-// Your existing file
 const { Events } = require('discord.js');
 const {
 	createVoiceChannel,
 } = require('@source/functions/utils/createVoiceChannel');
 const joinToCreateSchema = require('@source/models/joinToCreate');
 const temporaryChannelsSchema = require('@source/models/temporaryChannels');
+const {
+	deleteEmptyTempChannels,
+} = require('@source/functions/utils/deleteEmptyTempChannels');
+const {
+	settingsTempChannel,
+} = require('@source/functions/menus/setUpSettingsTempChannels');
+const { getColor } = require('@source/functions/utils/getColor');
 
 module.exports = {
 	name: Events.VoiceStateUpdate,
 	async execute(oldState, newState) {
-		const member = oldState.member || newState.member;
-		const interactionChannelIdData = await joinToCreateSchema.findOne({
-			guildId: member.guild.id,
+		const { member } = oldState || newState;
+		const { guild } = member;
+		const guildId = guild.id;
+
+		const joinToCreateData = await joinToCreateSchema.findOne({
+			guildId,
 		});
-		if (!interactionChannelIdData) return;
+		if (!joinToCreateData) return;
 
-		const interactionChannelId = interactionChannelIdData.channelId;
-
-		const temporaryChannels = await temporaryChannelsSchema.find({
-			guildId: member.guild.id,
-		});
-
-		temporaryChannels.forEach(async tempChannel => {
-			const channel = member.guild.channels.cache.get(tempChannel.channelId);
-			if (channel && channel.members.size === 0) {
-				await temporaryChannelsSchema.findOneAndDelete(tempChannel._id);
-				channel.delete();
-			}
+		const { channelId: interactionChannelId } = joinToCreateData;
+		const existingTempChannels = await temporaryChannelsSchema.find({
+			guildId: oldState.member.guild.id,
+			creatorId: oldState.member.id,
 		});
 
-		if (newState.channelId === interactionChannelId) {
-			const parent = oldState.channel?.parent || newState.channel?.parent;
+		await deleteEmptyTempChannels(member.guild, existingTempChannels);
+
+		if (interactionChannelId === newState.channelId) {
+			const parentCategory = newState.channel?.parent;
 			const channelName = `${member.user.username} channel`;
 
-			await createVoiceChannel(
+			const createdVoiceChannel = await createVoiceChannel(
 				member.guild,
 				member,
 				channelName,
 				0,
-				parent
-			).then(async channel => {
-				if (channel && newState) {
-					newState.setChannel(channel);
-					await temporaryChannelsSchema.create({
-						guildId: member.guild.id,
-						channelId: channel.id,
-					});
-				}
-			});
+				parentCategory
+			);
+
+			if (createdVoiceChannel && newState) {
+				newState.setChannel(createdVoiceChannel);
+
+				await temporaryChannelsSchema.create({
+					guildId: guild.id,
+					channelId: createdVoiceChannel.id,
+					creatorId: member.id,
+					channelName: channelName,
+				});
+
+				const defaultBotColor = getColor('default');
+
+				await createdVoiceChannel.send({
+					embeds: [
+						{ color: defaultBotColor, title: 'Temporary Voice Channel' },
+					],
+					components: [settingsTempChannel()],
+				});
+			}
 		}
 	},
 };

@@ -1,15 +1,25 @@
 {
-  "modals": {
-    "customBackground": "customBackground",
-    "customTag": "customTag",
-    "bugReport": "bugReport",
-    "bugCommand": "bugCommand",
-    "bugDescription": "bugDescription"
-  },
-  "menus": {
-    "customCreateProfile": "customCreateProfile"
-  },
-  "buttons": {
-    "deleteReport": "deleteReport"
-  }
+	"modals": {
+		"customBackground": "customBackground",
+		"customTag": "customTag",
+		"bugReport": "bugReport",
+		"bugCommand": "bugCommand",
+		"bugDescription": "bugDescription",
+		"tempChannelName": "tempChannelName",
+		"tempChannelNameInput": "tempChannelNameInput",
+		"tempChannelLimit": "tempChannelLimit",
+		"tempChannelLimitInput": " tempChannelLimitInput"
+	},
+	"menus": {
+		"settingTempChannel": "settingTempChannel",
+		"values": {
+			"tempChannelName": "tempName",
+			"tempChannelLimit": "limit",
+			"tempChannelLock": "lock",
+			"tempChannelUnlock": "unlock"
+		}
+	},
+	"buttons": {
+		"deleteReport": "deleteReport"
+	}
 }

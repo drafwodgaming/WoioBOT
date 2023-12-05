@@ -116,6 +116,9 @@ module.exports = {
 				};
 				break;
 		}
-		await interaction.reply({ embeds: [responseEmbed], ephemeral: true });
+		await interaction.reply({
+			embeds: [responseEmbed],
+			ephemeral: true,
+		});
 	},
 };
