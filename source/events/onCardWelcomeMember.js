@@ -1,7 +1,7 @@
 const { Events } = require('discord.js');
 const {
 	cardWelcomeMessage,
-} = require('@source/functions/canvases/setUpCardWelcomeMessage');
+} = require('@functions/canvases/setUpCardWelcomeMessage');
 const welcomeChannelSchema = require('@source/models/welcomeChannel');
 
 module.exports = {

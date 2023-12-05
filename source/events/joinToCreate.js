@@ -1,16 +1,14 @@
 const { Events } = require('discord.js');
-const {
-	createVoiceChannel,
-} = require('@source/functions/utils/createVoiceChannel');
+const { createVoiceChannel } = require('@functions/utils/createVoiceChannel');
 const joinToCreateSchema = require('@source/models/joinToCreate');
 const temporaryChannelsSchema = require('@source/models/temporaryChannels');
 const {
 	deleteEmptyTempChannels,
-} = require('@source/functions/utils/deleteEmptyTempChannels');
+} = require('@functions/utils/deleteEmptyTempChannels');
 const {
 	settingsTempChannel,
-} = require('@source/functions/menus/setUpSettingsTempChannels');
-const { getColor } = require('@source/functions/utils/getColor');
+} = require('@functions/menus/setUpSettingsTempChannels');
+const { getColor } = require('@functions/utils/getColor');
 
 module.exports = {
 	name: Events.VoiceStateUpdate,

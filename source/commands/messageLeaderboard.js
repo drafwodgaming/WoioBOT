@@ -1,13 +1,13 @@
 const { SlashCommandBuilder } = require('discord.js');
-const { i18n } = require('../../config/i18nConfig');
-const { getColor } = require('@source/functions/utils/getColor');
+const { i18n } = require('@config/i18nConfig');
+const { getColor } = require('@functions/utils/getColor');
 const messageLeaderboardSchema = require('@source/models/messageLeaderboard');
 const en = require('@config/languages/en.json');
 const ru = require('@config/languages/ru.json');
 const uk = require('@config/languages/uk.json');
 const {
 	formatLeaderboard,
-} = require('@source/functions/utils/messageLeaderboardUtils');
+} = require('@functions/utils/messageLeaderboardUtils');
 
 module.exports = {
 	data: new SlashCommandBuilder()

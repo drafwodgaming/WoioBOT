@@ -1,10 +1,16 @@
-const { SlashCommandBuilder, ChannelType } = require('discord.js');
+const { SlashCommandBuilder } = require('discord.js');
 const { i18n } = require('../../config/i18nConfig');
 const { getColor } = require('@source/functions/utils/getColor');
 const moment = require('moment');
 const en = require('@config/languages/en.json');
 const ru = require('@config/languages/ru.json');
 const uk = require('@config/languages/uk.json');
+
+const {
+	getChannelsInfo,
+} = require('@functions/utils/serverInfo/getChannelsInfo');
+const { getEmojisInfo } = require('@functions/utils/serverInfo/getEmojisInfo');
+const { getRolesInfo } = require('@functions/utils/serverInfo/getRolesInfo');
 
 const formatDate = date =>
 	moment(date).format(i18n.__('time.defaultTimeFormat'));
@@ -37,28 +43,11 @@ module.exports = {
 			member => !member.user.bot
 		).size;
 		const botMembersCount = membersCache.size - guildMembersCount;
-		const guildChannels = channelsCache.size;
-		const textChannels = channelsCache.filter(
-			channel => channel.type === ChannelType.GuildText
-		).size;
-		const voiceChannels = guild.channels.cache.filter(
-			channel => channel.type === ChannelType.GuildVoice
-		).size;
-		const guildCategories = channelsCache.filter(
-			channel => channel.type === ChannelType.GuildCategory
-		).size;
-
-		const totalEmojisCount = emojisCache.size;
-		const animatedEmojisCount = emojisCache.filter(
-			emoji => emoji.animated
-		).size;
-		const staticEmojisCount = emojisCache.size - animatedEmojisCount;
-
-		const guildRoles = rolesCache
-			.map(role => role.toString())
-			.slice(0, 15)
-			.join(' ');
-		const guildRolesCount = guild.roles.cache.map(role => role.name).length;
+		const { guildChannels, textChannels, voiceChannels, guildCategories } =
+			await getChannelsInfo(channelsCache);
+		const { totalEmojisCount, animatedEmojisCount, staticEmojisCount } =
+			await getEmojisInfo(emojisCache);
+		const { guildRoles, guildRolesCount } = await getRolesInfo(rolesCache);
 
 		const guildInfoTitle = i18n.__('commands.serverInfo.title');
 		const embedFields = [
