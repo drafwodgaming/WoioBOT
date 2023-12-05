@@ -108,6 +108,40 @@
 					"label": "Подробное описание проблемы",
 					"placeholder": "Пожалуйста, предоставьте подробное описание того, что некорректно работает в этой команде"
 				}
+			},
+			"setNameTempChannel": {
+				"title": "Изменить имя канала",
+				"label": "Ввести имя канала",
+				"succesUpdateName": "Имя канала успешно изменено"
+			},
+			"setLimitTempChannel": {
+				"title": "Изменить лимит пользователей",
+				"label": "Ввести лимит канала",
+				"errorLimit": "Пожалуйста введите цифру от 1 до 99",
+				"succesLimit": "Лимит успешно обновлён"
+			}
+		},
+		"menus": {
+			"tempChannel": {
+				"noCreate": "Ты не можешь управлять каналом!",
+				"tempChannelName": {
+					"label": "Имя",
+					"description": "Смена имени канала"
+				},
+				"limit": {
+					"label": "Limit",
+					"description": "Change the channel limit"
+				},
+				"lockChannel": {
+					"label": "Lock",
+					"description": "Lock the channel",
+					"successLock": "Канал успешно заблокирован"
+				},
+				"unlockChannel": {
+					"label": "Unlock",
+					"description": "Unlock the channel",
+					"successUnlock": "Канал успешно разблокирован"
+				}
 			}
 		}
 	},
