@@ -15,8 +15,10 @@ function createTempChannelName() {
 	const tempChannelNameInputField = new TextInputBuilder()
 		.setCustomId(modals.tempChannelNameInput)
 		.setLabel(i18n.__('components.modals.setNameTempChannel.label'))
-		.setStyle(TextInputStyle.Short);
-
+		.setStyle(TextInputStyle.Short)
+		.setPlaceholder(
+			i18n.__('components.modals.setNameTempChannel.nameRoomExample')
+		);
 	const bugCommandRow = new ActionRowBuilder().addComponents(
 		tempChannelNameInputField
 	);

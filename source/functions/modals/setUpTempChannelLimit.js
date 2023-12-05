@@ -8,21 +8,24 @@ const { i18n } = require('@config/i18nConfig');
 const { modals } = require('@config/componentsId.json');
 
 function createTempChannelLimit() {
-	const tempChannelName = new ModalBuilder()
+	const tempChannelLimit = new ModalBuilder()
 		.setCustomId(modals.tempChannelLimit)
 		.setTitle(i18n.__('components.modals.setLimitTempChannel.title'));
 
-	const tempChannelNameInputField = new TextInputBuilder()
+	const tempChannelLimitInputField = new TextInputBuilder()
 		.setCustomId(modals.tempChannelLimitInput)
 		.setLabel(i18n.__('components.modals.setLimitTempChannel.label'))
-		.setStyle(TextInputStyle.Short);
+		.setStyle(TextInputStyle.Short)
+		.setPlaceholder(
+			i18n.__('components.modals.setLimitTempChannel.limitRoomExample')
+		);
 
-	const bugCommandRow = new ActionRowBuilder().addComponents(
-		tempChannelNameInputField
+	const limitRow = new ActionRowBuilder().addComponents(
+		tempChannelLimitInputField
 	);
 
-	tempChannelName.addComponents(bugCommandRow);
+	tempChannelLimit.addComponents(limitRow);
 
-	return tempChannelName;
+	return tempChannelLimit;
 }
 module.exports = { createTempChannelLimit };
