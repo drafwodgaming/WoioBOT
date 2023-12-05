@@ -10,7 +10,8 @@
 	"_moduleAliases": {
 		"@source": "./source",
 		"@config": "./config",
-		"@assets": "./assets"
+		"@assets": "./assets",
+		"@functions": "./source/functions"
 	},
 	"keywords": [],
 	"author": "",
