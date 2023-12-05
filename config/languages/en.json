@@ -130,17 +130,20 @@
 			"setNameTempChannel": {
 				"title": "Change channel name",
 				"label": "Enter channel name",
-				"succesUpdateName": "Channel name updated successfully!"
+				"succesUpdateName": "Channel name updated successfully!",
+				"nameRoomExample": "Talking"
 			},
 			"setLimitTempChannel": {
 				"title": "Change channel user limit",
 				"label": "Enter channel limit",
 				"errorLimit": "Please enter a valid user limit between 1 and 99",
-				"succesLimit": "User limit updated successfully!"
+				"succesLimit": "User limit updated successfully!",
+				"limitRoomExample": "0 for unlimited"
 			}
 		},
 		"menus": {
 			"tempChannel": {
+				"changeSettings": "Change channel settings",
 				"notCreate": "You cannot manage the channel!",
 				"name": {
 					"label": "Name",

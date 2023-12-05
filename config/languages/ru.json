@@ -112,13 +112,15 @@
 			"setNameTempChannel": {
 				"title": "Изменить имя канала",
 				"label": "Ввести имя канала",
-				"succesUpdateName": "Имя канала успешно изменено"
+				"succesUpdateName": "Имя канала успешно изменено",
+				"nameRoomExample": "Общение"
 			},
 			"setLimitTempChannel": {
 				"title": "Изменить лимит пользователей",
 				"label": "Ввести лимит канала",
 				"errorLimit": "Пожалуйста введите цифру от 1 до 99",
-				"succesLimit": "Лимит успешно обновлён"
+				"succesLimit": "Лимит успешно обновлён",
+				"limitRoomExample": "0 для безлимита"
 			}
 		},
 		"menus": {
