@@ -7,10 +7,10 @@ const {
 const { i18n } = require('@config/i18nConfig');
 const { modals } = require('@config/componentsId.json');
 
-function createBugReportModal(bugReportId, bugReportLabel) {
+function createBugReportModal() {
 	const bugReportModal = new ModalBuilder()
-		.setCustomId(bugReportId)
-		.setTitle(bugReportLabel);
+		.setCustomId(modals.bugReport)
+		.setTitle(i18n.__('components.modals.bugReport.title'));
 
 	const bugCommandInputField = new TextInputBuilder()
 		.setCustomId(modals.bugCommand)

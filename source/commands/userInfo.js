@@ -5,8 +5,8 @@ const {
 } = require('discord.js');
 const { i18n } = require('@config/i18nConfig');
 const { profileImage } = require('discord-arts');
-const { addBadges } = require('@source/functions/userBadges');
-const { getColor } = require('@source/functions/utils/getColor');
+const { addBadges } = require('@functions/userBadges');
+const { getColor } = require('@functions/utils/getColor');
 const moment = require('moment');
 const en = require('@config/languages/en.json');
 const ru = require('@config/languages/ru.json');

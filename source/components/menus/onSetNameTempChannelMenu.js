@@ -1,13 +1,13 @@
 const { menus } = require('@config/componentsId.json');
 const {
 	createTempChannelName,
-} = require('@source/functions/modals/setUpTempChannelName');
+} = require('@functions/modals/setUpTempChannelName');
 const {
 	createTempChannelLimit,
-} = require('@source/functions/modals/setUpTempChannelLimit');
+} = require('@functions/modals/setUpTempChannelLimit');
 const {
 	settingsTempChannel,
-} = require('@source/functions/menus/setUpSettingsTempChannels');
+} = require('@functions/menus/setUpSettingsTempChannels');
 const temporaryChannelsSchema = require('@source/models/temporaryChannels');
 const { i18n } = require('@config/i18nConfig');
 const {

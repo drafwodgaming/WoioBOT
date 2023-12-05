@@ -1,8 +1,8 @@
 const { Events, ChatInputCommandInteraction } = require('discord.js');
 const { i18n } = require('@config/i18nConfig');
-const { getUserLocale } = require('@source/functions/locale/userLocale');
+const { getUserLocale } = require('@functions/locale/userLocale');
 const { onwerId } = require('@config/botConfig.json');
-const { getColor } = require('@source/functions/utils/getColor');
+const { getColor } = require('@functions/utils/getColor');
 /**
  * @param {ChatInputCommandInteraction} interaction
  */

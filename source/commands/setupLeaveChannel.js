@@ -5,12 +5,10 @@ const {
 	ChatInputCommandInteraction,
 } = require('discord.js');
 const { i18n } = require('@config/i18nConfig');
-const { getColor } = require('@source/functions/utils/getColor');
+const { getColor } = require('@functions/utils/getColor');
 const leaveChannelSchema = require('@source/models/leaveChannel');
-const { addChannel } = require('@source/functions/utils/addChannelToDB');
-const {
-	deleteChannel,
-} = require('@source/functions/utils/deleteChannelFromDB');
+const { addChannel } = require('@functions/utils/addChannelToDB');
+const { deleteChannel } = require('@functions/utils/deleteChannelFromDB');
 const emojis = require('@config/emojis.json');
 const en = require('@config/languages/en.json');
 const ru = require('@config/languages/ru.json');

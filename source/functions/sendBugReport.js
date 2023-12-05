@@ -1,8 +1,8 @@
 const { i18n } = require('@config/i18nConfig');
-const { reportDelete } = require('@source/functions/buttons/setUpReportDelete');
+const { reportDelete } = require('@functions/buttons/setUpReportDelete');
 const { buttons } = require('@config/componentsId.json');
 const { onwerId } = require('@config/botConfig.json');
-const { getColor } = require('@source/functions/utils/getColor');
+const { getColor } = require('@functions/utils/getColor');
 
 async function sendBugReport(interaction, client, bugCommand, bugDescription) {
 	const { user } = interaction;

@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, bold } = require('discord.js');
 const { i18n } = require('@config/i18nConfig');
-const { getColor } = require('@source/functions/utils/getColor');
+const { getColor } = require('@functions/utils/getColor');
 const en = require('@config/languages/en.json');
 const ru = require('@config/languages/ru.json');
 const uk = require('@config/languages/uk.json');
@@ -14,13 +14,14 @@ module.exports = {
 			uk: uk.commands.help.description,
 		}),
 	async execute(interaction) {
-		const buildCommandDescription = commandsArray =>
-			commandsArray
-				.map(command => `/${bold(command.name)} \n ${command.description}\n`)
-				.join('\n');
-
 		const defaultBotColor = getColor('default');
 		const helpTitle = i18n.__('commands.help.title');
+
+		const buildCommandDescription = commandsArray =>
+			commandsArray
+				.map(({ name, description }) => `/${bold(name)}\n${description}\n`)
+				.join('\n');
+
 		const embedDescription = buildCommandDescription(
 			interaction.client.commandsArray
 		);
