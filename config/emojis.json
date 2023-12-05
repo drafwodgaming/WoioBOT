@@ -1,18 +1,21 @@
 {
-  "activeDeveloper": "<:ActiveDeveloper:1156996872125292694>",
-  "bugHunerLevel1": "<:BugHunter1:1156996879486296256>",
-  "bugHunterLevel2": "<:BigHunter2:1156996890148208671>",
-  "certifiedModerator": "<:CertifiedModerator:1156996881201766450>",
-  "hypeSquadOnlineHouse1": "<:Bravery:1156996875694657536>",
-  "hypeSquadOnlineHouse2": "<:Brilliance:1156996877032620094>",
-  "hypeSquadOnlineHouse3": "<:Balance:1156996873396178954>",
-  "hypesquad": "<:Hypesquad:1156996888252387379>",
-  "Partner": "<:Partner:1156996897580531732>",
-  "premiumEarlySupporter": "<:EarlySupporter:1156996886117490698>",
-  "staff": "<:DiscordStaff:1156996883525419051>",
-  "verifiedDeveloper": "<:VerifiedBotDeveloper:1156996901036625970>",
-  "verifiedBot": "<:VerifiedBot:1156996937501909102>",
-    
-        "goldWarning": "⚠️"
-    
+	"activeDeveloper": "<:ActiveDeveloper:1156996872125292694>",
+	"bugHunerLevel1": "<:BugHunter1:1156996879486296256>",
+	"bugHunterLevel2": "<:BigHunter2:1156996890148208671>",
+	"certifiedModerator": "<:CertifiedModerator:1156996881201766450>",
+	"hypeSquadOnlineHouse1": "<:Bravery:1156996875694657536>",
+	"hypeSquadOnlineHouse2": "<:Brilliance:1156996877032620094>",
+	"hypeSquadOnlineHouse3": "<:Balance:1156996873396178954>",
+	"hypesquad": "<:Hypesquad:1156996888252387379>",
+	"Partner": "<:Partner:1156996897580531732>",
+	"premiumEarlySupporter": "<:EarlySupporter:1156996886117490698>",
+	"staff": "<:DiscordStaff:1156996883525419051>",
+	"verifiedDeveloper": "<:VerifiedBotDeveloper:1156996901036625970>",
+	"verifiedBot": "<:VerifiedBot:1156996937501909102>",
+
+	"goldWarning": "⚠️",
+	"nameTag": "<:nameTag:1180859068391358544>",
+	"limitPeople": "<:limit:1180859589328130089>",
+	"lockChannel": "<:lock:1180914792916078682>",
+	"unlockChannel": "<:unlock:1180914795604623541>"
 }
