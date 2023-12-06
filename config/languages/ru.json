@@ -83,7 +83,8 @@
 			"channelOption": "Установи канал для логов"
 		},
 		"bugReport": {
-			"description": "Рассказать про баг"
+			"description": "Рассказать про баг",
+			"reportExists": "Вы уже отправили отчёт об ошибке"
 		},
 		"messageLeaderboard": {
 			"description": "Топ сообщений",
@@ -100,13 +101,19 @@
 			"bugReport": {
 				"title": "ПОИСК БАГОВ",
 				"reportSent": "Ваш репорт успешно отправлен разработчику",
+				"reportSentToUser": {
+					"userId": "ID пользователя",
+					"reportId": "ID репорта",
+					"bugName": "Баг",
+					"bugDescription": "Описание"
+				},
 				"bugCommandInput": {
 					"label": "Причина отправления репорта",
-					"placeholder": "Введите команду бота, которая работает с ошибкой"
+					"placeholder": "Введите найденную ошибку"
 				},
 				"bugDescriptionInput": {
 					"label": "Подробное описание проблемы",
-					"placeholder": "Пожалуйста, предоставьте подробное описание того, что некорректно работает в этой команде"
+					"placeholder": "Пожалуйста, предоставьте подробное описание того, что некорректно работает у бота"
 				}
 			},
 			"setNameTempChannel": {
@@ -143,6 +150,14 @@
 					"label": "Unlock",
 					"description": "Unlock the channel",
 					"successUnlock": "Канал успешно разблокирован"
+				}
+			}
+		},
+		"buttons": {
+			"bugReport": {
+				"fixedBug": {
+					"name": "Исправить",
+					"succesFix": "Ваш отчет об ошибке был решен. Спасибо за помощь в улучшении!"
 				}
 			}
 		}
