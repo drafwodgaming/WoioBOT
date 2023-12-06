@@ -102,8 +102,13 @@
 				"title": "ПОИСК БАГОВ",
 				"reportSent": "Ваш репорт успешно отправлен разработчику",
 				"reportSentToUser": {
+					"reportFrom": "Отчёт от {{userId}}",
+					"yourBugReport": {
+						"title": "Ваш отчёт об ошибке",
+						"description": "Спасибо за отправку отчёта об ошибке! Вот детали:"
+					},
 					"userId": "ID пользователя",
-					"reportId": "ID репорта",
+					"reportId": "ID отчёта",
 					"bugName": "Баг",
 					"bugDescription": "Описание"
 				},

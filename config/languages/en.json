@@ -120,6 +120,11 @@
 				"title": "BUG FINDER",
 				"reportSent": "Your report has been successfully sent to the developer",
 				"reportSentToUser": {
+					"reportFrom": "Bug Report From {{userId}}",
+					"yourBugReport": {
+						"title": "Your Bug Report",
+						"description": "Thank you for submitting a bug report! Here are the details:"
+					},
 					"userId": "User ID",
 					"reportId": "Report ID",
 					"bugName": "Bug",
