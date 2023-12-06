@@ -23,22 +23,27 @@ async function sendBugReport(
 		return console.error('Bug report not found in the database');
 	}
 
-	const reportInfoTitle = `Bug Report from ${userId}`;
+	const reportInfoTitle = i18n.__(
+		'components.modals.bugReport.reportSentToUser.reportFrom',
+		{ userId }
+	);
 	const embedFields = [
 		{
-			name: i18n.__('components.bugReport.reportSentToUser.userId'),
+			name: i18n.__('components.modals.bugReport.reportSentToUser.userId'),
 			value: userId,
 		},
 		{
-			name: i18n.__('components.bugReport.reportSentToUser.reportId'),
+			name: i18n.__('components.modals.bugReport.reportSentToUser.reportId'),
 			value: reportId,
 		},
 		{
-			name: i18n.__('components.bugReport.reportSentToUser.bugName'),
+			name: i18n.__('components.modals.bugReport.reportSentToUser.bugName'),
 			value: bugCommand,
 		},
 		{
-			name: i18n.__('components.bugReport.reportSentToUser.bugDescription'),
+			name: i18n.__(
+				'components.modals.bugReport.reportSentToUser.bugDescription'
+			),
 			value: bugDescription,
 		},
 	];
@@ -53,9 +58,12 @@ async function sendBugReport(
 		embeds: [
 			{
 				color: botColor,
-				title: 'Your Bug Report',
-				description:
-					'Thank you for submitting a bug report! Here are the details:',
+				title: i18n.__(
+					'components.modals.bugReport.reportSentToUser.yourBugReport.title'
+				),
+				description: i18n.__(
+					'components.modals.bugReport.reportSentToUser.yourBugReport.description'
+				),
 				fields: embedFields,
 			},
 		],
