@@ -20,6 +20,7 @@
 		}
 	},
 	"buttons": {
-		"deleteReport": "deleteReport"
+		"fixedButton": "fixedButton",
+		"rejectedButton": "rejectedButton"
 	}
 }

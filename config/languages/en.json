@@ -100,7 +100,8 @@
 		},
 		"bugReport": {
 			"name": "report",
-			"description": "Tell me about the bug"
+			"description": "Tell me about the bug",
+			"reportExists": "You have already submitted a bug report"
 		},
 		"messageLeaderboard": {
 			"name": "messageleaderboard",
@@ -118,13 +119,19 @@
 			"bugReport": {
 				"title": "BUG FINDER",
 				"reportSent": "Your report has been successfully sent to the developer",
+				"reportSentToUser": {
+					"userId": "User ID",
+					"reportId": "Report ID",
+					"bugName": "Bug",
+					"bugDescription": "Description"
+				},
 				"bugCommandInput": {
 					"label": "Reason for reporting bug",
-					"placeholder": "Enter the name of the bot command with the error"
+					"placeholder": "Enter the discovered issue"
 				},
 				"bugDescriptionInput": {
 					"label": "Detailed description of the problem",
-					"placeholder": "Please provide a detailed description of what is not working correctly in this command"
+					"placeholder": "Please provide a detailed description of what is not working correctly with the bot"
 				}
 			},
 			"setNameTempChannel": {
@@ -162,6 +169,14 @@
 					"label": "Unlock",
 					"description": "Unlock the channel",
 					"successUnlock": "Channel successfully unlocked"
+				}
+			}
+		},
+		"buttons": {
+			"bugReport": {
+				"fixedBug": {
+					"name": "Fix",
+					"succesFix": "Your bug report has been resolved. Thank you for helping us improve!"
 				}
 			}
 		}
