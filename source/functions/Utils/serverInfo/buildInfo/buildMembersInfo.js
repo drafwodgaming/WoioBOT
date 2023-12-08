@@ -1,16 +1,17 @@
 // buildMembersInfo.js
 const { i18n } = require('@config/i18nConfig');
+const {
+	getMembersInfo,
+} = require('@functions/utils/serverInfo/getInfo/getMembersInfo');
 
 async function buildMembersInfo(membersCache) {
-	const guildMembersCount = membersCache.filter(
-		member => !member.user.bot
-	).size;
-	const botMembersCount = membersCache.size - guildMembersCount;
+	const { guildMembersCount, botMembersCount, totalMembersCount } =
+		await getMembersInfo(membersCache);
 
 	return [
 		{
 			name: i18n.__('commands.serverInfo.totalMembersCount', {
-				memberCount: membersCache.size,
+				totalMembersCount,
 			}),
 			value: [
 				i18n.__('commands.serverInfo.guildMembersCount', { guildMembersCount }),

@@ -1,14 +1,12 @@
 async function getRolesInfo(rolesCache) {
 	const guildRoles = rolesCache
-		.map(role => role.toString())
+		.map(role => role)
 		.slice(0, 15)
 		.join(' ');
+
 	const guildRolesCount = rolesCache.size;
 
-	return {
-		guildRoles,
-		guildRolesCount,
-	};
+	return { guildRoles, guildRolesCount };
 }
 
 module.exports = { getRolesInfo };

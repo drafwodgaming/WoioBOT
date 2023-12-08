@@ -3,11 +3,7 @@ async function getEmojisInfo(emojisCache) {
 	const animatedEmojisCount = emojisCache.filter(emoji => emoji.animated).size;
 	const staticEmojisCount = totalEmojisCount - animatedEmojisCount;
 
-	return {
-		totalEmojisCount,
-		animatedEmojisCount,
-		staticEmojisCount,
-	};
+	return { totalEmojisCount, animatedEmojisCount, staticEmojisCount };
 }
 
 module.exports = { getEmojisInfo };

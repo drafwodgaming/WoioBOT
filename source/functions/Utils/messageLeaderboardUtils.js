@@ -5,6 +5,7 @@ function formatLeaderboard(top10, { guild }) {
 
 	const leaderboardList = top10.map((entry, index) => {
 		const member = guildMembersCache.get(entry.userId);
+
 		return `${index + 1}. ${member.user.username}: ${entry.messageCount}`;
 	});
 
