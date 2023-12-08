@@ -76,7 +76,7 @@ module.exports = {
 			'commands.welcomeChannel.deletedChannel'
 		);
 
-		let welcomeChannel, responseEmbed;
+		let responseEmbed;
 
 		switch (subCommand) {
 			case en.commands.subcommands.setup:
