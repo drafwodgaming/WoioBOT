@@ -15,11 +15,12 @@ module.exports = {
 			uk: uk.commands.bugReport.description,
 		}),
 	async execute(interaction) {
-		const userId = interaction.user.id;
-		const existingReport = await reportBug.findOne({ userId: userId });
+		const { user } = interaction;
+		const { id: userId } = user;
+		const existingReport = await reportBug.findOne({ userId });
 
 		if (existingReport) {
-			return interaction.reply({
+			return await interaction.reply({
 				content: i18n.__('commands.bugReport.reportExists'),
 				ephemeral: true,
 			});

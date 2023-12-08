@@ -28,8 +28,8 @@ async function createVoiceChannel(
 	];
 
 	const permissionOverwrites = [
-		{ id: member.id, allow: [...memberPermissions] },
-		{ id: member.guild.id, allow: [...guildPermissions] },
+		{ id: member.id, allow: memberPermissions },
+		{ id: member.guild.id, allow: guildPermissions },
 	];
 
 	const createdChannel = await guild.channels.create({

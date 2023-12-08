@@ -1,5 +1,6 @@
 async function deleteChannel(guildId, channelModel) {
-	return await channelModel.findOneAndDelete({ guildId });
+	const isDeleted = await channelModel.findOneAndDelete({ guildId });
+	return isDeleted;
 }
 
 module.exports = { deleteChannel };

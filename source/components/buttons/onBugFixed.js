@@ -12,7 +12,7 @@ module.exports = {
 		// console.log('Searching for report with messageId:', messageId);
 
 		const devBugReports = await reportBug.findOneAndDelete({
-			$or: [{ messageToDevId: messageId }, { messageToUserId: messageId }],
+			$or: [{ devMessageId: messageId }, { userMessageId: messageId }],
 		});
 
 		// console.log('Found devBugReport:', devBugReports);

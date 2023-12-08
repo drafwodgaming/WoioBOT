@@ -1,7 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 const reportBug = require('@source/models/reportBug');
 const { bugReportButtons } = require('@functions/buttons/setUpBugReport');
-
 const { getColor } = require('@functions/utils/getColor');
 const { i18n } = require('@config/i18nConfig');
 const { onwerId } = require('@config/botConfig.json');
@@ -10,42 +9,41 @@ async function sendBugReport(
 	client,
 	userId,
 	reportId,
-	bugCommand,
-	bugDescription
+	reportTitle,
+	reportDescription
 ) {
 	const botOwnerId = onwerId;
 	const botOwner = await client.users.fetch(botOwnerId);
 	const botColor = getColor('default');
 
+	const messages = {
+		reportFrom: i18n.__('components.modals.bugReport.userReport.reportFrom', {
+			userId,
+		}),
+		userId: i18n.__('components.modals.bugReport.userReport.userId'),
+		reportId: i18n.__('components.modals.bugReport.userReport.reportId'),
+		reportTitle: i18n.__('components.modals.bugReport.userReport.reportTitle'),
+		reportDescription: i18n.__(
+			'components.modals.bugReport.userReport.reportDescription'
+		),
+		reportDetailsTitle: i18n.__(
+			'components.modals.bugReport.userReport.reportDetails.title'
+		),
+		reportDetailsDescription: i18n.__(
+			'components.modals.bugReport.userReport.reportDetails.description'
+		),
+	};
+
 	const bugReport = await reportBug.findOne({ userId, reportId });
 
-	if (!bugReport) {
-		return console.error('Bug report not found in the database');
-	}
+	if (!bugReport) throw new Error('Bug report not found in the database');
 
-	const reportInfoTitle = i18n.__(
-		'components.modals.bugReport.reportSentToUser.reportFrom',
-		{ userId }
-	);
+	const reportInfoTitle = i18n.__(messages.reportFrom, { userId });
 	const embedFields = [
-		{
-			name: i18n.__('components.modals.bugReport.reportSentToUser.userId'),
-			value: userId,
-		},
-		{
-			name: i18n.__('components.modals.bugReport.reportSentToUser.reportId'),
-			value: reportId,
-		},
-		{
-			name: i18n.__('components.modals.bugReport.reportSentToUser.bugName'),
-			value: bugCommand,
-		},
-		{
-			name: i18n.__(
-				'components.modals.bugReport.reportSentToUser.bugDescription'
-			),
-			value: bugDescription,
-		},
+		{ name: i18n.__(messages.userId), value: userId },
+		{ name: i18n.__(messages.reportId), value: reportId },
+		{ name: i18n.__(messages.reportTitle), value: reportTitle },
+		{ name: i18n.__(messages.reportDescription), value: reportDescription },
 	];
 
 	const botOwnerMessage = await botOwner.send({
@@ -58,23 +56,19 @@ async function sendBugReport(
 		embeds: [
 			{
 				color: botColor,
-				title: i18n.__(
-					'components.modals.bugReport.reportSentToUser.yourBugReport.title'
-				),
-				description: i18n.__(
-					'components.modals.bugReport.reportSentToUser.yourBugReport.description'
-				),
+				title: i18n.__(messages.reportDetailsTitle),
+				description: i18n.__(messages.reportDetailsDescription),
 				fields: embedFields,
 			},
 		],
 	});
 
-	await reportBug.updateOne(
+	await reportBug.findOneAndUpdate(
 		{ userId, reportId },
 		{
 			$set: {
-				messageToUserId: userMessage.id,
-				messageToDevId: botOwnerMessage.id,
+				userMessageId: userMessage.id,
+				devMessageId: botOwnerMessage.id,
 			},
 		}
 	);
