@@ -43,6 +43,4 @@ async function createVoiceChannel(
 	return createdChannel;
 }
 
-module.exports = {
-	createVoiceChannel,
-};
+module.exports = { createVoiceChannel };

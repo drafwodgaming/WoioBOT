@@ -66,10 +66,7 @@ async function sendBugReport(
 	await reportBug.findOneAndUpdate(
 		{ userId, reportId },
 		{
-			$set: {
-				userMessageId: userMessage.id,
-				devMessageId: botOwnerMessage.id,
-			},
+			$set: { userMessageId: userMessage.id, devMessageId: botOwnerMessage.id },
 		}
 	);
 }

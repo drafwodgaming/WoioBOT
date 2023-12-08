@@ -80,9 +80,11 @@ module.exports = {
 
 		switch (subCommand) {
 			case en.commands.subcommands.setup:
-				welcomeChannel = await welcomeChannelSchema.findOne({
-					guildId: interactionGuildId,
-				});
+				const { isNew } = await addChannel(
+					interactionGuildId,
+					interactionChannel.id,
+					welcomeChannelSchema
+				);
 
 				const editChannelDescription = i18n.__(
 					'commands.welcomeChannel.editedChannel',
@@ -95,30 +97,19 @@ module.exports = {
 				);
 
 				responseEmbed = {
-					color: welcomeChannel ? editBlueColor : installGreenColor,
-					description: welcomeChannel
-						? editChannelDescription
-						: installChannelDescription,
+					color: isNew ? installGreenColor : editBlueColor,
+					description: isNew
+						? installChannelDescription
+						: editChannelDescription,
 				};
-
-				welcomeChannel = await addChannel(
-					interactionGuildId,
-					interactionChannel.id,
-					welcomeChannelSchema
-				);
 				break;
 
 			case en.commands.subcommands.disable:
-				welcomeChannel = await deleteChannel(
-					interactionGuildId,
-					welcomeChannelSchema
-				);
+				const isDeleted = await deleteChannel(guild.id, welcomeChannelSchema);
 
 				responseEmbed = {
-					color: welcomeChannel ? errorRedColor : defaultBotColor,
-					description: welcomeChannel
-						? deletedChannelMessage
-						: noChannelMessage,
+					color: isDeleted ? errorRedColor : defaultBotColor,
+					description: isDeleted ? deletedChannelMessage : noChannelMessage,
 				};
 				break;
 		}

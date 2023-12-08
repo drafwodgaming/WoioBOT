@@ -1,23 +1,18 @@
 // functions/utils/userInfo/buildRolesInfo.js
 const { i18n } = require('@config/i18nConfig');
 const {
-	getMemberRoles,
-} = require('@functions/utils/userInfo/getInfo/getMemberRoles');
+	getRolesInfo,
+} = require('@functions/utils/userInfo/getInfo/getRolesInfo');
 
 async function buildRolesInfo(targetUser) {
-	const memberRolesList = await getMemberRoles(targetUser);
-
-	const formattedRoles = memberRolesList
-		.filter(role => role.id !== targetUser.guild.roles.everyone.id)
-		.slice(0, 3)
-		.join(' ');
+	const { userRoles, userRolesCount } = await getRolesInfo(targetUser);
 
 	return [
 		{
 			name: i18n.__('commands.userInfo.memberRoles'),
 			value:
-				formattedRoles.length > 0
-					? formattedRoles
+				userRolesCount > 0
+					? userRoles
 					: i18n.__('commands.userInfo.emptyRolesList'),
 		},
 	];

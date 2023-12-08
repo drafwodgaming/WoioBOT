@@ -3,12 +3,11 @@ const {
 	getUserStatus,
 } = require('@functions/utils/userInfo/getInfo/getUserStatus');
 async function buildStatusLabelInfo(targetUser) {
+	const statusList = getUserStatus(targetUser);
 	return [
 		{
 			name: i18n.__('commands.userInfo.statusLabel'),
-			value: i18n.__('commands.userInfo.userStatus', {
-				statusList: getUserStatus(targetUser),
-			}),
+			value: i18n.__('commands.userInfo.userStatus', { statusList }),
 			inline: true,
 		},
 	];

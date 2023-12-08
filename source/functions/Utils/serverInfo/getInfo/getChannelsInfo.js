@@ -1,23 +1,26 @@
 const { ChannelType } = require('discord.js');
 
 async function getChannelsInfo(channelsCache) {
-	const guildChannels = channelsCache.size;
-	const textChannels = channelsCache.filter(
-		channel => channel.type === ChannelType.GuildText
-	).size;
-	const voiceChannels = channelsCache.filter(
-		channel => channel.type === ChannelType.GuildVoice
-	).size;
-	const guildCategories = channelsCache.filter(
-		channel => channel.type === ChannelType.GuildCategory
-	).size;
+	return channelsCache.reduce(
+		(counts, channel) => {
+			counts.guildChannels++;
 
-	return {
-		guildChannels,
-		textChannels,
-		voiceChannels,
-		guildCategories,
-	};
+			switch (channel.type) {
+				case ChannelType.GuildText:
+					counts.textChannels++;
+					break;
+				case ChannelType.GuildVoice:
+					counts.voiceChannels++;
+					break;
+				case ChannelType.GuildCategory:
+					counts.guildCategories++;
+					break;
+			}
+
+			return counts;
+		},
+		{ guildChannels: 0, textChannels: 0, voiceChannels: 0, guildCategories: 0 }
+	);
 }
 
 module.exports = { getChannelsInfo };

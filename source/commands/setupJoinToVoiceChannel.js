@@ -68,7 +68,7 @@ module.exports = {
 			'commands.joinToCreateChannel.deletedChannel'
 		);
 
-		let joinToCreateChannel, responseEmbed;
+		let responseEmbed;
 
 		switch (subCommand) {
 			case en.commands.subcommands.setup:
