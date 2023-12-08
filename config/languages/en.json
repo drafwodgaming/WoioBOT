@@ -119,22 +119,22 @@
 			"bugReport": {
 				"title": "BUG FINDER",
 				"reportSent": "Your report has been successfully sent to the developer",
-				"reportSentToUser": {
+				"userReport": {
 					"reportFrom": "Bug Report From {{userId}}",
-					"yourBugReport": {
+					"reportDetails": {
 						"title": "Your Bug Report",
 						"description": "Thank you for submitting a bug report! Here are the details:"
 					},
 					"userId": "User ID",
 					"reportId": "Report ID",
-					"bugName": "Bug",
-					"bugDescription": "Description"
+					"reportTitle": "Bug",
+					"reportDescription": "Description"
 				},
-				"bugCommandInput": {
+				"reportTitleInput": {
 					"label": "Reason for reporting bug",
 					"placeholder": "Enter the discovered issue"
 				},
-				"bugDescriptionInput": {
+				"reportDescriptionInput": {
 					"label": "Detailed description of the problem",
 					"placeholder": "Please provide a detailed description of what is not working correctly with the bot"
 				}
