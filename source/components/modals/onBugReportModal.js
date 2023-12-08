@@ -8,17 +8,25 @@ module.exports = {
 	},
 	async execute(interaction, client) {
 		const userId = interaction.user.id;
-		const bugCommand = interaction.fields.getTextInputValue(modals.bugCommand);
-		const bugDescription = interaction.fields.getTextInputValue(
-			modals.bugDescription
+		const reportTitle = interaction.fields.getTextInputValue(
+			modals.reportTitle
+		);
+		const reportDescription = interaction.fields.getTextInputValue(
+			modals.reportDescription
 		);
 
 		const { reportId } = await reportToDB(
 			interaction,
-			bugCommand,
-			bugDescription
+			reportTitle,
+			reportDescription
 		);
 
-		await sendBugReport(client, userId, reportId, bugCommand, bugDescription);
+		await sendBugReport(
+			client,
+			userId,
+			reportId,
+			reportTitle,
+			reportDescription
+		);
 	},
 };

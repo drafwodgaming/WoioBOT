@@ -13,11 +13,11 @@ function createBugReportModal() {
 		.setTitle(i18n.__('components.modals.bugReport.title'));
 
 	const bugCommandInputField = new TextInputBuilder()
-		.setCustomId(modals.bugCommand)
-		.setLabel(i18n.__('components.modals.bugReport.bugCommandInput.label'))
+		.setCustomId(modals.reportTitle)
+		.setLabel(i18n.__('components.modals.bugReport.reportTitleInput.label'))
 		.setStyle(TextInputStyle.Short)
 		.setPlaceholder(
-			i18n.__('components.modals.bugReport.bugCommandInput.placeholder')
+			i18n.__('components.modals.bugReport.reportTitleInput.placeholder')
 		);
 
 	const bugCommandRow = new ActionRowBuilder().addComponents(
@@ -25,11 +25,13 @@ function createBugReportModal() {
 	);
 
 	const bugDescriptionInputField = new TextInputBuilder()
-		.setCustomId(modals.bugDescription)
-		.setLabel(i18n.__('components.modals.bugReport.bugDescriptionInput.label'))
+		.setCustomId(modals.reportDescription)
+		.setLabel(
+			i18n.__('components.modals.bugReport.reportDescriptionInput.label')
+		)
 		.setStyle(TextInputStyle.Paragraph)
 		.setPlaceholder(
-			i18n.__('components.modals.bugReport.bugDescriptionInput.placeholder')
+			i18n.__('components.modals.bugReport.reportDescriptionInput.placeholder')
 		);
 
 	const bugDescriptionRow = new ActionRowBuilder().addComponents(

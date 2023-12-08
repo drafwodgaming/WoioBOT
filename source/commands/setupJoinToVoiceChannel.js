@@ -72,9 +72,11 @@ module.exports = {
 
 		switch (subCommand) {
 			case en.commands.subcommands.setup:
-				joinToCreateChannel = await joinToCreateSchema.findOne({
-					guildId: interactionGuildId,
-				});
+				const { isNew } = await addChannel(
+					interactionGuildId,
+					interactionChannel.id,
+					joinToCreateSchema
+				);
 
 				const editChannelDescription = i18n.__(
 					'commands.joinToCreateChannel.editedChannel',
@@ -87,30 +89,19 @@ module.exports = {
 				);
 
 				responseEmbed = {
-					color: joinToCreateChannel ? editBlueColor : installGreenColor,
-					description: joinToCreateChannel
-						? editChannelDescription
-						: installChannelDescription,
+					color: isNew ? installGreenColor : editBlueColor,
+					description: isNew
+						? installChannelDescription
+						: editChannelDescription,
 				};
-
-				joinToCreateChannel = await addChannel(
-					interactionGuildId,
-					interactionChannel.id,
-					joinToCreateSchema
-				);
 				break;
 
 			case en.commands.subcommands.disable:
-				joinToCreateChannel = await deleteChannel(
-					interactionGuildId,
-					joinToCreateSchema
-				);
+				const isDeleted = await deleteChannel(guild.id, joinToCreateSchema);
 
 				responseEmbed = {
-					color: joinToCreateChannel ? errorRedColor : defaultBotColor,
-					description: joinToCreateChannel
-						? deletedChannelMessage
-						: noChannelMessage,
+					color: isDeleted ? errorRedColor : defaultBotColor,
+					description: isDeleted ? deletedChannelMessage : noChannelMessage,
 				};
 				break;
 		}

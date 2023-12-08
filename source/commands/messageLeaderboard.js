@@ -20,7 +20,7 @@ module.exports = {
 		.setDMPermission(false),
 	async execute(interaction) {
 		const { guild } = interaction;
-		const guildId = guild.id;
+		const { id: guildId } = guild;
 
 		const top10 = await messageLeaderboardSchema
 			.find({ guildId })

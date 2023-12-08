@@ -101,22 +101,22 @@
 			"bugReport": {
 				"title": "ПОШУК БАГІВ",
 				"reportSent": "Ваш репорт успішно надіслано розробнику",
-				"reportSentToUser": {
+				"userReport": {
 					"reportFrom": "Bug Report From {{userId}}",
-					"yourBugReport": {
+					"reportDetails": {
 						"title": "Your Bug Report",
 						"description": "Thank you for submitting a bug report! Here are the details:"
 					},
 					"userId": "User ID",
 					"reportId": "Report ID",
-					"bugName": "Bug",
-					"bugDescription": "Description"
+					"reportTitle": "Bug",
+					"reportDescription": "Description"
 				},
-				"bugCommandInput": {
+				"reportTitleInput": {
 					"label": "Причина отправления репорта",
 					"placeholder": "Введите найденную ошибку"
 				},
-				"bugDescriptionInput": {
+				"reportDescriptionInput": {
 					"label": "Подробное описание проблемы",
 					"placeholder": "Пожалуйста, предоставьте подробное описание того, что некорректно работает у бота"
 				}

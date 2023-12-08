@@ -101,22 +101,22 @@
 			"bugReport": {
 				"title": "ПОИСК БАГОВ",
 				"reportSent": "Ваш репорт успешно отправлен разработчику",
-				"reportSentToUser": {
+				"userReport": {
 					"reportFrom": "Отчёт от {{userId}}",
-					"yourBugReport": {
+					"reportDetails": {
 						"title": "Ваш отчёт об ошибке",
 						"description": "Спасибо за отправку отчёта об ошибке! Вот детали:"
 					},
 					"userId": "ID пользователя",
 					"reportId": "ID отчёта",
-					"bugName": "Баг",
-					"bugDescription": "Описание"
+					"reportTitle": "Баг",
+					"reportDescription": "Описание"
 				},
-				"bugCommandInput": {
+				"reportTitleInput": {
 					"label": "Причина отправления репорта",
 					"placeholder": "Введите найденную ошибку"
 				},
-				"bugDescriptionInput": {
+				"reportDescriptionInput": {
 					"label": "Подробное описание проблемы",
 					"placeholder": "Пожалуйста, предоставьте подробное описание того, что некорректно работает у бота"
 				}
