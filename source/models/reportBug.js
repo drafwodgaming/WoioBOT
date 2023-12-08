@@ -4,10 +4,11 @@ const { Schema, model } = require('mongoose');
 const reportBugSchema = new Schema({
 	reportId: String,
 	userId: String,
-	bugCommand: String,
+	bugName: String,
 	bugDescription: String,
-	messageToUserId: String,
-	messageToDevId: String,
+	userMessageId: String,
+	devMessageId: String,
+	reportType: { type: String, enum: ['bug', 'proposal', 'improvement'] },
 });
 
 module.exports = model('reportbug', reportBugSchema);
