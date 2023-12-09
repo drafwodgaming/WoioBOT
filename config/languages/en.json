@@ -43,7 +43,6 @@
 			"createdTime": "{{userCreatedAt}}",
 			"statusLabel": "Status",
 			"userStatus": "{{statusList}}",
-			"badges": "{{userBadgesList}}",
 			"joinedAt": "Joined",
 			"joinedTime": "{{memberJoinedTime}}",
 			"memberRoles": "Roles",
@@ -86,18 +85,6 @@
 			"disableChannel": "\"Join To Create\" channel",
 			"channelOption": "Setup \"Join To Create\" channel"
 		},
-
-		"logChannel": {
-			"name": "logchannel",
-			"editedChannel": "Log channel was changed at <#{{channelId}}>",
-			"installedChannel": "Log channel was set at <#{{channelId}}>. To disable run /logchannel disable",
-			"noChannel": "{{warningEmoji}} Channel has not been set yet",
-			"deletedChannel": "Log channel was deleted",
-			"selectLogChannel": "Select channel for log message",
-			"setupChannel": "Setup channel for log message",
-			"disableChannel": "Disable channel for log message",
-			"channelOption": "Setup channel for log message"
-		},
 		"bugReport": {
 			"name": "report",
 			"description": "Tell me about the bug",
@@ -112,10 +99,6 @@
 	},
 	"components": {
 		"modals": {
-			"customBackground": {
-				"label": "BACKGROUND",
-				"placeholder": "Custom Background"
-			},
 			"bugReport": {
 				"title": "BUG FINDER",
 				"reportSent": "Your report has been successfully sent to the developer",
