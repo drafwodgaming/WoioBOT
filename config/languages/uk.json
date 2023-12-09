@@ -32,7 +32,6 @@
 			"createdTime": "{{userCreatedAt}}",
 			"statusLabel": "Статус",
 			"userStatus": "{{statusList}}",
-			"badges": "{{userBadgesList}}",
 			"joinedAt": "Увійшов",
 			"joinedTime": "{{memberJoinedTime}}",
 			"memberRoles": "Ролі",
@@ -72,16 +71,6 @@
 			"disableChannel": "\"Join To Create\" channel",
 			"channelOption": "Setup \"Join To Create\" channel"
 		},
-		"logChannel": {
-			"editedChannel": "Канал для логів було змінено на <#{{channelId}}>",
-			"installedChannel": "Канал для логів було встановлено на <#{{channelId}}>. Для відключення введіть /logchannel disable",
-			"noChannel": "{{warningEmoji}} Канал ще не встановлено",
-			"deletedChannel": "Канал для логів було видалено",
-			"selectLogChannel": "Вибери канал для логів",
-			"setupChannel": "Встановіть канал для логів",
-			"disableChannel": "Вимкніть канал для логів",
-			"channelOption": "Встановіть канал для логів"
-		},
 		"bugReport": {
 			"description": "Розповісти про баг",
 			"reportExists": "You have already submitted a bug report"
@@ -94,10 +83,6 @@
 	},
 	"components": {
 		"modals": {
-			"customBackground": {
-				"label": "BACKGROUND",
-				"placeholder": "Custom Background"
-			},
 			"bugReport": {
 				"title": "ПОШУК БАГІВ",
 				"reportSent": "Ваш репорт успішно надіслано розробнику",
@@ -168,22 +153,7 @@
 		}
 	},
 	"events": {
-		"developerOnly": "Ця команда доступна тільки розробнику",
-		"logChannelWelcome": {
-			"title": "User Joined",
-			"description": "User : %userName",
-			"createdAt": "Created at : %guildCreatedAt"
-		},
-		"logMessageDelete": {
-			"title": "Message deleted",
-			"description": {
-				"channelName": "Channel : %channelName (%channelId)",
-				"deletedBy": "Deleted by : %executor"
-			},
-			"fields": {
-				"name": "Message"
-			}
-		}
+		"developerOnly": "Ця команда доступна тільки розробнику"
 	},
 	"time": {
 		"moment": {
