@@ -78,6 +78,7 @@
 		"messageLeaderboard": {
 			"description": "Топ сообщений",
 			"top10Messages": "Top 10 messages",
+			"noTop": "На сервере ещё нет топа сообщений",
 			"fieldName": "Список:"
 		}
 	},
