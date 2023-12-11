@@ -94,6 +94,7 @@
 			"name": "messageleaderboard",
 			"description": "Messages Leaderboard",
 			"top10Messages": "Top 10 members by message count",
+			"noTop": "There is no message leaderboard on the server yet",
 			"fieldName": "List:"
 		}
 	},

@@ -7,7 +7,7 @@ const ru = require('@config/languages/ru.json');
 const uk = require('@config/languages/uk.json');
 const {
 	formatLeaderboard,
-} = require('@functions/utils/messageLeaderboardUtils');
+} = require('@functions/utils/formatter/messageLeaderboard');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -29,12 +29,16 @@ module.exports = {
 
 		const defaultBotColor = getColor('default');
 
-		const leaderboardEmbed = {
+		const leaderboardData = formatLeaderboard(top10, interaction);
+
+		const embed = {
 			color: defaultBotColor,
-			title: i18n.__('commands.messageLeaderboard.top10Messages'),
-			fields: formatLeaderboard(top10, interaction),
+			description:
+				leaderboardData.description ||
+				i18n.__('commands.messageLeaderboard.top10Messages'),
+			fields: leaderboardData.fields || [],
 		};
 
-		await interaction.reply({ embeds: [leaderboardEmbed], ephemeral: true });
+		await interaction.reply({ embeds: [embed], ephemeral: true });
 	},
 };
