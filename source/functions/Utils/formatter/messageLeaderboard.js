@@ -9,12 +9,20 @@ function formatLeaderboard(top10, { guild }) {
 		return `${index + 1}. ${member.user.username}: ${entry.messageCount}`;
 	});
 
-	return [
-		{
-			name: i18n.__('commands.messageLeaderboard.fieldName'),
-			value: leaderboardList.join('\n'),
-		},
-	];
+	if (!top10.length) {
+		return {
+			description: i18n.__('commands.messageLeaderboard.noTop'),
+		};
+	}
+
+	return {
+		fields: [
+			{
+				name: i18n.__('commands.messageLeaderboard.fieldName'),
+				value: leaderboardList.join('\n'),
+			},
+		],
+	};
 }
 
 module.exports = { formatLeaderboard };
