@@ -1,12 +1,9 @@
 const i18n = require('i18n');
 
 function getUserLocale(interaction) {
-	if (interaction && interaction.locale) {
-		const userLocale = interaction.locale;
-		i18n.setLocale(userLocale);
-		return userLocale;
-	}
-	return i18n.getLocale();
+	const userLocale = interaction?.locale || i18n.getLocale();
+	i18n.setLocale(userLocale);
+	return userLocale;
 }
 
 module.exports = { getUserLocale };
