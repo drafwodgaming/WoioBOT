@@ -1,41 +1,50 @@
-const {
-	StringSelectMenuBuilder,
-	StringSelectMenuOptionBuilder,
-	ActionRowBuilder,
-} = require('discord.js');
+const { StringSelectMenuBuilder, ActionRowBuilder } = require('discord.js');
 const emojis = require('@config/emojis.json');
 const en = require('@config/languages/en.json');
 const { menus } = require('@config/componentsId.json');
-
+const { createOption } = require('@functions/utils/createSelectMenuOption');
 function settingsTempChannel() {
-	const nameTag = emojis.nameTag;
 	const selectorId = menus.settingTempChannel;
+
+	const menuOptions = [
+		{
+			label: en.components.menus.tempChannel.name.label,
+			description: en.components.menus.tempChannel.name.description,
+			value: menus.values.tempChannelName,
+			emoji: emojis.nameTag,
+		},
+		{
+			label: en.components.menus.tempChannel.limit.label,
+			description: en.components.menus.tempChannel.limit.description,
+			value: menus.values.tempChannelLimit,
+			emoji: emojis.limitPeople,
+		},
+		{
+			label: en.components.menus.tempChannel.lockChannel.label,
+			description: en.components.menus.tempChannel.lockChannel.description,
+			value: menus.values.tempChannelLock,
+			emoji: emojis.lockChannel,
+		},
+		{
+			label: en.components.menus.tempChannel.unlockChannel.label,
+			description: en.components.menus.tempChannel.unlockChannel.description,
+			value: menus.values.tempChannelUnlock,
+			emoji: emojis.unlockChannel,
+		},
+	];
+
 	const nameMenu = new StringSelectMenuBuilder()
 		.setCustomId(selectorId)
 		.setPlaceholder(en.components.menus.tempChannel.changeSettings)
 		.addOptions(
-			new StringSelectMenuOptionBuilder()
-				.setLabel(en.components.menus.tempChannel.name.label)
-				.setDescription(en.components.menus.tempChannel.name.description)
-				.setValue(menus.values.tempChannelName)
-				.setEmoji(nameTag),
-			new StringSelectMenuOptionBuilder()
-				.setLabel(en.components.menus.tempChannel.limit.label)
-				.setDescription(en.components.menus.tempChannel.limit.description)
-				.setValue(menus.values.tempChannelLimit)
-				.setEmoji(emojis.limitPeople),
-			new StringSelectMenuOptionBuilder()
-				.setLabel(en.components.menus.tempChannel.lockChannel.label)
-				.setDescription(en.components.menus.tempChannel.lockChannel.description)
-				.setValue(menus.values.tempChannelLock)
-				.setEmoji(emojis.lockChannel),
-			new StringSelectMenuOptionBuilder()
-				.setLabel(en.components.menus.tempChannel.unlockChannel.label)
-				.setDescription(
-					en.components.menus.tempChannel.unlockChannel.description
+			menuOptions.map(option =>
+				createOption(
+					option.label,
+					option.description,
+					option.value,
+					option.emoji
 				)
-				.setValue(menus.values.tempChannelUnlock)
-				.setEmoji(emojis.unlockChannel)
+			)
 		);
 
 	const actionRow = new ActionRowBuilder().addComponents(nameMenu);

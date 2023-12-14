@@ -36,7 +36,7 @@ async function sendBugReport(
 
 	const bugReport = await reportBug.findOne({ userId, reportId });
 
-	if (!bugReport) throw new Error('Bug report not found in the database');
+	// if (!bugReport) throw new Error('Bug report not found in the database');
 
 	const reportInfoTitle = i18n.__(messages.reportFrom, { userId });
 	const embedFields = [
