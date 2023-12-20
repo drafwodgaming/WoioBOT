@@ -25,7 +25,6 @@ module.exports = {
 		const { channelId: interactionChannelId } = joinToCreateData;
 		const existingTempChannels = await temporaryChannelsSchema.find({
 			guildId: oldState.member.guild.id,
-			creatorId: oldState.member.id,
 		});
 
 		await deleteEmptyTempChannels(member.guild, existingTempChannels);
