@@ -20,6 +20,7 @@ module.exports = {
 		const joinToCreateData = await joinToCreateSchema.findOne({
 			guildId,
 		});
+
 		if (!joinToCreateData) return;
 
 		const { channelId: interactionChannelId } = joinToCreateData;
@@ -31,7 +32,7 @@ module.exports = {
 
 		if (interactionChannelId === newState.channelId) {
 			const parentCategory = newState.channel?.parent;
-			const channelName = `${member.user.username} channel`;
+			const channelName = `🔉| ${member.user.username} channel`;
 
 			const createdVoiceChannel = await createVoiceChannel(
 				member.guild,
@@ -44,12 +45,14 @@ module.exports = {
 			if (createdVoiceChannel && newState) {
 				newState.setChannel(createdVoiceChannel);
 
-				await temporaryChannelsSchema.create({
-					guildId: guild.id,
-					channelId: createdVoiceChannel.id,
-					creatorId: member.id,
-					channelName: channelName,
-				});
+				setTimeout(async () => {
+					await temporaryChannelsSchema.create({
+						guildId,
+						channelId: createdVoiceChannel.id,
+						creatorId: member.id,
+						channelName,
+					});
+				}, 500);
 
 				const defaultBotColor = getColor('default');
 
