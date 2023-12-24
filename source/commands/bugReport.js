@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require('discord.js');
 const { createBugReportModal } = require('@functions/modals/setUpBugReport');
 const reportBug = require('@source/models/reportBug');
 const { i18n } = require('@config/i18nConfig');
-const en = require('@config//languages/en.json');
+const en = require('@config/languages/en.json');
 const ru = require('@config/languages/ru.json');
 const uk = require('@config/languages/uk.json');
 
