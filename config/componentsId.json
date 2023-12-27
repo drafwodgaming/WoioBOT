@@ -21,6 +21,7 @@
 	},
 	"buttons": {
 		"fixedButton": "fixedButton",
-		"rejectedButton": "rejectedButton"
+		"rejectedButton": "rejectedButton",
+		"rulesButton": "rulesButton"
 	}
 }
