@@ -24,11 +24,8 @@ module.exports = {
 		if (!joinToCreateData) return;
 
 		const { channelId: interactionChannelId } = joinToCreateData;
-		const existingTempChannels = await temporaryChannelsSchema.find({
-			guildId: oldState.member.guild.id,
-		});
 
-		await deleteEmptyTempChannels(member.guild, existingTempChannels);
+		await deleteEmptyTempChannels(member.guild);
 
 		if (interactionChannelId === newState.channelId) {
 			const parentCategory = newState.channel?.parent;
