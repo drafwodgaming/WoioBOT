@@ -44,7 +44,7 @@
 		"welcomeChannel": {
 			"editedChannel": "Привітальний канал було змінено на <#{{channelId}}>",
 			"installedChannel": "Привітальний канал було встановлено на <#{{channelId}}>. Для відключення введіть /welcomechannel disable",
-			"noChannel": "{{warningEmoji}} Канал ще не встановлено",
+			"noChannel": "{{{warningEmoji}}} Канал ще не встановлено",
 			"deletedChannel": "Привітальний канал було видалено",
 			"selectWelcomeChannel": "Вибери канал для привітальних повідомлень",
 			"setupChannel": "Встановіть канал для привітальних повідомлень",
@@ -54,7 +54,7 @@
 		"leaveChannel": {
 			"editedChannel": "Прощальний канал було змінено на <#{{channelId}}>",
 			"installedChannel": "Прощальний канал було встановлено на <#{{channelId}}>. Для відключення введіть /leavechannel disable",
-			"noChannel": "{{warningEmoji}} Канал ще не встановлено",
+			"noChannel": "{{{warningEmoji}}} Канал ще не встановлено",
 			"deletedChannel": "Прощальний канал було видалено",
 			"selectLeaveChannel": "Вибери канал для прощальних повідомлень",
 			"setupChannel": "Встановіть канал для прощальних повідомлень",
@@ -64,7 +64,7 @@
 		"joinToCreateChannel": {
 			"editedChannel": "\"Join To Create\" channel was changed at <#{{channelId}}>",
 			"installedChannel": "\"Join To Create\" channel was set at <#{{channelId}}>. To disabled run /jointocreate disable",
-			"noChannel": "{{warningEmoji}} Channel has not been set yet",
+			"noChannel": "{{{warningEmoji}}} Channel has not been set yet",
 			"deletedChannel": "\"Join To Create\" channel was deleted",
 			"selectJoinToCreateChannel": "Select \"Join To Create\"",
 			"setupChannel": "Setup \"Join To Create\" channel",
