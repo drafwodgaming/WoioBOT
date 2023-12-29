@@ -3,6 +3,7 @@ const { monoDB, monoDBTest } = require('@config/botConfig.json');
 const mongoose = require('mongoose');
 const en = require('@config/languages/en.json');
 const kleur = require('kleur');
+const { checkAllGuilds } = require('@functions/utils/ready/checkAllGuilds');
 // const { sendEmbed } = require('@functions/owner/sendEmbed');
 
 module.exports = {
@@ -35,5 +36,6 @@ module.exports = {
 		];
 		console.table(clientStats);
 		// sendEmbed(client);
+		checkAllGuilds(client);
 	},
 };
