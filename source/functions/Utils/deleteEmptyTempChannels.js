@@ -1,6 +1,9 @@
 const temporaryChannelsSchema = require('@source/models/temporaryChannels');
 
-async function deleteEmptyTempChannels(guild, tempChannels) {
+async function deleteEmptyTempChannels(guild) {
+	const tempChannels = await temporaryChannelsSchema.find({
+		guildId: guild.id,
+	});
 	for (const tempChannel of tempChannels) {
 		const { channelId, creatorId } = tempChannel;
 		const channel = guild.channels.cache.get(channelId);
