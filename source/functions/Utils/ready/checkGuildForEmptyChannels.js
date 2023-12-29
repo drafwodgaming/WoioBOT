@@ -13,11 +13,7 @@ async function checkGuildForEmptyChannels(guild) {
 		return !channel || channel.members.size === 0;
 	});
 
-	if (emptyChannels.length > 0) {
-		await deleteEmptyTempChannels(guild);
-
-		console.log(`${guild}: удалены пустые временные каналы`);
-	}
+	if (emptyChannels.length > 0) await deleteEmptyTempChannels(guild);
 }
 
 module.exports = { checkGuildForEmptyChannels };
