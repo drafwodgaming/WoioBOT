@@ -74,16 +74,6 @@ module.exports = {
 			url: 'attachment://profile.png',
 		};
 
-		ownerCrown = emojis.crown;
-
-		if (targetUser === interaction.guild.ownerId) {
-			embed.addFields({
-				name: 'Owner',
-				value: ownerCrown,
-				inline: false,
-			});
-		}
-
 		const userInfoEmbed = {
 			color: defaultBotColor,
 			title: userInfoTitle,
