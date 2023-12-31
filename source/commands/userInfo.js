@@ -9,18 +9,8 @@ const { getColor } = require('@functions/utils/getColor');
 const en = require('@config/languages/en.json');
 const ru = require('@config/languages/ru.json');
 const uk = require('@config/languages/uk.json');
-const {
-	buildCreatedAtInfo,
-} = require('@functions/utils/userInfo/buildInfo/buildCreatedAtInfo');
-const {
-	buildJoinedAtInfo,
-} = require('@functions/utils/userInfo/buildInfo/buildJoinedAtInfo');
-const {
-	buildStatusLabelInfo,
-} = require('@functions/utils/userInfo/buildInfo/buildStatusLabelInfo');
-const {
-	buildRolesInfo,
-} = require('@functions/utils/userInfo/buildInfo/buildRolesInfo');
+const { formatDate } = require('@functions/utils/formatter/formatDate');
+const emojis = require('@config/emojis.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -46,9 +36,13 @@ module.exports = {
 	 */
 	async execute(interaction) {
 		await interaction.deferReply();
+		const defaultBotColor = getColor('default');
 		const { options, member } = interaction;
 		const targetUser =
 			options.getMember(en.commands.options.userOption) || member;
+
+		const userCreatedAt = targetUser.createdAt;
+		const userCreatedAtTimeFormatted = formatDate(userCreatedAt);
 
 		const profileImageBuffer = await profileImage(targetUser.id, {
 			badgesFrame: true,
@@ -56,36 +50,76 @@ module.exports = {
 		const imageAttachment = new AttachmentBuilder(profileImageBuffer, {
 			name: 'profile.png',
 		});
-
-		const userCreatedAt = targetUser.user.createdAt;
 		const memberJoinedTime = targetUser.joinedAt;
+		const memberJoinedTimeFormatted = formatDate(memberJoinedTime);
+		const roleCache = targetUser.roles.cache.map(role => role);
+
+		const userRoles = roleCache
+			.filter(role => role.id !== targetUser.guild.roles.everyone.id)
+			.slice(0, 3)
+			.join(' ');
+
+		const userRolesCount = targetUser.roles.cache.size;
+		const userStatus = {
+			online: i18n.__('commands.userInfo.online'),
+			idle: i18n.__('commands.userInfo.idle'),
+			offline: i18n.__('commands.userInfo.offline'),
+			dnd: i18n.__('commands.userInfo.dnd'),
+		};
+		const statusList =
+			userStatus[targetUser.presence ? targetUser.presence.status : 'offline'];
 
 		const userInfoTitle = i18n.__('commands.userInfo.title');
-		const createdAt = await buildCreatedAtInfo(userCreatedAt);
-		const joinedAt = await buildJoinedAtInfo(memberJoinedTime);
-		const userStatus = await buildStatusLabelInfo(targetUser);
-		const rolesInfo = await buildRolesInfo(targetUser);
-		const embedFields = [
-			...createdAt,
-			...joinedAt,
-			...userStatus,
-			...rolesInfo,
-		];
-
-		const defaultBotColor = getColor('default');
-
 		const imageEmbed = {
 			url: 'attachment://profile.png',
 		};
-		await interaction.editReply({
-			embeds: [
+
+		ownerCrown = emojis.crown;
+
+		if (targetUser === interaction.guild.ownerId) {
+			embed.addFields({
+				name: 'Owner',
+				value: ownerCrown,
+				inline: false,
+			});
+		}
+
+		const userInfoEmbed = {
+			color: defaultBotColor,
+			title: userInfoTitle,
+			image: imageEmbed,
+			timestamp: new Date(),
+			fields: [
 				{
-					color: defaultBotColor,
-					title: userInfoTitle,
-					fields: embedFields,
-					image: imageEmbed,
+					name: i18n.__('commands.userInfo.createdAt'),
+					value: i18n.__('commands.userInfo.createdTime', {
+						userCreatedAt: userCreatedAtTimeFormatted,
+					}),
+					inline: true,
+				},
+				{
+					name: i18n.__('commands.userInfo.joinedAt'),
+					value: i18n.__('commands.userInfo.joinedTime', {
+						memberJoinedTime: memberJoinedTimeFormatted,
+					}),
+					inline: true,
+				},
+				{
+					name: i18n.__('commands.userInfo.memberRoles'),
+					value:
+						userRolesCount > 0
+							? userRoles
+							: i18n.__('commands.userInfo.emptyRolesList'),
+				},
+				{
+					name: i18n.__('commands.userInfo.statusLabel'),
+					value: i18n.__('commands.userInfo.userStatus', { statusList }),
+					inline: true,
 				},
 			],
+		};
+		await interaction.editReply({
+			embeds: [userInfoEmbed],
 			files: [imageAttachment],
 		});
 	},
