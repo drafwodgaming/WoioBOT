@@ -4,5 +4,14 @@
 	"limitPeople": "<:limit:1180859589328130089>",
 	"lockChannel": "<:lock:1180914792916078682>",
 	"unlockChannel": "<:unlock:1180914795604623541>",
-	"rules": "<:rules:1190013659284508793>"
+	"rules": "<:rules:1190013659284508793>",
+
+	"textChannel": "<:channel:1190840221621825546>",
+	"voiceChannel": "<:voiceChannel:1190840231176454277>",
+	"category": "<:category:1190840233458143292>",
+	"announcement": "<:announcement:1190840229511299072>",
+	"stage": "<:stage:1190840226936016906>",
+	"forum": "<:forum:1190840225405087885>",
+
+	"crown": "<:crown:1191023284117061682>"
 }
