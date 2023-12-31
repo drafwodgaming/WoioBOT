@@ -9,6 +9,7 @@
 			"description": "Показать информацию о сервере",
 			"generalLabel": "Основное",
 			"guildName": "Название: {{guildName}}",
+			"noDescription": "Нет Описания",
 			"ownerId": "Создатель: <@{{ownerId}}>",
 			"createdAt": "Cоздан: {{guildCreatedAt}}",
 			"guildDescription": "Описание: {{guildDescription}}",
@@ -16,9 +17,12 @@
 			"guildMembersCount": "Пользователи: {{guildMembersCount}}",
 			"guildBotsCount": "Боты: {{botMembersCount}}",
 			"totalChannelsCount": "Каналы [ {{guildChannels}} ]",
-			"textChannelsCount": "Текстовые: {{textChannels}}",
-			"voiceChannelsCount": "Голосовые: {{voiceChannels}}",
-			"categoriesCount": "Категории: {{guildCategories}}",
+			"textChannelsCount": "{{{textChannelsIco}}} `{{textChannels}}`",
+			"voiceChannelsCount": "{{{voiceChannelsIco}}} `{{voiceChannels}}`",
+			"categoriesCount": "{{{categoriesIco}}} `{{guildCategories}}`",
+			"annnouncementChannelsCount": "{{{annnouncementChannelIco}}} `{{annnouncementChannel}}`",
+			"stageChannelsCount": "{{{stageChannelIco}}} `{{stageChannel}}`",
+			"forumCount": "{{{forumIco}}} `{{forum}}`",
 			"totalEmojisCount": "Эмодзи [ {{totalEmojisCount}} ]",
 			"animatedEmojisCount": "Анимированные: {{animatedEmojisCount}}",
 			"staticEmojisCount": "Статичные: {{staticEmojisCount}}",
@@ -161,7 +165,7 @@
 			"momentLocale": "ru",
 			"momentWeekList": "Воскресенье_Понедельник_Вторник_Среда_Четверг_Пятница_Суббота"
 		},
-		"defaultTimeFormat": "dddd, DD.MM.YYYY HH:mm"
+		"defaultTimeFormat": "dddd, DD.MM.YYYY"
 	},
 	"logs": {
 		"errors": {
