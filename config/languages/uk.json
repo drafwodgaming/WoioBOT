@@ -8,6 +8,7 @@
 			"title": "Про сервер",
 			"description": "Показати інформацію про сервер",
 			"generalLabel": "Основне",
+			"noDescription": "No Description",
 			"guildName": "Назва: {{guildName}}",
 			"ownerId": "Творець: <@{{ownerId}}>",
 			"createdAt": "Створений: {{guildCreatedAt}}",
@@ -16,9 +17,12 @@
 			"guildMembersCount": "Користувачі: {{guildMembersCount}}",
 			"guildBotsCount": "Боти: {{botMembersCount}}",
 			"totalChannelsCount": "Канали [ {{guildChannels}} ]",
-			"textChannelsCount": "Текстові: {{textChannels}}",
-			"voiceChannelsCount": "Голосові: {{voiceChannels}}",
-			"categoriesCount": "Категорії: {{guildCategories}}",
+			"textChannelsCount": "{{{textChannelsIco}}} `{{textChannels}}`",
+			"voiceChannelsCount": "{{{voiceChannelsIco}}} `{{voiceChannels}}`",
+			"categoriesCount": "{{{categoriesIco}}} `{{guildCategories}}`",
+			"annnouncementChannelsCount": "{{{annnouncementChannelIco}}} `{{annnouncementChannel}}`",
+			"stageChannelsCount": "{{{stageChannelIco}}} `{{stageChannel}}`",
+			"forumCount": "{{{forumIco}}} `{{forum}}`",
 			"totalEmojisCount": "Емодзі [ {{totalEmojisCount}} ]",
 			"animatedEmojisCount": "Анімовані: {{animatedEmojisCount}}",
 			"staticEmojisCount": "Статичні: {{staticEmojisCount}}",
@@ -161,7 +165,7 @@
 			"momentLocale": "en",
 			"momentWeekList": "Неділя_Понеділок_Вівторок_Середа_Четвер_П'ятниця_Субота"
 		},
-		"defaultTimeFormat": "dddd, DD.MM.YYYY HH:mm"
+		"defaultTimeFormat": "dddd, DD.MM.YYYY"
 	},
 	"logs": {
 		"errors": {
