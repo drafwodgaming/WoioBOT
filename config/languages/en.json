@@ -26,7 +26,7 @@
 		"settings": {
 			"name": "settings",
 			"description": "Check all server's settigns",
-			"serverSettingsTitle": "Server Settings",
+			"settingServerTitle": "Server Settings",
 			"serverSettingsFieldName": "General",
 			"language": "Language {{language}}",
 			"welcomeChannel": "Welcome channel: {{{channelId}}}",
@@ -105,7 +105,7 @@
 			"deletedChannel": "\"Join To Create\" channel deleted",
 			"selectJoinToCreateChannel": "Select \"Join To Create\"",
 			"setupChannel": "Setup \"Join To Create\" channel",
-			"disableChannel": "\"Join To Create\" channel",
+			"disableChannel": "Disable \"Join To Create\"",
 			"channelOption": "Setup \"Join To Create\" channel"
 		},
 		"bugReport": {
