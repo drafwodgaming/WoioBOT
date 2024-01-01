@@ -1,17 +1,27 @@
 {
+	"code": "en",
 	"commands": {
 		"options": {
 			"userOption": "user",
-			"channelOption": "channel"
+			"channelOption": "channel",
+			"languageOption": "language"
 		},
 		"subcommands": {
 			"setup": "setup",
-			"disable": "disable"
+			"disable": "disable",
+			"setLanguage": "set"
 		},
 		"help": {
 			"name": "help",
 			"title": "Commands menu",
 			"description": "Get the commands for Lusty"
+		},
+		"language": {
+			"name": "language",
+			"description": "Setup language for server",
+			"setLanguage": "Set language for server",
+			"choiceLanguage": "Choice language",
+			"updateLanguage": "{{{flag}}} Language set to {{language}}"
 		},
 		"serverInfo": {
 			"name": "serverinfo",
@@ -20,7 +30,7 @@
 			"noDescription": "No Description",
 			"generalLabel": "General",
 			"ownerId": "Owner: <@{{ownerId}}>",
-			"createdAt": "Created at: {{guildCreatedAt}}",
+			"createdAt": "Created at: {{{guildCreatedAt}}}",
 			"totalMembersCount": "Members [ {{totalMembersCount}} ]",
 			"guildMembersCount": "Users: {{guildMembersCount}}",
 			"guildBotsCount": "Bots: {{botMembersCount}}",
@@ -42,11 +52,11 @@
 			"userOption": "Users",
 			"title": "About User",
 			"createdAt": "Created",
-			"createdTime": "{{userCreatedAt}}",
+			"createdTime": "{{{userCreatedAt}}}",
 			"statusLabel": "Status",
 			"userStatus": "{{statusList}}",
 			"joinedAt": "Joined",
-			"joinedTime": "{{memberJoinedTime}}",
+			"joinedTime": "{{{memberJoinedTime}}}",
 			"memberRoles": "Roles",
 			"emptyRolesList": "no roles",
 			"online": "Online",
@@ -173,7 +183,11 @@
 		}
 	},
 	"events": {
-		"developerOnly": "This command may only be used by the developer"
+		"developerOnly": "This command may only be used by the developer",
+		"joinToCreate": {
+			"channelName": "🔉| {{username}} channel",
+			"tempVoiceChannelTitle": "Temp Voice Channel"
+		}
 	},
 	"time": {
 		"moment": {
