@@ -14,51 +14,62 @@
 		"help": {
 			"name": "help",
 			"title": "Commands menu",
-			"description": "Get the commands for Lusty"
+			"description": "Get the list of commands for the bot"
 		},
 		"language": {
 			"name": "language",
-			"description": "Setup language for server",
-			"setLanguage": "Set language for server",
-			"choiceLanguage": "Choice language",
+			"description": "Set the language for the server",
+			"setLanguage": "Set the language for the server",
+			"choiceLanguage": "Choose the language",
 			"updateLanguage": "{{{flag}}} Language set to {{language}}"
+		},
+		"settings": {
+			"name": "settings",
+			"description": "Check all server's settigns",
+			"serverSettingsTitle": "Server Settings",
+			"serverSettingsFieldName": "General",
+			"language": "Language {{language}}",
+			"welcomeChannel": "Welcome channel: {{{channelId}}}",
+			"leaveChannel": "Leave channel: {{{channelId}}}",
+			"joinToCreateChannel": "Join To Create channel: {{{channelId}}}",
+			"noChannel": "No Installed"
 		},
 		"serverInfo": {
 			"name": "serverinfo",
 			"title": "About Server",
-			"description": "View the server information",
+			"description": "View information about the server",
 			"noDescription": "No Description",
 			"generalLabel": "General",
 			"ownerId": "Owner: <@{{ownerId}}>",
 			"createdAt": "Created at: {{{guildCreatedAt}}}",
-			"totalMembersCount": "Members [ {{totalMembersCount}} ]",
+			"totalMembersCount": "Total Members [ {{totalMembersCount}} ]",
 			"guildMembersCount": "Users: {{guildMembersCount}}",
 			"guildBotsCount": "Bots: {{botMembersCount}}",
-			"totalChannelsCount": "Channels [ {{guildChannels}} ]",
+			"totalChannelsCount": "Total Channels [ {{guildChannels}} ]",
 			"textChannelsCount": "{{{textChannelsIco}}} `{{textChannels}}`",
 			"voiceChannelsCount": "{{{voiceChannelsIco}}} `{{voiceChannels}}`",
 			"categoriesCount": "{{{categoriesIco}}} `{{guildCategories}}`",
 			"annnouncementChannelsCount": "{{{annnouncementChannelIco}}} `{{annnouncementChannel}}`",
 			"stageChannelsCount": "{{{stageChannelIco}}} `{{stageChannel}}`",
 			"forumCount": "{{{forumIco}}} `{{forum}}`",
-			"totalEmojisCount": "Emojis [ {{totalEmojisCount}} ]",
-			"animatedEmojisCount": "Animate: {{animatedEmojisCount}}",
+			"totalEmojisCount": "Total Emojis [ {{totalEmojisCount}} ]",
+			"animatedEmojisCount": "Animated: {{animatedEmojisCount}}",
 			"staticEmojisCount": "Static: {{staticEmojisCount}}",
 			"guildRolesCount": "Roles [ {{guildRolesCount}} ]"
 		},
 		"userInfo": {
 			"name": "userinfo",
-			"description": "View the user information",
+			"description": "View information about the user",
 			"userOption": "Users",
-			"title": "About User",
-			"createdAt": "Created",
+			"title": "About the User",
+			"createdAt": "Joined Discord",
 			"createdTime": "{{{userCreatedAt}}}",
 			"statusLabel": "Status",
 			"userStatus": "{{statusList}}",
-			"joinedAt": "Joined",
+			"joinedAt": "Joined Server",
 			"joinedTime": "{{{memberJoinedTime}}}",
 			"memberRoles": "Roles",
-			"emptyRolesList": "no roles",
+			"emptyRolesList": "No roles",
 			"online": "Online",
 			"idle": "Idle",
 			"offline": "Offline",
@@ -66,10 +77,10 @@
 		},
 		"welcomeChannel": {
 			"name": "welcomechannel",
-			"editedChannel": "Welcome channel was changed at <#{{channelId}}>",
-			"installedChannel": "Welcome channel was set at <#{{channelId}}>. To disable run /welcomechannel disable",
-			"noChannel": "{{{warningEmoji}}} Channel has not been set yet",
-			"deletedChannel": "Welcome channel was deleted",
+			"editedChannel": "Welcome channel changed to <#{{channelId}}>",
+			"installedChannel": "Welcome channel set to <#{{channelId}}>. To disable run /welcomechannel disable",
+			"noChannel": "{{{warningEmoji}}} Welcome channel not set",
+			"deletedChannel": "Welcome channel deleted",
 			"selectWelcomeChannel": "Select channel for welcome message",
 			"setupChannel": "Setup channel for welcome message",
 			"disableChannel": "Disable channel for welcome message",
@@ -77,10 +88,10 @@
 		},
 		"leaveChannel": {
 			"name": "leavechannel",
-			"editedChannel": "Leave channel was changed at <#{{channelId}}>",
-			"installedChannel": "Leave channel was set at <#{{channelId}}>. To disabled run /leavechannel disable",
-			"noChannel": "{{{warningEmoji}}} Channel has not been set yet",
-			"deletedChannel": "Leave channel was deleted",
+			"editedChannel": "Leave channel changed to <#{{channelId}}>",
+			"installedChannel": "Leave channel set to <#{{channelId}}>. To disabled run /leavechannel disable",
+			"noChannel": "{{{warningEmoji}}} Leave channel not set",
+			"deletedChannel": "Leave channel deleted",
 			"selectLeaveChannel": "Select channel for leave message",
 			"setupChannel": "Setup channel for leave message",
 			"disableChannel": "Disable channel for leave message",
@@ -88,10 +99,10 @@
 		},
 		"joinToCreateChannel": {
 			"name": "jointocreate",
-			"editedChannel": "\"Join To Create\" channel was changed at <#{{channelId}}>",
-			"installedChannel": "\"Join To Create\" channel was set at <#{{channelId}}>. To disabled run /jointocreate disable",
-			"noChannel": "{{{warningEmoji}}} Channel has not been set yet",
-			"deletedChannel": "\"Join To Create\" channel was deleted",
+			"editedChannel": "\"Join To Create\" channel changed to <#{{channelId}}>",
+			"installedChannel": "\"Join To Create\" channel set to <#{{channelId}}>. To disabled run /jointocreate disable",
+			"noChannel": "{{{warningEmoji}}} \"Join To Create\" channel not set",
+			"deletedChannel": "\"Join To Create\" channel deleted",
 			"selectJoinToCreateChannel": "Select \"Join To Create\"",
 			"setupChannel": "Setup \"Join To Create\" channel",
 			"disableChannel": "\"Join To Create\" channel",
@@ -99,15 +110,8 @@
 		},
 		"bugReport": {
 			"name": "report",
-			"description": "Tell me about the bug",
+			"description": "Report a bug to the developer",
 			"reportExists": "You have already submitted a bug report"
-		},
-		"messageLeaderboard": {
-			"name": "messageleaderboard",
-			"description": "Messages Leaderboard",
-			"top10Messages": "Top 10 members by message count",
-			"noTop": "There is no message leaderboard on the server yet",
-			"fieldName": "List:"
 		}
 	},
 	"components": {
@@ -136,17 +140,17 @@
 				}
 			},
 			"setNameTempChannel": {
-				"title": "Change channel name",
-				"label": "Enter channel name",
+				"title": "Change Channel Name",
+				"label": "Enter the new channel name",
 				"succesUpdateName": "Channel name updated successfully!",
-				"nameRoomExample": "Talking"
+				"nameRoomExample": "Example: Talking"
 			},
 			"setLimitTempChannel": {
-				"title": "Change channel user limit",
-				"label": "Enter channel limit",
+				"title": "Change Channel User Limit",
+				"label": "Enter user limit",
 				"errorLimit": "Please enter a valid user limit between 1 and 99",
 				"succesLimit": "User limit updated successfully!",
-				"limitRoomExample": "0 for unlimited"
+				"limitRoomExample": "Set to 0 for unlimited"
 			}
 		},
 		"menus": {
@@ -185,16 +189,9 @@
 	"events": {
 		"developerOnly": "This command may only be used by the developer",
 		"joinToCreate": {
-			"channelName": "🔉| {{username}} channel",
-			"tempVoiceChannelTitle": "Temp Voice Channel"
+			"channelName": "🔉| {{username}}'s channel",
+			"tempVoiceChannelTitle": "Temporary Voice Channel"
 		}
-	},
-	"time": {
-		"moment": {
-			"momentLocale": "en",
-			"momentWeekList": "Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday"
-		},
-		"defaultTimeFormat": "dddd, DD.MM.YYYY"
 	},
 	"logs": {
 		"unhandledRejection": "[ERROR:UNHANDLED PROMISE REJECTION] ❯",

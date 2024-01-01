@@ -3,21 +3,31 @@
 	"commands": {
 		"help": {
 			"title": "Меню команд",
-			"description": "Показати команди бота"
+			"description": "Показати список команд бота"
 		},
 		"language": {
-			"description": "Setup language for server",
-			"setLanguage": "Set language for server",
-			"choiceLanguage": "Choice language",
-			"updateLanguage": "{{{flag}}} Язык устиановлен на {{language}}"
+			"description": "Налаштувати мову для сервера",
+			"setLanguage": "Встановити мову для сервера",
+			"choiceLanguage": "Вибрати мову",
+			"updateLanguage": "{{{flag}}} Мова встановлена на {{language}}"
+		},
+		"settings": {
+			"description": "Переглянути всі налаштування сервера",
+			"settingServerTitle": "Налаштування сервера",
+			"serverSettingsFieldName": "Загальні",
+			"language": "Мова: {{language}}",
+			"welcomeChannel": "Канал привітання: {{{channelId}}}",
+			"leaveChannel": "Канал прощання: {{{channelId}}}",
+			"joinToCreateChannel": "Канал \"Join To Create\"  {{{channelId}}}",
+			"noChannel": "Не Встановлено"
 		},
 		"serverInfo": {
-			"title": "Про сервер",
-			"description": "Показати інформацію про сервер",
-			"generalLabel": "Основне",
-			"noDescription": "No Description",
+			"title": "Інформація про сервер",
+			"description": "Показати загальну інформацію про сервер",
+			"generalLabel": "Загальне",
+			"noDescription": "Опис відсутній",
 			"guildName": "Назва: {{guildName}}",
-			"ownerId": "Творець: <@{{ownerId}}>",
+			"ownerId": "Власник: <@{{ownerId}}>",
 			"createdAt": "Створений: {{{guildCreatedAt}}}",
 			"guildDescription": "Опис: {{guildDescription}}",
 			"totalMembersCount": "Учасники [ {{totalMembersCount}} ]",
@@ -39,120 +49,114 @@
 			"description": "Показати інформацію про користувача",
 			"userOption": "Користувач",
 			"title": "Про Користувача",
-			"createdAt": "Створений",
+			"createdAt": "Обліковий запис створений",
 			"createdTime": "{{{userCreatedAt}}}",
 			"statusLabel": "Статус",
 			"userStatus": "{{statusList}}",
-			"joinedAt": "Увійшов",
+			"joinedAt": "Ввійшов на сервер",
 			"joinedTime": "{{{memberJoinedTime}}}",
 			"memberRoles": "Ролі",
-			"emptyRolesList": "немає ролей",
+			"emptyRolesList": "Немає ролей",
 			"online": "В мережi",
-			"idle": "Вiдiйшов",
+			"idle": "Відійшов",
 			"offline": "Не в мережі",
 			"dnd": "Не турбувати"
 		},
 		"welcomeChannel": {
-			"editedChannel": "Привітальний канал було змінено на <#{{channelId}}>",
-			"installedChannel": "Привітальний канал було встановлено на <#{{channelId}}>. Для відключення введіть /welcomechannel disable",
-			"noChannel": "{{{warningEmoji}}} Канал ще не встановлено",
-			"deletedChannel": "Привітальний канал було видалено",
-			"selectWelcomeChannel": "Вибери канал для привітальних повідомлень",
+			"editedChannel": "Канал для привітання змінено на <#{{channelId}}>",
+			"installedChannel": "Канал для привітання встановлено на <#{{channelId}}>. Для відключення введіть /welcomechannel disable",
+			"noChannel": "{{{warningEmoji}}} Канал для привітання ще не встановлено",
+			"deletedChannel": "Канал для вітання видалено",
+			"selectWelcomeChannel": "Виберіть канал для привітальних повідомлень",
 			"setupChannel": "Встановіть канал для привітальних повідомлень",
-			"disableChannel": "Вимкніть канал для привітальних повідомлень",
+			"disableChannel": "Відключіть канал для привітальних повідомлень",
 			"channelOption": "Встановіть канал для привітальних повідомлень"
 		},
 		"leaveChannel": {
-			"editedChannel": "Прощальний канал було змінено на <#{{channelId}}>",
-			"installedChannel": "Прощальний канал було встановлено на <#{{channelId}}>. Для відключення введіть /leavechannel disable",
-			"noChannel": "{{{warningEmoji}}} Канал ще не встановлено",
-			"deletedChannel": "Прощальний канал було видалено",
-			"selectLeaveChannel": "Вибери канал для прощальних повідомлень",
+			"editedChannel": "Канал для прощання змінено на <#{{channelId}}>",
+			"installedChannel": "Канал для прощання встановлено на <#{{channelId}}>. Для відключення введіть /leavechannel disable",
+			"noChannel": "{{{warningEmoji}}} Канал для прощання ще не встановлено",
+			"deletedChannel": "Канал для прощання видалено",
+			"selectLeaveChannel": "Виберіть канал для прощальних повідомлень",
 			"setupChannel": "Встановіть канал для прощальних повідомлень",
 			"disableChannel": "Вимкніть канал для прощальних повідомлень",
 			"channelOption": "Встановіть канал для прощальних повідомлень"
 		},
 		"joinToCreateChannel": {
-			"editedChannel": "\"Join To Create\" channel was changed at <#{{channelId}}>",
-			"installedChannel": "\"Join To Create\" channel was set at <#{{channelId}}>. To disabled run /jointocreate disable",
-			"noChannel": "{{{warningEmoji}}} Channel has not been set yet",
-			"deletedChannel": "\"Join To Create\" channel was deleted",
-			"selectJoinToCreateChannel": "Select \"Join To Create\"",
-			"setupChannel": "Setup \"Join To Create\" channel",
-			"disableChannel": "\"Join To Create\" channel",
-			"channelOption": "Setup \"Join To Create\" channel"
+			"editedChannel": "Канал \"Join To Create\" змінено на <#{{channelId}}>",
+			"installedChannel": "Канал \"Join To Create\" встановлено на <#{{channelId}}>. Для відключення введіть /jointocreate disable",
+			"noChannel": "{{{warningEmoji}}} Канал \"Join To Create\" ще не встановлено",
+			"deletedChannel": "Канал \"Join To Create\" видалено",
+			"selectJoinToCreateChannel": "Виберіть канал \"Join To Create\"",
+			"setupChannel": "Встановіть канал \"Join To Create\"",
+			"disableChannel": "Відключіть канал \"Join To Create\"",
+			"channelOption": "Встановіть канал \"Join To Create\""
 		},
 		"bugReport": {
 			"description": "Розповісти про баг",
-			"reportExists": "You have already submitted a bug report"
-		},
-		"messageLeaderboard": {
-			"description": "Топ сообщений",
-			"top10Messages": "Top 10 messages",
-			"noTop": "На сервере ещё нет топа сообщений",
-			"fieldName": "Список:"
+			"reportExists": "Ви вже відправили звіт про баг"
 		}
 	},
 	"components": {
 		"modals": {
 			"bugReport": {
 				"title": "ПОШУК БАГІВ",
-				"reportSent": "Ваш репорт успішно надіслано розробнику",
+				"reportSent": "Ваш звіт успішно відправлено розробнику",
 				"userReport": {
-					"reportFrom": "Bug Report From {{userId}}",
+					"reportFrom": "Репорт от {{userId}}",
 					"reportDetails": {
-						"title": "Your Bug Report",
-						"description": "Thank you for submitting a bug report! Here are the details:"
+						"title": "Ваш звіт про баг",
+						"description": "Дякуємо вам за надсилання звіту про помилку! Ось деталі:"
 					},
-					"userId": "User ID",
-					"reportId": "Report ID",
-					"reportTitle": "Bug",
-					"reportDescription": "Description"
+					"userId": "ID користувача",
+					"reportId": "ID звіту",
+					"reportTitle": "Баг",
+					"reportDescription": "Опис"
 				},
 				"reportTitleInput": {
-					"label": "Причина отправления репорта",
-					"placeholder": "Введите найденную ошибку"
+					"label": "Причина відправки звіту",
+					"placeholder": "Введіть опис знайденої помилки"
 				},
 				"reportDescriptionInput": {
-					"label": "Подробное описание проблемы",
-					"placeholder": "Пожалуйста, предоставьте подробное описание того, что некорректно работает у бота"
+					"label": "Докладний опис проблеми",
+					"placeholder": "Будь ласка, надайте докладний опис того, що некоректно працює у бота"
 				}
 			},
 			"setNameTempChannel": {
-				"title": "Изменить имя канала",
-				"label": "Ввести имя канала",
-				"succesUpdateName": "Channel name updated successfully!",
-				"nameRoomExample": "Talking"
+				"title": "Змінити ім'я каналу",
+				"label": "Введіть нове ім'я каналу",
+				"succesUpdateName": "Ім'я каналу успішно змінено",
+				"nameRoomExample": "Приклад: Обговорення"
 			},
 			"setLimitTempChannel": {
-				"title": "Change channel user limit",
-				"label": "Enter channel limit",
-				"errorLimit": "Please enter a valid user limit between 1 and 99",
-				"succesLimit": "User limit updated successfully!",
-				"limitRoomExample": "0 for unlimited"
+				"title": "Змінити ліміт користувачів",
+				"label": "Введіть ліміт каналу",
+				"errorLimit": "Будь ласка, введіть цифру від 1 до 99",
+				"succesLimit": "Ліміт успішно оновлено",
+				"limitRoomExample": "0 для безлімітного доступу"
 			}
 		},
 		"menus": {
 			"tempChannel": {
-				"changeSettings": "Change channel settings",
-				"notCreate": "Ты не можешь управлять каналом!",
+				"changeSettings": "Змінити налаштування каналу",
+				"notCreate": "Ви не можете керувати цим каналом!",
 				"name": {
-					"label": "Name",
-					"description": "Change the channel name"
+					"label": "Ім'я",
+					"description": "Зміна імені каналу"
 				},
 				"limit": {
-					"label": "Limit",
-					"description": "Change the channel limit"
+					"label": "Ліміт",
+					"description": "Зміна ліміту каналу"
 				},
 				"lockChannel": {
-					"label": "Lock",
-					"description": "Lock the channel",
-					"successLock": "Channel successfully locked"
+					"label": "Заблокувати",
+					"description": "Заблокувати канал",
+					"successLock": "Канал успішно заблоковано"
 				},
 				"unlockChannel": {
-					"label": "Unlock",
-					"description": "Unlock the channel",
-					"successUnlock": "Channel successfully unlocked"
+					"label": "Розблокувати",
+					"description": "Розблокувати канал",
+					"successUnlock": "Канал успішно розблоковано"
 				}
 			}
 		},
@@ -160,28 +164,21 @@
 			"bugReport": {
 				"fixedBug": {
 					"name": "Fix",
-					"succesFix": "Your bug report has been resolved. Thank you for helping us improve!"
+					"succesFix": "Ваш звіт про помилку було вирішено. Дякуємо за допомогу в поліпшенні!"
 				}
 			}
 		}
 	},
 	"events": {
-		"developerOnly": "Ця команда доступна тільки розробнику",
+		"developerOnly": "Ця команда доступна лише розробнику",
 		"joinToCreate": {
-			"channelName": "🔉| {{username}} канал",
-			"tempVoiceChannelTitle": "Temp Voice Channel"
+			"channelName": "🔉| Канал {{username}}",
+			"tempVoiceChannelTitle": "Тимчасовий голосовий канал"
 		}
-	},
-	"time": {
-		"moment": {
-			"momentLocale": "en",
-			"momentWeekList": "Неділя_Понеділок_Вівторок_Середа_Четвер_П'ятниця_Субота"
-		},
-		"defaultTimeFormat": "dddd, DD.MM.YYYY"
 	},
 	"logs": {
 		"errors": {
-			"errorCallCommand": "There was an error while executing this command! If this error continues, please contact us!"
+			"errorCallCommand": "Під час виконання цієї команди виникла помилка! Якщо ця помилка продовжиться, будь ласка, зв'яжіться з нами!"
 		}
 	}
 }
