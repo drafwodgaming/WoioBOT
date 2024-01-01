@@ -1,10 +1,10 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { createBugReportModal } = require('@functions/modals/setUpBugReport');
 const reportBug = require('@source/models/reportBug');
-const { i18n } = require('@config/i18nConfig');
 const en = require('@config/languages/en.json');
 const ru = require('@config/languages/ru.json');
 const uk = require('@config/languages/uk.json');
+const { getLocalizedText } = require('@source/functions/locale/getLocale');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -13,19 +13,22 @@ module.exports = {
 		.setDescriptionLocalizations({
 			ru: ru.commands.bugReport.description,
 			uk: uk.commands.bugReport.description,
-		}),
+		})
+		.setDMPermission(false),
+
 	async execute(interaction) {
-		const { user } = interaction;
+		const { user, guild } = interaction;
 		const { id: userId } = user;
 		const existingReport = await reportBug.findOne({ userId });
+		const localizedText = await getLocalizedText(interaction);
 
 		if (existingReport) {
 			return await interaction.reply({
-				content: i18n.__('commands.bugReport.reportExists'),
+				content: localizedText.commands.bugReport.reportExists,
 				ephemeral: true,
 			});
 		}
-
-		await interaction.showModal(createBugReportModal());
+		const modal = await createBugReportModal(interaction);
+		await interaction.showModal(modal);
 	},
 };
