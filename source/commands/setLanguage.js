@@ -20,16 +20,29 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName(en.commands.language.name)
 		.setDescription(en.commands.language.description)
+		.setDescriptionLocalizations({
+			ru: ru.commands.language.description,
+			uk: uk.commands.language.description,
+		})
+
 		.setDMPermission(false)
 		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
 		.addSubcommand(subcommand =>
 			subcommand
 				.setName(en.commands.subcommands.setLanguage)
 				.setDescription(en.commands.language.setLanguage)
+				.setDescriptionLocalizations({
+					ru: ru.commands.language.setLanguage,
+					uk: uk.commands.language.setLanguage,
+				})
 				.addStringOption(option =>
 					option
 						.setName(en.commands.options.languageOption)
 						.setDescription(en.commands.language.choiceLanguage)
+						.setDescriptionLocalizations({
+							ru: ru.commands.language.choiceLanguage,
+							uk: uk.commands.language.choiceLanguage,
+						})
 						.setRequired(true)
 						.addChoices(
 							{ name: 'English', value: 'en' },
