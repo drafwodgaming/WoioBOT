@@ -1,8 +1,8 @@
 const { SlashCommandBuilder, bold } = require('discord.js');
 const { getColor } = require('@functions/utils/getColor');
 const en = require('@config/languages/en.json');
-const ru = require('@config/languages/en.json');
-const uk = require('@config/languages/en.json');
+const ru = require('@config/languages/ru.json');
+const uk = require('@config/languages/uk.json');
 const { getLocalizedText } = require('@source/functions/locale/getLocale');
 
 module.exports = {

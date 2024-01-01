@@ -31,6 +31,10 @@ module.exports = {
 			subcommand
 				.setName(en.commands.subcommands.setup)
 				.setDescription(en.commands.joinToCreateChannel.setupChannel)
+				.setDescriptionLocalizations({
+					ru: ru.commands.joinToCreateChannel.setupChannel,
+					uk: uk.commands.joinToCreateChannel.setupChannel,
+				})
 				.addChannelOption(option =>
 					option
 						.setName(en.commands.options.channelOption)
@@ -47,6 +51,10 @@ module.exports = {
 			subcommand
 				.setName(en.commands.subcommands.disable)
 				.setDescription(en.commands.joinToCreateChannel.disableChannel)
+				.setDescriptionLocalizations({
+					ru: ru.commands.joinToCreateChannel.disableChannel,
+					uk: uk.commands.joinToCreateChannel.disableChannel,
+				})
 		)
 		.setDMPermission(false),
 
