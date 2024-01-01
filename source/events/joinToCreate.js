@@ -9,6 +9,8 @@ const {
 	settingsTempChannel,
 } = require('@functions/menus/setUpSettingsTempChannels');
 const { getColor } = require('@functions/utils/getColor');
+const { getLocalizedText } = require('@source/functions/locale/getLocale');
+const mustache = require('mustache');
 
 module.exports = {
 	name: Events.VoiceStateUpdate,
@@ -16,6 +18,8 @@ module.exports = {
 		const { member } = oldState || newState;
 		const { guild } = member;
 		const guildId = guild.id;
+		const username = member.user.username;
+		const localizedText = await getLocalizedText(member);
 
 		const joinToCreateData = await joinToCreateSchema.findOne({
 			guildId,
@@ -29,7 +33,10 @@ module.exports = {
 
 		if (interactionChannelId === newState.channelId) {
 			const parentCategory = newState.channel?.parent;
-			const channelName = `🔉| ${member.user.username} channel`;
+			const channelName = mustache.render(
+				localizedText.events.joinToCreate.channelName,
+				{ username }
+			);
 
 			const createdVoiceChannel = await createVoiceChannel(
 				member.guild,
@@ -55,9 +62,12 @@ module.exports = {
 
 				await createdVoiceChannel.send({
 					embeds: [
-						{ color: defaultBotColor, title: 'Temporary Voice Channel' },
+						{
+							color: defaultBotColor,
+							title: localizedText.events.joinToCreate.tempVoiceChannelTitle,
+						},
 					],
-					components: [settingsTempChannel()],
+					components: [await settingsTempChannel(member)],
 				});
 			}
 		}

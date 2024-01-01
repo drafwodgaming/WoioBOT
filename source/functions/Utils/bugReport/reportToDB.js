@@ -1,10 +1,12 @@
 const reportBug = require('@source/models/reportBug');
 const { getColor } = require('@functions/utils/getColor');
-const { i18n } = require('@config/i18nConfig');
+const { getLocalizedText } = require('@source/functions/locale/getLocale');
 
 async function reportToDB(interaction, reportTitle, reportDescription) {
 	const botColor = getColor('editBlue');
 	const { id: userId } = interaction.user;
+
+	const localizedText = await getLocalizedText(interaction);
 
 	const bugReport = await reportBug.create({
 		userId,
@@ -13,7 +15,8 @@ async function reportToDB(interaction, reportTitle, reportDescription) {
 	});
 	const reportId = bugReport.reportId;
 
-	const reportSentMessage = i18n.__('components.modals.bugReport.reportSent');
+	const reportSentMessage =
+		localizedText.components.modals.bugReport.reportSent;
 	await interaction.reply({
 		embeds: [{ color: botColor, description: reportSentMessage }],
 		ephemeral: true,

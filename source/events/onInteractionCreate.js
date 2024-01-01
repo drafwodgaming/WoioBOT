@@ -1,8 +1,8 @@
 const { Events, ChatInputCommandInteraction } = require('discord.js');
-const { i18n } = require('@config/i18nConfig');
-const { getUserLocale } = require('@functions/locale/userLocale');
 const { onwerId } = require('@config/botConfig.json');
 const { getColor } = require('@functions/utils/getColor');
+const { getLocalizedText } = require('@source/functions/locale/getLocale');
+
 /**
  * @param {ChatInputCommandInteraction} interaction
  */
@@ -15,8 +15,10 @@ module.exports = {
 		const isButton = interaction.isButton();
 		const isStringSelectMenu = interaction.isStringSelectMenu();
 
-		const userLocale = getUserLocale(interaction);
-		i18n.setLocale(userLocale);
+		const localizedText = await getLocalizedText(interaction);
+
+		// const userLocale = getUserLocale(interaction);
+		// i18n.setLocale(userLocale);
 
 		switch (true) {
 			case isChatInputCommand:
@@ -26,7 +28,7 @@ module.exports = {
 
 				if (!command) return;
 
-				const developerOnlyMessage = i18n.__('events.developerOnly');
+				const developerOnlyMessage = localizedText.events.developerOnly;
 				const defaultBotColor = getColor('default');
 				if (command.developer && interaction.user.id !== onwerId) {
 					return interaction.reply({

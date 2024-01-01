@@ -4,7 +4,6 @@ const {
 	PermissionFlagsBits,
 	ChatInputCommandInteraction,
 } = require('discord.js');
-const { i18n } = require('@config/i18nConfig');
 const { getColor } = require('@functions/utils/getColor');
 const joinToCreateSchema = require('@source/models/joinToCreate');
 const { addChannel } = require('@functions/utils/database/addChannelToDB');
@@ -15,6 +14,8 @@ const emojis = require('@config/emojis.json');
 const en = require('@config/languages/en.json');
 const ru = require('@config/languages/ru.json');
 const uk = require('@config/languages/uk.json');
+const { getLocalizedText } = require('@source/functions/locale/getLocale');
+const mustache = require('mustache');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -46,12 +47,15 @@ module.exports = {
 			subcommand
 				.setName(en.commands.subcommands.disable)
 				.setDescription(en.commands.joinToCreateChannel.disableChannel)
-		),
+		)
+		.setDMPermission(false),
+
 	/**
 	 * @param {ChatInputCommandInteraction} interaction
 	 */
 	async execute(interaction) {
 		const { guild, options } = interaction;
+		const localizedText = await getLocalizedText(interaction);
 		const subCommand = options.getSubcommand();
 		const defaultBotColor = getColor('default');
 		const installGreenColor = getColor('succesGreen');
@@ -63,11 +67,12 @@ module.exports = {
 		const interactionGuildId = guild.id;
 		const warningEmoji = emojis.goldWarning;
 
-		const noChannelMessage = i18n.__('commands.joinToCreateChannel.noChannel', {
-			warningEmoji,
-		});
-		const deletedChannelMessage = i18n.__(
-			'commands.joinToCreateChannel.deletedChannel'
+		const noChannelMessage = mustache.render(
+			localizedText.commands.joinToCreateChannel.noChannel,
+			{ warningEmoji }
+		);
+		const deletedChannelMessage = mustache.render(
+			localizedText.commands.joinToCreateChannel.deletedChannel
 		);
 
 		let responseEmbed;
@@ -80,13 +85,13 @@ module.exports = {
 					joinToCreateSchema
 				);
 
-				const editChannelDescription = i18n.__(
-					'commands.joinToCreateChannel.editedChannel',
+				const editChannelDescription = mustache.render(
+					localizedText.commands.joinToCreateChannel.editedChannel,
 					{ channelId: interactionChannel.id }
 				);
 
-				const installChannelDescription = i18n.__(
-					'commands.joinToCreateChannel.installedChannel',
+				const installChannelDescription = mustache.render(
+					localizedText.commands.joinToCreateChannel.installedChannel,
 					{ channelId: interactionChannel.id }
 				);
 

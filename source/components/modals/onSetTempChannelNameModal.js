@@ -1,6 +1,6 @@
 const { modals } = require('@config/componentsId.json');
 const temporaryChannelsSchema = require('@source/models/temporaryChannels');
-const { i18n } = require('@config/i18nConfig');
+const { getLocalizedText } = require('@source/functions/locale/getLocale');
 
 module.exports = {
 	data: {
@@ -16,6 +16,8 @@ module.exports = {
 			modals.tempChannelNameInput
 		);
 
+		const localizedText = await getLocalizedText(interaction);
+
 		const updatedChannel = await temporaryChannelsSchema.findOneAndUpdate(
 			{ guildId, creatorId: memberId },
 			{ $set: { channelName: newChannelName } },
@@ -29,7 +31,8 @@ module.exports = {
 			if (voiceChannel) await voiceChannel.setName(newChannelName);
 		}
 		await interaction.followUp({
-			content: i18n.__('components.modals.setNameTempChannel.succesUpdateName'),
+			content:
+				localizedText.components.modals.setNameTempChannel.succesUpdateName,
 			ephemeral: true,
 		});
 	},

@@ -1,14 +1,16 @@
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { buttons } = require('@config/componentsId.json');
-const { i18n } = require('@config/i18nConfig');
+const { getLocalizedText } = require('@source/functions/locale/getLocale');
+const en = require('@config/languages/en.json');
 
-function bugReportButtons(disable) {
-	const rejectId = buttons.rejectedButton;
+async function bugReportButtons(interaction, disable) {
 	const fixedId = buttons.fixedButton;
+	const localizedText = await getLocalizedText(interaction);
+
 	const button = new ActionRowBuilder().addComponents(
 		new ButtonBuilder()
 			.setCustomId(fixedId)
-			.setLabel(i18n.__('components.buttons.bugReport.fixedBug.name'))
+			.setLabel(localizedText.components.buttons.bugReport.fixedBug.name)
 			.setStyle(ButtonStyle.Success)
 			.setDisabled(disable)
 	);

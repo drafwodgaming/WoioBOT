@@ -1,54 +1,59 @@
-const { v4: uuidv4 } = require('uuid');
 const reportBug = require('@source/models/reportBug');
 const { bugReportButtons } = require('@functions/buttons/setUpBugReport');
 const { getColor } = require('@functions/utils/getColor');
-const { i18n } = require('@config/i18nConfig');
 const { onwerId } = require('@config/botConfig.json');
+const { getLocalizedText } = require('@source/functions/locale/getLocale');
+const mustache = require('mustache');
 
 async function sendBugReport(
 	client,
 	userId,
 	reportId,
 	reportTitle,
-	reportDescription
+	reportDescription,
+	interaction
 ) {
 	const botOwnerId = onwerId;
 	const botOwner = await client.users.fetch(botOwnerId);
 	const botColor = getColor('default');
+	const localizedText = await getLocalizedText(interaction);
 
 	const messages = {
-		reportFrom: i18n.__('components.modals.bugReport.userReport.reportFrom', {
-			userId,
-		}),
-		userId: i18n.__('components.modals.bugReport.userReport.userId'),
-		reportId: i18n.__('components.modals.bugReport.userReport.reportId'),
-		reportTitle: i18n.__('components.modals.bugReport.userReport.reportTitle'),
-		reportDescription: i18n.__(
-			'components.modals.bugReport.userReport.reportDescription'
+		reportFrom: mustache.render(
+			localizedText.components.modals.bugReport.userReport.reportFrom,
+			{ userId }
 		),
-		reportDetailsTitle: i18n.__(
-			'components.modals.bugReport.userReport.reportDetails.title'
-		),
-		reportDetailsDescription: i18n.__(
-			'components.modals.bugReport.userReport.reportDetails.description'
-		),
+		userId: localizedText.components.modals.bugReport.userReport.userId,
+		reportId: localizedText.components.modals.bugReport.userReport.reportId,
+		reportTitle:
+			localizedText.components.modals.bugReport.userReport.reportTitle,
+		reportDescription:
+			localizedText.components.modals.bugReport.userReport.reportDescription,
+		reportDetailsTitle:
+			localizedText.components.modals.bugReport.userReport.reportDetails.title,
+		reportDetailsDescription:
+			localizedText.components.modals.bugReport.userReport.reportDetails
+				.description,
 	};
-
-	const bugReport = await reportBug.findOne({ userId, reportId });
 
 	// if (!bugReport) throw new Error('Bug report not found in the database');
 
-	const reportInfoTitle = i18n.__(messages.reportFrom, { userId });
+	const reportInfoTitle = mustache.render(messages.reportFrom, {
+		userId,
+	});
 	const embedFields = [
-		{ name: i18n.__(messages.userId), value: userId },
-		{ name: i18n.__(messages.reportId), value: reportId },
-		{ name: i18n.__(messages.reportTitle), value: reportTitle },
-		{ name: i18n.__(messages.reportDescription), value: reportDescription },
+		{ name: messages.userId, value: userId },
+		{ name: messages.reportId, value: reportId },
+		{ name: messages.reportTitle, value: reportTitle },
+		{
+			name: messages.reportDescription,
+			value: reportDescription,
+		},
 	];
 
 	const botOwnerMessage = await botOwner.send({
 		embeds: [{ color: botColor, title: reportInfoTitle, fields: embedFields }],
-		components: [bugReportButtons(false)],
+		components: [await bugReportButtons(interaction, false)],
 	});
 
 	const user = await client.users.fetch(userId);
@@ -56,8 +61,8 @@ async function sendBugReport(
 		embeds: [
 			{
 				color: botColor,
-				title: i18n.__(messages.reportDetailsTitle),
-				description: i18n.__(messages.reportDetailsDescription),
+				title: messages.reportDetailsTitle,
+				description: messages.reportDetailsDescription,
 				fields: embedFields,
 			},
 		],

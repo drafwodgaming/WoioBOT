@@ -26,7 +26,8 @@ module.exports = {
 			userId,
 			reportId,
 			reportTitle,
-			reportDescription
+			reportDescription,
+			interaction
 		);
 	},
 };

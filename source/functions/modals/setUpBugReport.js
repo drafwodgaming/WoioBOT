@@ -4,36 +4,41 @@ const {
 	TextInputBuilder,
 	TextInputStyle,
 } = require('discord.js');
-const { i18n } = require('@config/i18nConfig');
 const { modals } = require('@config/componentsId.json');
+const { getLocalizedText } = require('@source/functions/locale/getLocale');
 
-function createBugReportModal() {
+async function createBugReportModal(interaction) {
+	const localizedText = await getLocalizedText(interaction);
+
 	const componentsData = [
 		{
 			id: modals.reportTitle,
-			label: 'components.modals.bugReport.reportTitleInput.label',
+			label: localizedText.components.modals.bugReport.reportTitleInput.label,
 			style: TextInputStyle.Short,
-			placeholder: 'components.modals.bugReport.reportTitleInput.placeholder',
+			placeholder:
+				localizedText.components.modals.bugReport.reportTitleInput.placeholder,
 		},
 		{
 			id: modals.reportDescription,
-			label: 'components.modals.bugReport.reportDescriptionInput.label',
+			label:
+				localizedText.components.modals.bugReport.reportDescriptionInput.label,
 			style: TextInputStyle.Paragraph,
 			placeholder:
-				'components.modals.bugReport.reportDescriptionInput.placeholder',
+				localizedText.components.modals.bugReport.reportDescriptionInput
+					.placeholder,
 		},
 	];
 
 	const bugReportModal = new ModalBuilder()
 		.setCustomId(modals.bugReport)
-		.setTitle(i18n.__('components.modals.bugReport.title'));
+		.setTitle(localizedText.components.modals.bugReport.title);
 
 	componentsData.forEach(({ id, label, style, placeholder }) => {
 		const inputField = new TextInputBuilder()
 			.setCustomId(id)
-			.setLabel(i18n.__(label))
+			.setLabel(label)
 			.setStyle(style)
-			.setPlaceholder(i18n.__(placeholder));
+			.setPlaceholder(placeholder);
 
 		const row = new ActionRowBuilder().addComponents(inputField);
 

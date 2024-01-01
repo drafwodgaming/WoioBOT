@@ -1,6 +1,6 @@
 const { modals } = require('@config/componentsId.json');
 const temporaryChannelsSchema = require('@source/models/temporaryChannels');
-const { i18n } = require('@config/i18nConfig');
+const { getLocalizedText } = require('@source/functions/locale/getLocale');
 
 module.exports = {
 	data: {
@@ -12,9 +12,11 @@ module.exports = {
 			interaction.fields.getTextInputValue(modals.tempChannelLimitInput)
 		);
 
+		const localizedText = await getLocalizedText(interaction);
+
 		if (isNaN(newUserLimit) || newUserLimit < 0 || newUserLimit > 99) {
 			return await interaction.followUp({
-				content: i18n.__('components.modals.setLimitTempChannel.errorLimit'),
+				content: localizedText.components.modals.setLimitTempChannel.errorLimit,
 				ephemeral: true,
 			});
 		}
@@ -35,7 +37,7 @@ module.exports = {
 		}
 
 		await interaction.followUp({
-			content: i18n.__('components.modals.setLimitTempChannel.succesLimit'),
+			content: localizedText.components.modals.setLimitTempChannel.succesLimit,
 			ephemeral: true,
 		});
 	},

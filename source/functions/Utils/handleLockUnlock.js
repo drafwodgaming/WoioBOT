@@ -1,5 +1,5 @@
-const { i18n } = require('@config/i18nConfig');
 const temporaryChannelsSchema = require('@source/models/temporaryChannels');
+const { getLocalizedText } = require('@source/functions/locale/getLocale');
 
 async function handleLockUnlock(interaction, permission) {
 	const { guild, user } = interaction;
@@ -10,6 +10,8 @@ async function handleLockUnlock(interaction, permission) {
 		guildId,
 		creatorId,
 	});
+
+	const localizedText = await getLocalizedText(interaction);
 
 	if (updatedChannel) {
 		const voiceChannel = guild.channels.cache.get(updatedChannel.channelId);
@@ -22,13 +24,29 @@ async function handleLockUnlock(interaction, permission) {
 			});
 		}
 	}
-
-	const actionType = permission ? 'Unlock' : 'Lock';
-	const messageType = permission ? 'unlockChannel' : 'lockChannel';
-	const contentKey = `components.menus.tempChannel.${messageType}.success${actionType}`;
-
 	await interaction.deferUpdate();
-	await interaction.followUp({ content: i18n.__(contentKey), ephemeral: true });
+
+	if (permission) {
+		const successUnlockContent =
+			localizedText.components.menus.tempChannel.unlockChannel.successUnlock;
+
+		if (successUnlockContent) {
+			await interaction.followUp({
+				content: successUnlockContent,
+				ephemeral: true,
+			});
+		}
+	} else {
+		const successLockContent =
+			localizedText.components.menus.tempChannel.lockChannel.successLock;
+
+		if (successLockContent) {
+			await interaction.followUp({
+				content: successLockContent,
+				ephemeral: true,
+			});
+		}
+	}
 }
 
 module.exports = { handleLockUnlock };

@@ -1,11 +1,11 @@
 const { SlashCommandBuilder, ChannelType, bold } = require('discord.js');
-const { i18n } = require('@config/i18nConfig');
+const mustache = require('mustache');
 const { getColor } = require('@source/functions/utils/getColor');
 const en = require('@config/languages/en.json');
 const ru = require('@config/languages/ru.json');
 const uk = require('@config/languages/uk.json');
-const { formatDate } = require('@functions/utils/formatter/formatDate');
 const emojis = require('@config/emojis.json');
+const { getLocalizedText } = require('@source/functions/locale/getLocale');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -19,9 +19,12 @@ module.exports = {
 	async execute(interaction) {
 		const { guild } = interaction;
 		const { members, roles, channels } = guild;
-		const { name, ownerId, createdAt } = guild;
+		const { name, ownerId, createdTimestamp } = guild;
 
-		const guildCreatedAt = formatDate(createdAt);
+		const guildId = guild.id;
+
+		const localizedText = await getLocalizedText(interaction);
+
 		const defaultBotColor = getColor('default');
 
 		const guildMembersCount = members.cache.filter(
@@ -31,7 +34,6 @@ module.exports = {
 		const totalMembersCount = members.cache.size;
 
 		const guildIcon = guild.iconURL();
-		const guildId = guild.id;
 
 		const guildChannels = channels.cache.size;
 		const guildCategories = channels.cache.filter(
@@ -76,75 +78,91 @@ module.exports = {
 
 		const description =
 			interaction.guild.description ||
-			i18n.__('commands.serverInfo.noDescription');
+			localizedText.commands.serverInfo.noDescription;
 
 		const serverInfoEmbed = {
 			color: defaultBotColor,
 			description: bold(description),
 			fields: [
 				{
-					name: i18n.__('commands.serverInfo.generalLabel'),
+					name: localizedText.commands.serverInfo.generalLabel,
 					value: [
-						i18n.__('commands.serverInfo.ownerId', { ownerId }),
-						i18n.__('commands.serverInfo.createdAt', { guildCreatedAt }),
+						mustache.render(localizedText.commands.serverInfo.ownerId, {
+							ownerId,
+						}),
+						mustache.render(localizedText.commands.serverInfo.createdAt, {
+							guildCreatedAt: `<t:${parseInt(createdTimestamp / 1000)}:R>`,
+						}),
 					].join('\n'),
 				},
 				{
-					name: i18n.__('commands.serverInfo.totalMembersCount', {
-						totalMembersCount,
-					}),
+					name: mustache.render(
+						localizedText.commands.serverInfo.totalMembersCount,
+						{ totalMembersCount }
+					),
 					value: [
-						i18n.__('commands.serverInfo.guildMembersCount', {
-							guildMembersCount,
+						mustache.render(
+							localizedText.commands.serverInfo.guildMembersCount,
+							{ guildMembersCount }
+						),
+						mustache.render(localizedText.commands.serverInfo.guildBotsCount, {
+							botMembersCount,
 						}),
-						i18n.__('commands.serverInfo.guildBotsCount', { botMembersCount }),
 					].join('\n'),
 				},
 				{
-					name: i18n.__('commands.serverInfo.totalChannelsCount', {
-						guildChannels,
-					}),
+					name: mustache.render(
+						localizedText.commands.serverInfo.totalChannelsCount,
+						{ guildChannels }
+					),
 					value: [
-						i18n.__('commands.serverInfo.textChannelsCount', {
-							textChannelsIco,
-							textChannels,
-						}),
-						i18n.__('commands.serverInfo.voiceChannelsCount', {
-							voiceChannelsIco,
-							voiceChannels,
-						}),
-						i18n.__('commands.serverInfo.categoriesCount', {
+						mustache.render(
+							localizedText.commands.serverInfo.textChannelsCount,
+							{ textChannelsIco, textChannels }
+						),
+						mustache.render(
+							localizedText.commands.serverInfo.voiceChannelsCount,
+							{ voiceChannelsIco, voiceChannels }
+						),
+						mustache.render(localizedText.commands.serverInfo.categoriesCount, {
 							categoriesIco,
 							guildCategories,
 						}),
-						i18n.__('commands.serverInfo.annnouncementChannelsCount', {
-							annnouncementChannelIco,
-							annnouncementChannel,
+						mustache.render(
+							localizedText.commands.serverInfo.annnouncementChannelsCount,
+							{ annnouncementChannelIco, annnouncementChannel }
+						),
+						mustache.render(
+							localizedText.commands.serverInfo.stageChannelsCount,
+							{ stageChannelIco, stageChannel }
+						),
+						mustache.render(localizedText.commands.serverInfo.forumCount, {
+							forumIco,
+							forum,
 						}),
-						i18n.__('commands.serverInfo.stageChannelsCount', {
-							stageChannelIco,
-							stageChannel,
-						}),
-						i18n.__('commands.serverInfo.forumCount', { forumIco, forum }),
 					].join(' | '),
 				},
 				{
-					name: i18n.__('commands.serverInfo.totalEmojisCount', {
-						totalEmojisCount,
-					}),
+					name: mustache.render(
+						localizedText.commands.serverInfo.totalEmojisCount,
+						{ totalEmojisCount }
+					),
 					value: [
-						i18n.__('commands.serverInfo.animatedEmojisCount', {
-							animatedEmojisCount,
-						}),
-						i18n.__('commands.serverInfo.staticEmojisCount', {
-							staticEmojisCount,
-						}),
+						mustache.render(
+							localizedText.commands.serverInfo.animatedEmojisCount,
+							{ animatedEmojisCount }
+						),
+						mustache.render(
+							localizedText.commands.serverInfo.staticEmojisCount,
+							{ staticEmojisCount }
+						),
 					].join('\n'),
 				},
 				{
-					name: i18n.__('commands.serverInfo.guildRolesCount', {
-						guildRolesCount,
-					}),
+					name: mustache.render(
+						localizedText.commands.serverInfo.guildRolesCount,
+						{ guildRolesCount }
+					),
 					value: guildRoles,
 				},
 			],

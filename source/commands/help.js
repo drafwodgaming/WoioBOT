@@ -1,9 +1,9 @@
 const { SlashCommandBuilder, bold } = require('discord.js');
-const { i18n } = require('@config/i18nConfig');
 const { getColor } = require('@functions/utils/getColor');
 const en = require('@config/languages/en.json');
-const ru = require('@config/languages/ru.json');
-const uk = require('@config/languages/uk.json');
+const ru = require('@config/languages/en.json');
+const uk = require('@config/languages/en.json');
+const { getLocalizedText } = require('@source/functions/locale/getLocale');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -12,10 +12,14 @@ module.exports = {
 		.setDescriptionLocalizations({
 			ru: ru.commands.help.description,
 			uk: uk.commands.help.description,
-		}),
+		})
+		.setDMPermission(false),
+
 	async execute(interaction) {
+		const localizedText = await getLocalizedText(interaction);
+
 		const defaultBotColor = getColor('default');
-		const helpTitle = i18n.__('commands.help.title');
+		const helpTitle = localizedText.commands.help.title;
 
 		const buildCommandDescription = commandsArray =>
 			commandsArray

@@ -4,7 +4,6 @@ const {
 	PermissionFlagsBits,
 	ChatInputCommandInteraction,
 } = require('discord.js');
-const { i18n } = require('@config/i18nConfig');
 const { getColor } = require('@functions/utils/getColor');
 const leaveChannelSchema = require('@source/models/leaveChannel');
 const { addChannel } = require('@functions/utils/database/addChannelToDB');
@@ -15,6 +14,8 @@ const emojis = require('@config/emojis.json');
 const en = require('@config/languages/en.json');
 const ru = require('@config/languages/ru.json');
 const uk = require('@config/languages/uk.json');
+const { getLocalizedText } = require('@source/functions/locale/getLocale');
+const mustache = require('mustache');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -54,7 +55,9 @@ module.exports = {
 					ru: ru.commands.leaveChannel.disableChannel,
 					uk: uk.commands.leaveChannel.disableChannel,
 				})
-		),
+		)
+		.setDMPermission(false),
+
 	/**
 	 * @param {ChatInputCommandInteraction} interaction
 	 */
@@ -71,14 +74,17 @@ module.exports = {
 		const interactionGuildId = guild.id;
 		const warningEmoji = emojis.goldWarning;
 
-		const noChannelMessage = i18n.__('commands.leaveChannel.noChannel', {
-			warningEmoji,
-		});
-		const deletedChannelMessage = i18n.__(
-			'commands.leaveChannel.deletedChannel'
+		const localizedText = await getLocalizedText(interaction);
+
+		const noChannelMessage = mustache.render(
+			localizedText.commands.leaveChannel.noChannel,
+			{ warningEmoji }
+		);
+		const deletedChannelMessage = mustache.render(
+			localizedText.commands.leaveChannel.deletedChannel
 		);
 
-		let leaveChannel, responseEmbed;
+		let responseEmbed;
 
 		switch (subCommand) {
 			case en.commands.subcommands.setup:
@@ -88,13 +94,13 @@ module.exports = {
 					leaveChannelSchema
 				);
 
-				const editChannelDescription = i18n.__(
-					'commands.leaveChannel.editedChannel',
+				const editChannelDescription = mustache.render(
+					localizedText.commands.leaveChannel.editedChannel,
 					{ channelId: interactionChannel.id }
 				);
 
-				const installChannelDescription = i18n.__(
-					'commands.leaveChannel.installedChannel',
+				const installChannelDescription = mustache.render(
+					localizedText.commands.leaveChannel.installedChannel,
 					{ channelId: interactionChannel.id }
 				);
 
