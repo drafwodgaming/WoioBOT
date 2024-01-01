@@ -62,27 +62,21 @@ module.exports = {
 		const interactionLocale = options.getString(
 			en.commands.options.languageOption
 		);
+
 		const interactionGuildId = guild.id;
+
 		const languageName = getLanguageName(interactionLocale);
 		const languageFlag = getLanguageFlag(interactionLocale);
 
-		let serverDoc = await serverLocaleSchema.findOne({
-			guildId: interactionGuildId,
-		});
+		let responseContent;
 
 		switch (subCommand) {
 			case 'set':
-				if (serverDoc) {
-					serverDoc.language = interactionLocale;
-					serverDoc.guildId = interactionGuildId;
-					await serverDoc.save();
-				} else {
-					const newLocale = new serverLocaleSchema({
-						guildId: interactionGuildId,
-						language: interactionLocale,
-					});
-					await newLocale.save();
-				}
+				await serverLocaleSchema.findOneAndUpdate(
+					{ guildId: interactionGuildId },
+					{ guildId: interactionGuildId, language: interactionLocale },
+					{ upsert: true }
+				);
 
 				const localizedText = await getLocalizedText(interaction);
 				responseContent = mustache.render(

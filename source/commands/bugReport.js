@@ -17,17 +17,17 @@ module.exports = {
 		.setDMPermission(false),
 
 	async execute(interaction) {
-		const { user, guild } = interaction;
+		const { user } = interaction;
 		const { id: userId } = user;
 		const existingReport = await reportBug.findOne({ userId });
 		const localizedText = await getLocalizedText(interaction);
 
-		if (existingReport) {
+		if (existingReport)
 			return await interaction.reply({
 				content: localizedText.commands.bugReport.reportExists,
 				ephemeral: true,
 			});
-		}
+
 		const modal = await createBugReportModal(interaction);
 		await interaction.showModal(modal);
 	},

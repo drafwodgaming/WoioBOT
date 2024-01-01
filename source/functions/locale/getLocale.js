@@ -3,9 +3,10 @@ const serverLocaleSchema = require('@source/models/serverLocale');
 
 async function getLocalizedText(interaction) {
 	if (interaction.guild) guildId = interaction.guild.id;
-	// Если взаимодействие происходит в личных сообщениях
 	else guildId = interaction.user.id;
+
 	const userLanguageCode = await getGuildLanguage(guildId, serverLocaleSchema);
+
 	return interaction.client.languages.get(userLanguageCode);
 }
 module.exports = { getLocalizedText };
