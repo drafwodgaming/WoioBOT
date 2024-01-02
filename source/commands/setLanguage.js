@@ -15,6 +15,9 @@ const { getLocalizedText } = require('@source/functions/locale/getLocale');
 
 const { getLanguageName } = require('@functions/utils/getLanguageName');
 const { getLanguageFlag } = require('@functions/utils/getLanguageFlag');
+const {
+	updateRecordField,
+} = require('@functions/utils/database/updateRecordField');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -72,10 +75,10 @@ module.exports = {
 
 		switch (subCommand) {
 			case 'set':
-				await serverLocaleSchema.findOneAndUpdate(
+				await updateRecordField(
+					serverLocaleSchema,
 					{ guildId: interactionGuildId },
-					{ guildId: interactionGuildId, language: interactionLocale },
-					{ upsert: true }
+					{ language: interactionLocale }
 				);
 
 				const localizedText = await getLocalizedText(interaction);

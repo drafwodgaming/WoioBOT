@@ -15,7 +15,7 @@ module.exports = {
 			modals.reportDescription
 		);
 
-		const { reportId } = await reportToDB(
+		const { fieldValue } = await reportToDB(
 			interaction,
 			reportTitle,
 			reportDescription
@@ -24,7 +24,7 @@ module.exports = {
 		await sendBugReport(
 			client,
 			userId,
-			reportId,
+			fieldValue,
 			reportTitle,
 			reportDescription,
 			interaction

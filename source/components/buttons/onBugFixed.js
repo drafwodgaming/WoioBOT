@@ -3,6 +3,9 @@ const reportBug = require('@source/models/reportBug');
 const { bugReportButtons } = require('@functions/buttons/setUpBugReport');
 const { getColor } = require('@functions/utils/getColor');
 const { getLocalizedText } = require('@source/functions/locale/getLocale');
+const {
+	deleteRecordField,
+} = require('@functions/utils/database/deleteRecordField');
 
 module.exports = {
 	data: {
@@ -15,13 +18,13 @@ module.exports = {
 
 		// console.log('Searching for report with messageId:', messageId);
 
-		const devBugReports = await reportBug.findOneAndDelete({
+		const deletedData = await deleteRecordField(reportBug, {
 			$or: [{ devMessageId: messageId }, { userMessageId: messageId }],
 		});
 
 		// console.log('Found devBugReport:', devBugReports);
 
-		const { userId } = devBugReports;
+		const { userId } = deletedData;
 		const user = await client.users.fetch(userId);
 
 		const fixedEmbed = {
@@ -32,7 +35,7 @@ module.exports = {
 
 		setTimeout(() => console.log('Function completed'), 1000);
 
-		const components = devBugReports
+		const components = deletedData
 			? [await bugReportButtons(interaction, true)]
 			: [await bugReportButtons(interaction, false)];
 

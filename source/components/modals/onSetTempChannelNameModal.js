@@ -30,6 +30,7 @@ module.exports = {
 			);
 			if (voiceChannel) await voiceChannel.setName(newChannelName);
 		}
+
 		await interaction.followUp({
 			content:
 				localizedText.components.modals.setNameTempChannel.succesUpdateName,

@@ -6,10 +6,12 @@ const {
 } = require('discord.js');
 const { getColor } = require('@functions/utils/getColor');
 const joinToCreateSchema = require('@source/models/joinToCreate');
-const { addChannel } = require('@functions/utils/database/addChannelToDB');
 const {
-	deleteChannel,
-} = require('@functions/utils/database/deleteChannelFromDB');
+	updateRecordField,
+} = require('@functions/utils/database/updateRecordField');
+const {
+	deleteRecordField,
+} = require('@functions/utils/database/deleteRecordField');
 const emojis = require('@config/emojis.json');
 const en = require('@config/languages/en.json');
 const ru = require('@config/languages/ru.json');
@@ -82,15 +84,14 @@ module.exports = {
 		const deletedChannelMessage = mustache.render(
 			localizedText.commands.joinToCreateChannel.deletedChannel
 		);
-
 		let responseEmbed;
 
 		switch (subCommand) {
 			case en.commands.subcommands.setup:
-				const { isNew } = await addChannel(
-					interactionGuildId,
-					interactionChannel.id,
-					joinToCreateSchema
+				const updateData = await updateRecordField(
+					joinToCreateSchema,
+					{ guildId: interactionGuildId },
+					{ channelId: interactionChannel.id }
 				);
 
 				const editChannelDescription = mustache.render(
@@ -104,19 +105,20 @@ module.exports = {
 				);
 
 				responseEmbed = {
-					color: isNew ? installGreenColor : editBlueColor,
-					description: isNew
-						? installChannelDescription
-						: editChannelDescription,
+					color: updateData ? editBlueColor : installGreenColor,
+					description: updateData
+						? editChannelDescription
+						: installChannelDescription,
 				};
 				break;
 
 			case en.commands.subcommands.disable:
-				const isDeleted = await deleteChannel(guild.id, joinToCreateSchema);
-
+				const deletedData = await deleteRecordField(joinToCreateSchema, {
+					guildId: interactionGuildId,
+				});
 				responseEmbed = {
-					color: isDeleted ? errorRedColor : defaultBotColor,
-					description: isDeleted ? deletedChannelMessage : noChannelMessage,
+					color: deletedData ? errorRedColor : defaultBotColor,
+					description: deletedData ? deletedChannelMessage : noChannelMessage,
 				};
 				break;
 		}
