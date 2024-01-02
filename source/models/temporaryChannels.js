@@ -6,7 +6,6 @@ const temporaryChannels = new Schema({
 	creatorId: String,
 	channelName: String,
 	userLimit: Number,
-	createdAt: { type: Date, default: Date.now },
 });
 
 module.exports = model('temporarychannels', temporaryChannels);
