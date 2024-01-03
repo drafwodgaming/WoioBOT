@@ -11,7 +11,9 @@ const {
 const { getColor } = require('@functions/utils/getColor');
 const { getLocalizedText } = require('@source/functions/locale/getLocale');
 const mustache = require('mustache');
-
+const {
+	updateRecordField,
+} = require('@functions/utils/database/updateRecordField');
 module.exports = {
 	name: Events.VoiceStateUpdate,
 	async execute(oldState, newState) {
@@ -50,12 +52,11 @@ module.exports = {
 				newState.setChannel(createdVoiceChannel);
 
 				setTimeout(async () => {
-					await temporaryChannelsSchema.create({
-						guildId,
-						channelId: createdVoiceChannel.id,
-						creatorId: member.id,
-						channelName,
-					});
+					await updateRecordField(
+						temporaryChannelsSchema,
+						{ guildId, channelId: createdVoiceChannel.id },
+						{ creatorId: member.id, channelName }
+					);
 				}, 500);
 
 				const defaultBotColor = getColor('default');
