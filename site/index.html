@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Минималистичный сайт</title>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+		/>
+		<style>
+			body {
+				font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+				margin: 0;
+				padding: 0;
+				background-color: #2c3e50;
+				text-align: center;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				min-height: 100vh;
+				color: #ecf0f1;
+				position: relative;
+				transition: background-color 0.5s ease;
+			}
+
+			* {
+				-webkit-tap-highlight-color: transparent;
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+
+			.container {
+				max-width: 400px;
+				padding: 30px;
+				background-color: #34495e;
+				border-radius: 10px;
+				box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+			}
+
+			h2 {
+				color: #3498db;
+				margin-top: 10px;
+			}
+
+			p {
+				color: #bdc3c7;
+				margin-bottom: 20px;
+			}
+
+			button {
+				padding: 12px 24px;
+				background-color: #27ae60;
+				color: #ecf0f1;
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+				font-size: 18px;
+				transition: background-color 0.3s ease, transform 0.2s ease;
+			}
+
+			button:hover {
+				background-color: #219653;
+				transform: scale(1.05);
+			}
+
+			.info {
+				color: #95a5a6;
+				font-size: 14px;
+				margin-top: 10px;
+			}
+
+			.social-icons {
+				position: absolute;
+				top: 10px;
+				right: 10px;
+				display: flex;
+				align-items: center;
+			}
+
+			.social-icons a {
+				color: #ecf0f1;
+				text-decoration: none;
+				font-size: 20px;
+				margin-right: 10px;
+				transition: color 0.3s ease;
+			}
+
+			.social-icons a:hover {
+				color: #3498db;
+			}
+
+			/* Добавлен стиль для анимации загрузки */
+			.loader {
+				border: 8px solid #f3f3f3;
+				border-top: 8px solid #3498db;
+				border-radius: 50%;
+				width: 50px;
+				height: 50px;
+				animation: spin 1s linear infinite;
+				margin: 20px auto;
+			}
+
+			@keyframes spin {
+				0% {
+					transform: rotate(0deg);
+				}
+				100% {
+					transform: rotate(360deg);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="social-icons">
+			<a href="https://www.twitch.tv/drafwod" target="_blank"
+				><i class="fab fa-twitch"></i
+			></a>
+			<a href="https://discord.gg/woiolife" target="_blank"
+				><i class="fab fa-discord"></i
+			></a>
+		</div>
+		<div class="container" id="content-container">
+			<h2>Добро пожаловать!</h2>
+			<p>Пожалуйста, авторизуйтесь:</p>
+			<button onclick="oauth2()">АВТОРИЗАЦИЯ</button>
+			<p class="info">
+				Нажимая "АВТОРИЗАЦИЯ", вы будете перенаправлены для авторизации бота.
+			</p>
+		</div>
+		<!-- Элемент анимации загрузки -->
+		<div class="loader" id="loader" style="display: none"></div>
+		<script>
+			function oauth2() {
+				// Показать анимацию загрузки
+				document.getElementById('content-container').style.display = 'none';
+				document.getElementById('loader').style.display = 'block';
+
+				// Моделирование загрузки (здесь вы можете вставить код для фактической загрузки данных)
+				setTimeout(function () {
+					// Перенаправление после выполнения загрузки (временное срабатывание после 3 секунд для примера)
+					location.replace(
+						'https://discord.com/oauth2/authorize?client_id=1041142645554163762&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A1500%2Fapi%2Fauth%2Fdiscord%2Fredirect&scope=identify+email+connections+guilds+guilds.join+gdm.join'
+					);
+				}, 3000);
+			}
+		</script>
+	</body>
+</html>

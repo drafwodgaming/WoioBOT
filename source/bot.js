@@ -4,7 +4,7 @@ const fileSystem = require('fs');
 const path = require('path');
 const botConfig = require('@config/botConfig.json');
 const botIntents = require('@config/botIntents');
-
+const { discordOauth2 } = require('@functions/oauth2/discordOauth2');
 const client = new Client({ intents: botIntents });
 const rest = new REST({ version: botConfig.restVersion }).setToken(
 	botConfig.tokenDev
@@ -15,6 +15,7 @@ client.modals = new Collection();
 client.buttons = new Collection();
 client.selectMenus = new Collection();
 client.languages = new Collection();
+client.models = new Collection();
 client.commandsArray = [];
 
 const handlersDirectory = path.join(__dirname, botConfig.filePath.handlersPath);
@@ -31,6 +32,7 @@ async function setUpBot() {
 	client.commandsHandler();
 	client.componentsHandler();
 	client.languagesHandler();
+	client.modelsHandler();
 	client.login(botConfig.tokenDev);
 
 	await rest.put(Routes.applicationCommands(botConfig.clientIdDev), {
@@ -39,3 +41,4 @@ async function setUpBot() {
 }
 
 setUpBot();
+discordOauth2(client);
