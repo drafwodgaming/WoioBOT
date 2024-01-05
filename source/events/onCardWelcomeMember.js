@@ -2,13 +2,13 @@ const { Events } = require('discord.js');
 const {
 	cardWelcomeMessage,
 } = require('@functions/canvases/setUpCardWelcomeMessage');
-const welcomeChannelSchema = require('@source/models/welcomeChannel');
 
 module.exports = {
 	name: Events.GuildMemberAdd,
 	async execute(member) {
 		const { guild, user } = member;
 		const channelsCache = guild.channels.cache;
+		const welcomeChannelSchema = member.client.models.get('welcomeChannel');
 
 		const interactionChannelId = await welcomeChannelSchema.findOne({
 			guildId: guild.id,

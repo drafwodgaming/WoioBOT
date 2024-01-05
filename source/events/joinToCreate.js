@@ -1,7 +1,5 @@
 const { Events } = require('discord.js');
 const { createVoiceChannel } = require('@functions/utils/createVoiceChannel');
-const joinToCreateSchema = require('@source/models/joinToCreate');
-const temporaryChannelsSchema = require('@source/models/temporaryChannels');
 const {
 	deleteEmptyTempChannels,
 } = require('@functions/utils/deleteEmptyTempChannels');
@@ -23,13 +21,16 @@ module.exports = {
 		const username = member.user.username;
 		const localizedText = await getLocalizedText(member);
 
+		const joinToCreateSchema = member.client.models.get('joinToCreate');
 		const joinToCreateData = await joinToCreateSchema.findOne({
 			guildId,
 		});
 
+		const temporaryChannels = member.client.models.get('temporaryChannels');
+
 		if (!joinToCreateData) return;
 
-		const { channelId: interactionChannelId } = joinToCreateData;
+		const interactionChannelId = joinToCreateData.channelId;
 
 		await deleteEmptyTempChannels(member.guild);
 
@@ -40,36 +41,41 @@ module.exports = {
 				{ username }
 			);
 
-			const createdVoiceChannel = await createVoiceChannel(
-				member.guild,
-				member,
-				channelName,
-				0,
-				parentCategory
-			);
+			const existingChannel = await temporaryChannels.findOne({
+				guildId,
+				channelId: newState.channelId,
+			});
 
-			if (createdVoiceChannel && newState) {
-				newState.setChannel(createdVoiceChannel);
+			if (!existingChannel) {
+				const createdVoiceChannel = await createVoiceChannel(
+					member.guild,
+					member,
+					channelName,
+					0,
+					parentCategory
+				);
 
-				setTimeout(async () => {
+				if (createdVoiceChannel && newState) {
+					newState.setChannel(createdVoiceChannel);
+
 					await updateRecordField(
-						temporaryChannelsSchema,
+						temporaryChannels,
 						{ guildId, channelId: createdVoiceChannel.id },
 						{ creatorId: member.id, channelName }
 					);
-				}, 500);
 
-				const defaultBotColor = getColor('default');
+					const defaultBotColor = getColor('default');
 
-				await createdVoiceChannel.send({
-					embeds: [
-						{
-							color: defaultBotColor,
-							title: localizedText.events.joinToCreate.tempVoiceChannelTitle,
-						},
-					],
-					components: [await settingsTempChannel(member)],
-				});
+					await createdVoiceChannel.send({
+						embeds: [
+							{
+								color: defaultBotColor,
+								title: localizedText.events.joinToCreate.tempVoiceChannelTitle,
+							},
+						],
+						components: [await settingsTempChannel(member)],
+					});
+				}
 			}
 		}
 	},

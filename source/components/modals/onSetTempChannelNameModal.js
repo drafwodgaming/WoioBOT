@@ -1,7 +1,8 @@
 const { modals } = require('@config/componentsId.json');
-const temporaryChannelsSchema = require('@source/models/temporaryChannels');
 const { getLocalizedText } = require('@source/functions/locale/getLocale');
-
+const {
+	updateRecordField,
+} = require('@functions/utils/database/updateRecordField');
 module.exports = {
 	data: {
 		name: modals.tempChannelName,
@@ -15,13 +16,15 @@ module.exports = {
 		const newChannelName = interaction.fields.getTextInputValue(
 			modals.tempChannelNameInput
 		);
+		const temporaryChannelsSchema =
+			interaction.client.models.get('temporaryChannels');
 
 		const localizedText = await getLocalizedText(interaction);
 
-		const updatedChannel = await temporaryChannelsSchema.findOneAndUpdate(
+		const updatedChannel = await updateRecordField(
+			temporaryChannelsSchema,
 			{ guildId, creatorId: memberId },
-			{ $set: { channelName: newChannelName } },
-			{ new: true }
+			{ channelName: newChannelName }
 		);
 
 		if (updatedChannel) {

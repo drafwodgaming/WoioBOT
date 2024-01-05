@@ -3,10 +3,6 @@ const en = require('@config/languages/en.json');
 const ru = require('@config/languages/ru.json');
 const uk = require('@config/languages/uk.json');
 const { getLocalizedText } = require('@source/functions/locale/getLocale');
-const joinToCreateSchema = require('@source/models/joinToCreate');
-const leaveChannelSchema = require('@source/models/leaveChannel');
-const welcomeChannelSchema = require('@source/models/welcomeChannel');
-const serverLocaleSchema = require('@source/models/serverLocale');
 const { getColor } = require('@functions/utils/getColor');
 const { getLanguageName } = require('@functions/utils/getLanguageName');
 const mustache = require('mustache');
@@ -24,6 +20,12 @@ module.exports = {
 	async execute(interaction) {
 		const defaultBotColor = getColor('default');
 		const localizedText = await getLocalizedText(interaction);
+
+		const joinToCreateSchema = interaction.client.models.get('joinToCreate');
+		const leaveChannelSchema = interaction.client.models.get('leaveChannel');
+		const welcomeChannelSchema =
+			interaction.client.models.get('welcomeChannel');
+		const serverLocaleSchema = interaction.client.models.get('serverLocale');
 
 		const guildLocale = await serverLocaleSchema.findOne({
 			guildId: interaction.guild.id,

@@ -51,16 +51,16 @@ module.exports = {
 		const forumIco = emojis.forum;
 
 		const voiceChannels = channels.cache.filter(
-			c => c.type === ChannelType.GuildVoice
+			channel => channel.type === ChannelType.GuildVoice
 		).size;
 		const annnouncementChannel = guild.channels.cache.filter(
-			c => c.type === ChannelType.GuildAnnouncement
+			channel => channel.type === ChannelType.GuildAnnouncement
 		).size;
 		const stageChannel = channels.cache.filter(
-			c => c.type === ChannelType.GuildStageVoice
+			channel => channel.type === ChannelType.GuildStageVoice
 		).size;
 		const forum = channels.cache.filter(
-			c => c.type === ChannelType.GuildForum
+			channel => channel.type === ChannelType.GuildForum
 		).size;
 
 		const guildEmojis = guild.emojis.cache;

@@ -1,6 +1,5 @@
 const { StringSelectMenuBuilder, ActionRowBuilder } = require('discord.js');
 const emojis = require('@config/emojis.json');
-const en = require('@config/languages/en.json');
 const { menus } = require('@config/componentsId.json');
 const { createOption } = require('@functions/utils/createSelectMenuOption');
 const { getLocalizedText } = require('@source/functions/locale/getLocale');

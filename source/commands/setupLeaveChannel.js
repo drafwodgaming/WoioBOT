@@ -5,7 +5,6 @@ const {
 	ChatInputCommandInteraction,
 } = require('discord.js');
 const { getColor } = require('@functions/utils/getColor');
-const leaveChannelSchema = require('@source/models/leaveChannel');
 const {
 	updateRecordField,
 } = require('@functions/utils/database/updateRecordField');
@@ -77,6 +76,8 @@ module.exports = {
 		const warningEmoji = emojis.goldWarning;
 
 		const localizedText = await getLocalizedText(interaction);
+
+		const leaveChannelSchema = interaction.client.models.get('leaveChannel');
 
 		const noChannelMessage = mustache.render(
 			localizedText.commands.leaveChannel.noChannel,

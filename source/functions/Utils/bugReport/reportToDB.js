@@ -1,4 +1,3 @@
-const reportBug = require('@source/models/reportBug');
 const { getColor } = require('@functions/utils/getColor');
 const { getLocalizedText } = require('@source/functions/locale/getLocale');
 const {
@@ -11,6 +10,7 @@ const {
 async function reportToDB(interaction, reportTitle, reportDescription) {
 	const botColor = getColor('editBlue');
 	const { id: userId } = interaction.user;
+	const reportBug = interaction.client.models.get('reportBug');
 
 	const localizedText = await getLocalizedText(interaction);
 	const fieldsToUpdate = {

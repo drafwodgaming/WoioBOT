@@ -1,4 +1,3 @@
-const reportBug = require('@source/models/reportBug');
 const { bugReportButtons } = require('@functions/buttons/setUpBugReport');
 const { getColor } = require('@functions/utils/getColor');
 const { onwerId } = require('@config/botConfig.json');
@@ -17,6 +16,8 @@ async function sendBugReport(
 	const botOwner = await client.users.fetch(botOwnerId);
 	const botColor = getColor('default');
 	const localizedText = await getLocalizedText(interaction);
+
+	const reportBug = interaction.client.models.get('reportBug');
 
 	const messages = {
 		reportFrom: mustache.render(

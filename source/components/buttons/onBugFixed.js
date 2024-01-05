@@ -1,5 +1,4 @@
 const { buttons } = require('@config/componentsId.json');
-const reportBug = require('@source/models/reportBug');
 const { bugReportButtons } = require('@functions/buttons/setUpBugReport');
 const { getColor } = require('@functions/utils/getColor');
 const { getLocalizedText } = require('@source/functions/locale/getLocale');
@@ -15,6 +14,7 @@ module.exports = {
 		const { id: messageId } = interaction.message;
 		const bugFixed = getColor('successReportFixed');
 		const localizedText = await getLocalizedText(interaction);
+		const reportBug = interaction.client.models.get('reportBug');
 
 		// console.log('Searching for report with messageId:', messageId);
 

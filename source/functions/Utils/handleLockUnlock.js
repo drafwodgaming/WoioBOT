@@ -1,10 +1,12 @@
-const temporaryChannelsSchema = require('@source/models/temporaryChannels');
 const { getLocalizedText } = require('@source/functions/locale/getLocale');
 
 async function handleLockUnlock(interaction, permission) {
 	const { guild, user } = interaction;
 	const { id: guildId } = guild;
 	const { id: creatorId } = user;
+
+	const temporaryChannelsSchema =
+		interaction.client.models.get('temporaryChannels');
 
 	const updatedChannel = await temporaryChannelsSchema.findOne({
 		guildId,

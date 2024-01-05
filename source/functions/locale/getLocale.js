@@ -1,7 +1,7 @@
 const { getGuildLanguage } = require('@functions/utils/getGuildLanguage');
-const serverLocaleSchema = require('@source/models/serverLocale');
 
 async function getLocalizedText(interaction) {
+	const serverLocaleSchema = interaction.client.models.get('serverLocale');
 	if (interaction.guild) guildId = interaction.guild.id;
 	else guildId = interaction.user.id;
 

@@ -5,7 +5,6 @@ const {
 	ChatInputCommandInteraction,
 } = require('discord.js');
 const { getColor } = require('@functions/utils/getColor');
-const welcomeChannelSchema = require('@source/models/welcomeChannel');
 const {
 	updateRecordField,
 } = require('@functions/utils/database/updateRecordField');
@@ -76,6 +75,9 @@ module.exports = {
 		);
 		const interactionGuildId = guild.id;
 		const warningEmoji = emojis.goldWarning;
+
+		const welcomeChannelSchema =
+			interaction.client.models.get('welcomeChannel');
 
 		const noChannelMessage = mustache.render(
 			localizedText.commands.welcomeChannel.noChannel,

@@ -5,7 +5,6 @@ const {
 	ChatInputCommandInteraction,
 } = require('discord.js');
 const { getColor } = require('@functions/utils/getColor');
-const joinToCreateSchema = require('@source/models/joinToCreate');
 const {
 	updateRecordField,
 } = require('@functions/utils/database/updateRecordField');
@@ -76,6 +75,8 @@ module.exports = {
 		);
 		const interactionGuildId = guild.id;
 		const warningEmoji = emojis.goldWarning;
+
+		const joinToCreateSchema = interaction.client.models.get('joinToCreate');
 
 		const noChannelMessage = mustache.render(
 			localizedText.commands.joinToCreateChannel.noChannel,

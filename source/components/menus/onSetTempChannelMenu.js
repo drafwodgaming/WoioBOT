@@ -8,7 +8,6 @@ const {
 const {
 	settingsTempChannel,
 } = require('@functions/menus/setUpSettingsTempChannels');
-const temporaryChannelsSchema = require('@source/models/temporaryChannels');
 const {
 	handleLockUnlock,
 } = require('@source/functions/utils/handleLockUnlock');
@@ -20,6 +19,8 @@ module.exports = {
 		const guildId = interaction.guild.id;
 		const memberId = interaction.user.id;
 		const localizedText = await getLocalizedText(interaction);
+		const temporaryChannelsSchema =
+			interaction.client.models.get('temporaryChannels');
 
 		const existingChannel = await temporaryChannelsSchema.findOne({
 			guildId,

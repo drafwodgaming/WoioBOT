@@ -1,18 +1,14 @@
 const {
 	SlashCommandBuilder,
-	ChannelType,
 	PermissionFlagsBits,
 	ChatInputCommandInteraction,
 } = require('discord.js');
-const { getColor } = require('@functions/utils/getColor');
 const en = require('@config/languages/en.json');
 const ru = require('@config/languages/ru.json');
 const uk = require('@config/languages/uk.json');
 const mustache = require('mustache');
 
-const serverLocaleSchema = require('@source/models/serverLocale');
 const { getLocalizedText } = require('@source/functions/locale/getLocale');
-
 const { getLanguageName } = require('@functions/utils/getLanguageName');
 const { getLanguageFlag } = require('@functions/utils/getLanguageFlag');
 const {
@@ -70,6 +66,8 @@ module.exports = {
 
 		const languageName = getLanguageName(interactionLocale);
 		const languageFlag = getLanguageFlag(interactionLocale);
+
+		const serverLocaleSchema = interaction.client.models.get('serverLocale');
 
 		let responseContent;
 

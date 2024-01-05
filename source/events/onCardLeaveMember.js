@@ -10,6 +10,7 @@ module.exports = {
 		const { guild, user } = member;
 		const channelsCache = guild.channels.cache;
 
+		const leaveChannelSchema = member.client.models.get('leaveChannel');
 		const interactionChannelId = await leaveChannelSchema.findOne({
 			guildId: guild.id,
 		});
