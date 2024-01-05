@@ -156,7 +156,7 @@
 		"menus": {
 			"tempChannel": {
 				"changeSettings": "Change channel settings",
-				"notCreate": "You cannot manage the channel!",
+				"noCreate": "You cannot manage the channel!",
 				"name": {
 					"label": "Name",
 					"description": "Change the channel name"
