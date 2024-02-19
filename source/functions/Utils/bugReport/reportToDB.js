@@ -16,13 +16,12 @@ async function reportToDB(interaction, reportTitle, reportDescription) {
 	const fieldsToUpdate = {
 		reportTitle: reportTitle,
 		reportDescription: reportDescription,
-		// Add other fields as needed
 	};
 
 	const bugReport = await updateRecordField(
 		reportBug,
 		{ userId },
-		fieldsToUpdate
+		{ $set: fieldsToUpdate }
 	);
 
 	const fieldValue = await getFieldFromRecord(

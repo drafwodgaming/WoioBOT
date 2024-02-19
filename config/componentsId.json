@@ -1,14 +1,17 @@
 {
 	"modals": {
-		"customBackground": "customBackground",
-		"customTag": "customTag",
 		"bugReport": "bugReport",
 		"reportTitle": "reportTitle",
 		"reportDescription": "reportDescription",
 		"tempChannelName": "tempChannelName",
 		"tempChannelNameInput": "tempChannelNameInput",
 		"tempChannelLimit": "tempChannelLimit",
-		"tempChannelLimitInput": " tempChannelLimitInput"
+		"tempChannelLimitInput": " tempChannelLimitInput",
+
+		"newActivity": "newActivity",
+		"activityTitle": "activityTitle",
+		"activityDescription": "activityDescription",
+		"activityPlayersCount": "activityPlayersCount"
 	},
 	"menus": {
 		"settingTempChannel": "settingTempChannel",
@@ -22,6 +25,8 @@
 	"buttons": {
 		"fixedButton": "fixedButton",
 		"rejectedButton": "rejectedButton",
-		"rulesButton": "rulesButton"
+		"rulesButton": "rulesButton",
+		"joinToActivityButton": "joinToActivityButton",
+		"leaveFromActivityButton": "leaveFromActivityButton"
 	}
 }

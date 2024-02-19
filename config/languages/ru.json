@@ -134,6 +134,26 @@
 				"errorLimit": "Пожалуйста, введите цифру от 1 до 99",
 				"succesLimit": "Лимит успешно обновлён",
 				"limitRoomExample": "0 для безлимита"
+			},
+			"newActivity": {
+				"title": "НОВАЯ АКТИВНОСТЬ",
+				"activityTitleInput": {
+					"label": "Название активности",
+					"placeholder": "Введите название активности для сбора боевой группы"
+				},
+				"activityDescription": {
+					"label": "Причина поиска боевой группы",
+					"placeholder": "Какая причина дял поиска: например \"Игры в траилсы\""
+				},
+				"activityPlayersCount": {
+					"label": "Количество участников для поиска",
+					"placeholder": "От 1 до 9",
+					"numberCount": "Пожалуйста, введите корректное число для поля количества участников"
+				},
+				"activityInfo": {
+					"playersField": "Участники",
+					"creatorField": "Создатель"
+				}
 			}
 		},
 		"menus": {
@@ -165,6 +185,23 @@
 				"fixedBug": {
 					"name": "Исправить",
 					"succesFix": "Ваш отчет об ошибке был решен. Спасибо за помощь в улучшении!"
+				}
+			},
+			"activity": {
+				"joinToActivity": {
+					"name": "Присоединиться",
+					"deletedActivity": "Невозможно найти связанную активность",
+					"alreadyInGroup": "Вы уже участник этой активности",
+					"successJoinToActivity": "Вы присоединились к активности",
+					"ownerCannotJoin": "Создатель не может войти в активность",
+					"fullGroup": "Группа заполнена"
+				},
+				"leaveFromActivity": {
+					"name": "Выйти",
+					"deletedActivity": "Невозможно найти связанную активность",
+					"noInGroup": "Вы не состоите в группе",
+					"successLeaveFromActivity": "Вы вышли из активности",
+					"ownerCannotLeave": "Создатель не может выйти из активности. Сначала нужно её закрыть"
 				}
 			}
 		}

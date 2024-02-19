@@ -94,7 +94,7 @@ module.exports = {
 				const updateData = await updateRecordField(
 					leaveChannelSchema,
 					{ guildId: interactionGuildId },
-					{ channelId: interactionChannel.id }
+					{ $set: { channelId: interactionChannel.id } }
 				);
 
 				const editChannelDescription = mustache.render(

@@ -24,7 +24,7 @@ module.exports = {
 		const updatedChannel = await updateRecordField(
 			temporaryChannelsSchema,
 			{ guildId, creatorId: memberId },
-			{ channelName: newChannelName }
+			{ $set: { channelName: newChannelName } }
 		);
 
 		if (updatedChannel) {

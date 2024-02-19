@@ -9,7 +9,12 @@
 		"subcommands": {
 			"setup": "setup",
 			"disable": "disable",
-			"setLanguage": "set"
+			"setLanguage": "set",
+			"newActivity": "new"
+		},
+
+		"searchActivity": {
+			"name": "activitie"
 		},
 		"help": {
 			"name": "help",
@@ -151,6 +156,26 @@
 				"errorLimit": "Please enter a valid user limit between 1 and 99",
 				"succesLimit": "User limit updated successfully!",
 				"limitRoomExample": "Set to 0 for unlimited"
+			},
+			"newActivity": {
+				"title": "NEW ACTIVITY",
+				"activityTitleInput": {
+					"label": "Activity Name",
+					"placeholder": "Enter the activity title for forming a combat group"
+				},
+				"activityDescription": {
+					"label": "Reason for searching for a combat group",
+					"placeholder": "What is the reason for the search, for example, \"Playing in trails\""
+				},
+				"activityPlayersCount": {
+					"label": "Number of participants for search",
+					"placeholder": "From 1 to 9",
+					"numberCount": "Please enter a valid number for the participant count field"
+				},
+				"activityInfo": {
+					"playersField": "Participants",
+					"creatorField": "Creator"
+				}
 			}
 		},
 		"menus": {
@@ -182,6 +207,23 @@
 				"fixedBug": {
 					"name": "Fix",
 					"succesFix": "Your bug report has been resolved. Thank you for helping us improve!"
+				}
+			},
+			"activity": {
+				"joinToActivity": {
+					"name": "Join",
+					"deletedActivity": "Unable to find the associated activity",
+					"alreadyInGroup": "You are already a participant in this activity",
+					"successJoinToActivity": "You have joined the activity",
+					"ownerCannotJoin": "The creator cannot join the activity",
+					"fullGroup": "Group is full"
+				},
+				"leaveFromActivity": {
+					"name": "Leave",
+					"deletedActivity": "Unable to find the associated activity",
+					"noInGroup": "You are not a member of the group",
+					"successLeaveFromActivity": "You have left the activity",
+					"ownerCannotLeave": "The creator cannot leave the activity. First, it needs to be closed"
 				}
 			}
 		}

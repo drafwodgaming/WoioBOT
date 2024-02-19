@@ -12,6 +12,7 @@ const mustache = require('mustache');
 const {
 	updateRecordField,
 } = require('@functions/utils/database/updateRecordField');
+
 module.exports = {
 	name: Events.VoiceStateUpdate,
 	async execute(oldState, newState) {
@@ -61,7 +62,7 @@ module.exports = {
 					await updateRecordField(
 						temporaryChannels,
 						{ guildId, channelId: createdVoiceChannel.id },
-						{ creatorId: member.id, channelName }
+						{ $set: { creatorId: member.id, channelName } }
 					);
 
 					const defaultBotColor = getColor('default');

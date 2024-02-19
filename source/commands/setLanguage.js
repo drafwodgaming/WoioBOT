@@ -72,11 +72,11 @@ module.exports = {
 		let responseContent;
 
 		switch (subCommand) {
-			case 'set':
+			case en.commands.subcommands.setLanguage:
 				await updateRecordField(
 					serverLocaleSchema,
 					{ guildId: interactionGuildId },
-					{ language: interactionLocale }
+					{ $set: { language: interactionLocale } }
 				);
 
 				const localizedText = await getLocalizedText(interaction);

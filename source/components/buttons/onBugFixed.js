@@ -28,7 +28,7 @@ module.exports = {
 		const user = await client.users.fetch(userId);
 
 		const fixedEmbed = {
-			color: bugFixed, // Зеленый цвет
+			color: bugFixed,
 			title: localizedText.components.buttons.bugReport.fixedBug.succesFix,
 		};
 		await user.send({ embeds: [fixedEmbed] });

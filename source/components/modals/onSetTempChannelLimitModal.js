@@ -30,7 +30,7 @@ module.exports = {
 		const updatedChannel = await updateRecordField(
 			temporaryChannelsSchema,
 			{ guildId, creatorId: memberId },
-			{ userLimit: newUserLimit }
+			{ $set: { userLimit: newUserLimit } }
 		);
 
 		if (updatedChannel) {
