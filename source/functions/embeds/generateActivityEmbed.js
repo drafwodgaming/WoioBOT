@@ -5,7 +5,8 @@ function generateActivityEmbed(
 	acceptedPlayers,
 	maxPlayersCount,
 	creatorId,
-	creatorIdFieldName
+	creatorIdFieldName,
+	colorActivity
 ) {
 	return {
 		title: activityTitle,
@@ -21,6 +22,7 @@ function generateActivityEmbed(
 				inline: true,
 			},
 		],
+		color: colorActivity,
 	};
 }
 

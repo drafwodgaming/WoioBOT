@@ -20,7 +20,8 @@ module.exports = {
 
 		if (isNaN(newUserLimit) || newUserLimit < 0 || newUserLimit > 99) {
 			return await interaction.followUp({
-				content: localizedText.components.modals.setLimitTempChannel.errorLimit,
+				content:
+					localizedText.components.modals.setLimitTempChannel.errorInvalidLimit,
 				ephemeral: true,
 			});
 		}
@@ -41,7 +42,8 @@ module.exports = {
 		}
 
 		await interaction.followUp({
-			content: localizedText.components.modals.setLimitTempChannel.succesLimit,
+			content:
+				localizedText.components.modals.setLimitTempChannel.successMessage,
 			ephemeral: true,
 		});
 	},

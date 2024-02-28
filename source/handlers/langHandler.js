@@ -4,7 +4,7 @@ const path = require('path');
 const asciiTable = require('ascii-table');
 
 module.exports = (client, sourcePath) => {
-	client.languagesHandler = async () => {
+	client.languagesHandler = () => {
 		const { languages } = client;
 		const table = new asciiTable().setHeading('Languages', 'Status');
 		const languagesDirectoryPath = path.join(
@@ -12,16 +12,17 @@ module.exports = (client, sourcePath) => {
 			'..',
 			filePath.languagesPath
 		);
-		const languagesFiles = fileSystem.readdirSync(languagesDirectoryPath);
 
-		for (const file of languagesFiles) {
-			if (!file.endsWith(filePath.jsonFileExtension)) continue;
+		const languagesFiles = fileSystem
+			.readdirSync(languagesDirectoryPath)
+			.filter(file => file.endsWith(filePath.jsonFileExtension));
 
+		languagesFiles.forEach(file => {
 			const languageFilePath = path.join(languagesDirectoryPath, file);
 			const loadedLanguage = require(languageFilePath);
 			languages.set(loadedLanguage.code, loadedLanguage);
 			table.addRow(loadedLanguage.code, '🟩');
-		}
+		});
 
 		console.log(table.toString());
 	};

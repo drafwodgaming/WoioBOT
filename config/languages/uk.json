@@ -1,6 +1,19 @@
 {
 	"code": "uk",
 	"commands": {
+		"activity": {
+			"description": "Управління активностями",
+			"newActivity": {
+				"description": "Створення нової активності"
+			},
+			"searchActivity": {
+				"description": "Пошук існуючих активностей на сервері",
+				"nameSearchLabel": "Назва: {{name}}",
+				"descriptionSearchLabel": "Опис: {{description}}",
+				"playersCountLabel": "Гравці: {{{playersInfo}}}",
+				"activityLinksTitle": "Посилання на активності"
+			}
+		},
 		"help": {
 			"title": "Меню команд",
 			"description": "Показати список команд бота"
@@ -8,18 +21,18 @@
 		"language": {
 			"description": "Налаштувати мову для сервера",
 			"setLanguage": "Встановити мову для сервера",
-			"choiceLanguage": "Вибрати мову",
-			"updateLanguage": "{{{flag}}} Мова встановлена на {{language}}"
+			"chooseLanguage": "Вибрати мову",
+			"languageUpdated": "{{{flag}}} Мова встановлена на {{language}}"
 		},
 		"settings": {
 			"description": "Переглянути всі налаштування сервера",
-			"settingServerTitle": "Налаштування сервера",
-			"serverSettingsFieldName": "Загальні",
-			"language": "Мова: {{language}}",
-			"welcomeChannel": "Канал привітання: {{{channelId}}}",
-			"leaveChannel": "Канал прощання: {{{channelId}}}",
-			"joinToCreateChannel": "Канал \"Join To Create\"  {{{channelId}}}",
-			"noChannel": "Не Встановлено"
+			"serverSettingsTitle": "Налаштування сервера",
+			"generalSettingsFieldName": "Загальні",
+			"languageSetting": "Мова: {{language}}",
+			"welcomeChannelSetting": "Канал привітання: {{{channelId}}}",
+			"leaveChannelSetting": "Канал прощання: {{{channelId}}}",
+			"joinToCreateChannelSetting": "Канал \"Join To Create\"  {{{channelId}}}",
+			"noChannelSet": "Не Встановлено"
 		},
 		"serverInfo": {
 			"title": "Інформація про сервер",
@@ -67,7 +80,7 @@
 			"installedChannel": "Канал для привітання встановлено на <#{{channelId}}>. Для відключення введіть /welcomechannel disable",
 			"noChannel": "{{{warningEmoji}}} Канал для привітання ще не встановлено",
 			"deletedChannel": "Канал для вітання видалено",
-			"selectWelcomeChannel": "Виберіть канал для привітальних повідомлень",
+			"selectChannel": "Виберіть канал для привітальних повідомлень",
 			"setupChannel": "Встановіть канал для привітальних повідомлень",
 			"disableChannel": "Відключіть канал для привітальних повідомлень",
 			"channelOption": "Встановіть канал для привітальних повідомлень"
@@ -77,7 +90,7 @@
 			"installedChannel": "Канал для прощання встановлено на <#{{channelId}}>. Для відключення введіть /leavechannel disable",
 			"noChannel": "{{{warningEmoji}}} Канал для прощання ще не встановлено",
 			"deletedChannel": "Канал для прощання видалено",
-			"selectLeaveChannel": "Виберіть канал для прощальних повідомлень",
+			"selectChannel": "Виберіть канал для прощальних повідомлень",
 			"setupChannel": "Встановіть канал для прощальних повідомлень",
 			"disableChannel": "Вимкніть канал для прощальних повідомлень",
 			"channelOption": "Встановіть канал для прощальних повідомлень"
@@ -87,7 +100,7 @@
 			"installedChannel": "Канал \"Join To Create\" встановлено на <#{{channelId}}>. Для відключення введіть /jointocreate disable",
 			"noChannel": "{{{warningEmoji}}} Канал \"Join To Create\" ще не встановлено",
 			"deletedChannel": "Канал \"Join To Create\" видалено",
-			"selectJoinToCreateChannel": "Виберіть канал \"Join To Create\"",
+			"selectChannel": "Виберіть канал \"Join To Create\"",
 			"setupChannel": "Встановіть канал \"Join To Create\"",
 			"disableChannel": "Відключіть канал \"Join To Create\"",
 			"channelOption": "Встановіть канал \"Join To Create\""
@@ -125,15 +138,16 @@
 			"setNameTempChannel": {
 				"title": "Змінити ім'я каналу",
 				"label": "Введіть нове ім'я каналу",
-				"succesUpdateName": "Ім'я каналу успішно змінено",
-				"nameRoomExample": "Приклад: Обговорення"
+				"successMessage": "Ім'я каналу успішно змінено",
+				"exampleName": "Приклад: Обговорення",
+				"renameCooldownMessage": "Перейменовувати ім'я можна не частіше ніж протягом 5 хвилин"
 			},
 			"setLimitTempChannel": {
 				"title": "Змінити ліміт користувачів",
 				"label": "Введіть ліміт каналу",
-				"errorLimit": "Будь ласка, введіть цифру від 1 до 99",
-				"succesLimit": "Ліміт успішно оновлено",
-				"limitRoomExample": "0 для безлімітного доступу"
+				"errorInvalidLimit": "Будь ласка, введіть цифру від 1 до 99",
+				"successMessage": "Ліміт успішно оновлено",
+				"unlimitedLimitExample": "0 для безлімітного доступу"
 			},
 			"newActivity": {
 				"title": "НОВА АКТИВНІСТЬ",
@@ -148,7 +162,7 @@
 				"activityPlayersCount": {
 					"label": "Кількість учасників для пошуку",
 					"placeholder": "Від 1 до 9",
-					"numberCount": "Будь ласка, введіть правильне число для поля кількості учасників"
+					"invalidNumberMessage": "Будь ласка, введіть правильне число для поля кількості учасників"
 				},
 
 				"activityInfo": {
@@ -195,7 +209,7 @@
 					"alreadyInGroup": "Ви вже прийняли участь у цій активності",
 					"successJoinToActivity": "Ви приєдналися до активності",
 					"ownerCannotJoin": "Творець не може приєднатися до активності",
-					"fullGroup": "Група заповнена"
+					"groupFull": "Група заповнена"
 				},
 				"leaveFromActivity": {
 					"name": "Вийти",
@@ -203,6 +217,12 @@
 					"noInGroup": "Ви не є учасником групи",
 					"successLeaveFromActivity": "Ви вийшли з активності",
 					"ownerCannotLeave": "Творець не може вийти з активності. Спочатку її потрібно закрити"
+				},
+				"groupReady": {
+					"name": "{{{acceptedPlayers}}} группа готова",
+					"pingPlayers": "Група {{{acceptedPlayers}}} готова!",
+					"deleteAfterTime": "Видалення <t:{{deletionTimestampInSeconds}}:R>",
+					"ownerOnly": "Ця дія доступна лише власнику активності"
 				}
 			}
 		}

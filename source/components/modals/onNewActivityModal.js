@@ -1,6 +1,5 @@
 const { modals } = require('@config/componentsId.json');
 const { activityButtons } = require('@functions/buttons/setUpActivityButtons');
-
 const { getLocalizedText } = require('@functions/locale/getLocale');
 const {
 	generateActivityEmbed,
@@ -8,6 +7,7 @@ const {
 const {
 	updateRecordField,
 } = require('@functions/utils/database/updateRecordField');
+const { getColor } = require('@functions/utils/getColor');
 
 module.exports = {
 	data: {
@@ -27,19 +27,21 @@ module.exports = {
 			modals.activityPlayersCount
 		);
 
-		if (!/^\d+$/.test(activityPlayersCount)) {
+		const colorActivity = getColor('activity.redColor');
+
+		if (
+			!/^\d+$/.test(activityPlayersCount) ||
+			parseInt(activityPlayersCount) <= 0
+		)
 			return interaction.reply({
 				content:
 					localizedText.components.modals.newActivity.activityPlayersCount
-						.numberCount,
+						.invalidNumberMessage,
 				ephemeral: true,
 			});
-		}
 
 		const participantsFieldName =
 			localizedText.components.modals.newActivity.activityInfo.playersField;
-
-		// const acceptedPlayers = [interaction.user.id];
 
 		const creatorId = interaction.user.id;
 		const creatorIdFieldName =
@@ -52,12 +54,13 @@ module.exports = {
 			[],
 			activityPlayersCount,
 			creatorId,
-			creatorIdFieldName
+			creatorIdFieldName,
+			colorActivity
 		);
 
 		await interaction.reply({
 			embeds: [embed],
-			components: [await activityButtons(interaction)],
+			components: [await activityButtons(interaction, true)],
 		});
 
 		await interaction.fetchReply().then(async reply => {
@@ -71,7 +74,8 @@ module.exports = {
 						description: activityDescription,
 						maxPlayersCount: parseInt(activityPlayersCount),
 						messageId: reply.id,
-						acceptedPlayers: [],
+						guildId: interaction.guild.id,
+						channelId: interaction.channel.id,
 					},
 				}
 			);

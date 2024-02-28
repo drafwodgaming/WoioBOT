@@ -16,7 +16,7 @@ async function createTempChannelName(interaction) {
 			label: localizedText.components.modals.setNameTempChannel.label,
 			style: TextInputStyle.Short,
 			placeholder:
-				localizedText.components.modals.setNameTempChannel.nameRoomExample,
+				localizedText.components.modals.setNameTempChannel.exampleName,
 		},
 	];
 

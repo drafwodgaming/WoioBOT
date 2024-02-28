@@ -16,7 +16,8 @@ async function createTempChannelLimit(interaction) {
 			label: localizedText.components.modals.setLimitTempChannel.label,
 			style: TextInputStyle.Short,
 			placeholder:
-				localizedText.components.modals.setLimitTempChannel.limitRoomExample,
+				localizedText.components.modals.setLimitTempChannel
+					.unlimitedLimitExample,
 		},
 	];
 
@@ -31,7 +32,7 @@ async function createTempChannelLimit(interaction) {
 			.setStyle(style)
 			.setPlaceholder(placeholder);
 
-		const row = new ActionRowBuilder().addComponents([inputField]);
+		const row = new ActionRowBuilder().addComponents(inputField);
 
 		tempChannelLimit.addComponents(row);
 	});

@@ -17,9 +17,6 @@ module.exports = {
 
 		const localizedText = await getLocalizedText(interaction);
 
-		// const userLocale = getUserLocale(interaction);
-		// i18n.setLocale(userLocale);
-
 		switch (true) {
 			case isChatInputCommand:
 				const command = interaction.client.commands.get(
@@ -43,27 +40,18 @@ module.exports = {
 				break;
 
 			case isModalSubmit:
-				const { modals } = client;
-				const modal = modals.get(customId);
-				if (!modal) return;
-
-				await modal.execute(interaction, client);
+				const modal = client.modals.get(customId);
+				if (modal) await modal.execute(interaction, client);
 				break;
 
 			case isButton:
-				const { buttons } = client;
-				const button = buttons.get(customId);
-				if (!button) return;
-
-				await button.execute(interaction, client);
+				const button = client.buttons.get(customId);
+				if (button) await button.execute(interaction, client);
 				break;
 
 			case isStringSelectMenu:
-				const { selectMenus } = client;
-				const selectMenu = selectMenus.get(customId);
-				if (!selectMenu) return;
-
-				await selectMenu.execute(interaction, client);
+				const selectMenu = client.selectMenus.get(customId);
+				if (selectMenu) await selectMenu.execute(interaction, client);
 				break;
 		}
 	},

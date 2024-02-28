@@ -1,14 +1,10 @@
 async function deleteRecordField(model, filter, fieldsToDelete) {
-	// Если поля для удаления не указаны, просто удаляем запись по фильтру
-	if (!fieldsToDelete || fieldsToDelete.length === 0) {
+	if (!fieldsToDelete || fieldsToDelete.length === 0)
 		return await model.findOneAndDelete(filter);
-	}
 
-	// Формируем объект с полями, которые нужно удалить
-	const unsetFields = fieldsToDelete.reduce((acc, field) => {
-		acc[field] = 1;
-		return acc;
-	}, {});
+	const unsetFields = Object.fromEntries(
+		fieldsToDelete.map(field => [field, 1])
+	);
 
 	const deletedRecord = await model.findOneAndUpdate(
 		filter,

@@ -21,10 +21,10 @@ const mustache = require('mustache');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName(en.commands.joinToCreateChannel.name)
-		.setDescription(en.commands.joinToCreateChannel.selectJoinToCreateChannel)
+		.setDescription(en.commands.joinToCreateChannel.selectChannel)
 		.setDescriptionLocalizations({
-			ru: ru.commands.joinToCreateChannel.selectJoinToCreateChannel,
-			uk: uk.commands.joinToCreateChannel.selectJoinToCreateChannel,
+			ru: ru.commands.joinToCreateChannel.selectChannel,
+			uk: uk.commands.joinToCreateChannel.selectChannel,
 		})
 		.setDMPermission(false)
 		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator)

@@ -43,43 +43,43 @@ module.exports = {
 		const languageName = getLanguageName(guildLocale?.language) ?? 'English';
 
 		const languageField = mustache.render(
-			localizedText.commands.settings.language,
+			localizedText.commands.settings.languageSetting,
 			{ language: languageName }
 		);
 
 		const welcomeChannelField = mustache.render(
-			localizedText.commands.settings.welcomeChannel,
+			localizedText.commands.settings.welcomeChannelSetting,
 			{
 				channelId: welcomeChannelDoc
 					? `<#${welcomeChannelDoc.channelId}>`
-					: localizedText.commands.settings.noChannel,
+					: localizedText.commands.settings.noChannelSet,
 			}
 		);
 
 		const leaveChannelField = mustache.render(
-			localizedText.commands.settings.leaveChannel,
+			localizedText.commands.settings.leaveChannelSetting,
 			{
 				channelId: leaveChannelDoc
 					? `<#${leaveChannelDoc.channelId}>`
-					: localizedText.commands.settings.noChannel,
+					: localizedText.commands.settings.noChannelSet,
 			}
 		);
 
 		const joinToCreateChannelField = mustache.render(
-			localizedText.commands.settings.joinToCreateChannel,
+			localizedText.commands.settings.joinToCreateChannelSetting,
 			{
 				channelId: joinToCreateChannelDoc
 					? `<#${joinToCreateChannelDoc.channelId}>`
-					: localizedText.commands.settings.noChannel,
+					: localizedText.commands.settings.noChannelSet,
 			}
 		);
 
 		const embed = {
 			color: defaultBotColor,
-			title: localizedText.commands.settings.settingServerTitle,
+			title: localizedText.commands.settings.serverSettingsTitle,
 			fields: [
 				{
-					name: localizedText.commands.settings.serverSettingsFieldName,
+					name: localizedText.commands.settings.generalSettingsFieldName,
 					value: [
 						languageField,
 						welcomeChannelField,

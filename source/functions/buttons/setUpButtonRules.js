@@ -5,14 +5,14 @@ const ru = require('@config/languages/ru.json');
 
 function serverRulesButton() {
 	const rulesButton = buttons.rulesButton;
-	const button = new ActionRowBuilder().addComponents(
+
+	return new ActionRowBuilder().addComponents(
 		new ButtonBuilder()
 			.setCustomId(rulesButton)
 			.setLabel(ru.myServer.buttons.serverRules.label)
 			.setStyle(ButtonStyle.Secondary)
 			.setEmoji(emojis.rules)
 	);
-	return button;
 }
 
 module.exports = { serverRulesButton };

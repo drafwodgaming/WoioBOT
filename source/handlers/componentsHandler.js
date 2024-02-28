@@ -7,6 +7,7 @@ module.exports = (client, sourcePath) => {
 		const { modals, buttons, selectMenus } = client;
 		const componentsFolderPath = path.join(sourcePath, filePath.componentsPath);
 		const componentsFolder = fileSystem.readdirSync(componentsFolderPath);
+
 		for (const folder of componentsFolder) {
 			const folderPath = path.join(componentsFolderPath, folder);
 			const componentFiles = fileSystem

@@ -6,14 +6,13 @@ async function bugReportButtons(interaction, disable) {
 	const fixedId = buttons.fixedButton;
 	const localizedText = await getLocalizedText(interaction);
 
-	const button = new ActionRowBuilder().addComponents(
+	return new ActionRowBuilder().addComponents(
 		new ButtonBuilder()
 			.setCustomId(fixedId)
 			.setLabel(localizedText.components.buttons.bugReport.fixedBug.name)
 			.setStyle(ButtonStyle.Success)
 			.setDisabled(disable)
 	);
-	return button;
 }
 
 module.exports = { bugReportButtons };

@@ -1,12 +1,35 @@
 const { Schema, model } = require('mongoose');
 
 const activitySchema = new Schema({
-	ownerId: String,
-	name: String,
+	ownerId: {
+		type: String,
+		required: true,
+	},
+	name: {
+		type: String,
+		required: true,
+	},
 	description: String,
-	maxPlayersCount: Number,
-	messageId: String,
-	acceptedPlayers: Array,
+	maxPlayersCount: {
+		type: Number,
+		required: true,
+	},
+	messageId: {
+		type: String,
+		required: true,
+	},
+	acceptedPlayers: {
+		type: Array,
+		default: [],
+	},
+	guildId: {
+		type: String,
+		required: true,
+	},
+	channelId: {
+		type: String,
+		required: true,
+	},
 });
 
-module.exports = model('activity', activitySchema);
+module.exports = model('Activity', activitySchema);

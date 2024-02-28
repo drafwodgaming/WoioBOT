@@ -52,8 +52,7 @@ async function settingsTempChannel(interaction) {
 		);
 	const components = [nameMenu];
 
-	const actionRow = new ActionRowBuilder().addComponents(components);
-	return actionRow;
+	return new ActionRowBuilder().addComponents(components);
 }
 
 module.exports = { settingsTempChannel };

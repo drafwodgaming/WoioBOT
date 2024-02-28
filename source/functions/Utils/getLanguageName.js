@@ -1,14 +1,11 @@
 function getLanguageName(code) {
-	switch (code) {
-		case 'en':
-			return 'English';
-		case 'ru':
-			return 'Русский';
-		case 'uk':
-			return 'Українська';
-		default:
-			return code;
-	}
+	const languageNames = {
+		en: 'English',
+		ru: 'Русский',
+		uk: 'Українська',
+	};
+
+	return languageNames[code] || code;
 }
 
 module.exports = { getLanguageName };

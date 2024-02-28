@@ -27,6 +27,7 @@
 		"rejectedButton": "rejectedButton",
 		"rulesButton": "rulesButton",
 		"joinToActivityButton": "joinToActivityButton",
-		"leaveFromActivityButton": "leaveFromActivityButton"
+		"leaveFromActivityButton": "leaveFromActivityButton",
+		"groupReadyButton": "groupReady"
 	}
 }

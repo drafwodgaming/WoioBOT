@@ -10,11 +10,22 @@
 			"setup": "setup",
 			"disable": "disable",
 			"setLanguage": "set",
-			"newActivity": "new"
+			"newActivity": "new",
+			"searchActivity": "search"
 		},
-
-		"searchActivity": {
-			"name": "activitie"
+		"activity": {
+			"name": "activity",
+			"description": "Managing activities",
+			"newActivity": {
+				"description": "Creating a new activity"
+			},
+			"searchActivity": {
+				"description": "Searching for existing activities on the server",
+				"nameSearchLabel": "Name: {{name}}",
+				"descriptionSearchLabel": "Description: {{description}}",
+				"playersCountLabel": "Players: {{{playersInfo}}}",
+				"activityLinksTitle": "Activity Links"
+			}
 		},
 		"help": {
 			"name": "help",
@@ -25,19 +36,19 @@
 			"name": "language",
 			"description": "Set the language for the server",
 			"setLanguage": "Set the language for the server",
-			"choiceLanguage": "Choose the language",
-			"updateLanguage": "{{{flag}}} Language set to {{language}}"
+			"chooseLanguage": "Choose the language",
+			"languageUpdated": "{{{flag}}} Language set to {{language}}"
 		},
 		"settings": {
 			"name": "settings",
 			"description": "Check all server's settigns",
-			"settingServerTitle": "Server Settings",
-			"serverSettingsFieldName": "General",
-			"language": "Language {{language}}",
-			"welcomeChannel": "Welcome channel: {{{channelId}}}",
-			"leaveChannel": "Leave channel: {{{channelId}}}",
-			"joinToCreateChannel": "Join To Create channel: {{{channelId}}}",
-			"noChannel": "No Installed"
+			"serverSettingsTitle": "Server Settings",
+			"generalSettingsFieldName": "General",
+			"languageSetting": "Language {{language}}",
+			"welcomeChannelSetting": "Welcome channel: {{{channelId}}}",
+			"leaveChannelSetting": "Leave channel: {{{channelId}}}",
+			"joinToCreateChannelSetting": "Join To Create channel: {{{channelId}}}",
+			"noChannelSet": "No Installed"
 		},
 		"serverInfo": {
 			"name": "serverinfo",
@@ -86,7 +97,7 @@
 			"installedChannel": "Welcome channel set to <#{{channelId}}>. To disable run /welcomechannel disable",
 			"noChannel": "{{{warningEmoji}}} Welcome channel not set",
 			"deletedChannel": "Welcome channel deleted",
-			"selectWelcomeChannel": "Select channel for welcome message",
+			"selectChannel": "Select channel for welcome message",
 			"setupChannel": "Setup channel for welcome message",
 			"disableChannel": "Disable channel for welcome message",
 			"channelOption": "Setup channel for welcome message"
@@ -97,7 +108,7 @@
 			"installedChannel": "Leave channel set to <#{{channelId}}>. To disabled run /leavechannel disable",
 			"noChannel": "{{{warningEmoji}}} Leave channel not set",
 			"deletedChannel": "Leave channel deleted",
-			"selectLeaveChannel": "Select channel for leave message",
+			"selectChannel": "Select channel for leave message",
 			"setupChannel": "Setup channel for leave message",
 			"disableChannel": "Disable channel for leave message",
 			"channelOption": "Setup channel for leave message"
@@ -108,7 +119,7 @@
 			"installedChannel": "\"Join To Create\" channel set to <#{{channelId}}>. To disabled run /jointocreate disable",
 			"noChannel": "{{{warningEmoji}}} \"Join To Create\" channel not set",
 			"deletedChannel": "\"Join To Create\" channel deleted",
-			"selectJoinToCreateChannel": "Select \"Join To Create\"",
+			"selectChannel": "Select \"Join To Create\"",
 			"setupChannel": "Setup \"Join To Create\" channel",
 			"disableChannel": "Disable \"Join To Create\"",
 			"channelOption": "Setup \"Join To Create\" channel"
@@ -147,15 +158,16 @@
 			"setNameTempChannel": {
 				"title": "Change Channel Name",
 				"label": "Enter the new channel name",
-				"succesUpdateName": "Channel name updated successfully!",
-				"nameRoomExample": "Example: Talking"
+				"successMessage": "Channel name updated successfully!",
+				"exampleName": "Example: Talking",
+				"renameCooldownMessage": "You can rename the name no more often than every 5 minutes"
 			},
 			"setLimitTempChannel": {
 				"title": "Change Channel User Limit",
 				"label": "Enter user limit",
-				"errorLimit": "Please enter a valid user limit between 1 and 99",
-				"succesLimit": "User limit updated successfully!",
-				"limitRoomExample": "Set to 0 for unlimited"
+				"errorInvalidLimit": "Please enter a valid user limit between 1 and 99",
+				"successMessage": "User limit updated successfully!",
+				"unlimitedLimitExample": "Set to 0 for unlimited"
 			},
 			"newActivity": {
 				"title": "NEW ACTIVITY",
@@ -170,7 +182,7 @@
 				"activityPlayersCount": {
 					"label": "Number of participants for search",
 					"placeholder": "From 1 to 9",
-					"numberCount": "Please enter a valid number for the participant count field"
+					"invalidNumberMessage": "Please enter a valid number for the participant count field"
 				},
 				"activityInfo": {
 					"playersField": "Participants",
@@ -216,7 +228,7 @@
 					"alreadyInGroup": "You are already a participant in this activity",
 					"successJoinToActivity": "You have joined the activity",
 					"ownerCannotJoin": "The creator cannot join the activity",
-					"fullGroup": "Group is full"
+					"groupFull": "Group is full"
 				},
 				"leaveFromActivity": {
 					"name": "Leave",
@@ -224,6 +236,12 @@
 					"noInGroup": "You are not a member of the group",
 					"successLeaveFromActivity": "You have left the activity",
 					"ownerCannotLeave": "The creator cannot leave the activity. First, it needs to be closed"
+				},
+				"groupReady": {
+					"name": "Group ready!",
+					"pingPlayers": "{{{acceptedPlayers}}} group is ready!",
+					"deleteAfterTime": "Deletion in <t:{{deletionTimestampInSeconds}}:R>",
+					"ownerOnly": "This action is available only to the activity owner"
 				}
 			}
 		}

@@ -19,35 +19,23 @@ async function handleLockUnlock(interaction, permission) {
 		const voiceChannel = guild.channels.cache.get(updatedChannel.channelId);
 
 		if (voiceChannel) {
-			const everyoneRole = guild.roles.everyone;
-
-			await voiceChannel.permissionOverwrites.edit(everyoneRole, {
+			await voiceChannel.permissionOverwrites.edit(guild.roles.everyone, {
 				Connect: permission,
 			});
 		}
 	}
+
 	await interaction.deferUpdate();
 
-	if (permission) {
-		const successUnlockContent =
-			localizedText.components.menus.tempChannel.unlockChannel.successUnlock;
+	const successContent = permission
+		? localizedText.components.menus.tempChannel.unlockChannel.successUnlock
+		: localizedText.components.menus.tempChannel.lockChannel.successLock;
 
-		if (successUnlockContent) {
-			await interaction.followUp({
-				content: successUnlockContent,
-				ephemeral: true,
-			});
-		}
-	} else {
-		const successLockContent =
-			localizedText.components.menus.tempChannel.lockChannel.successLock;
-
-		if (successLockContent) {
-			await interaction.followUp({
-				content: successLockContent,
-				ephemeral: true,
-			});
-		}
+	if (successContent) {
+		await interaction.followUp({
+			content: successContent,
+			ephemeral: true,
+		});
 	}
 }
 

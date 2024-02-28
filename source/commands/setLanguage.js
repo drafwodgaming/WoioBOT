@@ -37,10 +37,10 @@ module.exports = {
 				.addStringOption(option =>
 					option
 						.setName(en.commands.options.languageOption)
-						.setDescription(en.commands.language.choiceLanguage)
+						.setDescription(en.commands.language.chooseLanguage)
 						.setDescriptionLocalizations({
-							ru: ru.commands.language.choiceLanguage,
-							uk: uk.commands.language.choiceLanguage,
+							ru: ru.commands.language.chooseLanguage,
+							uk: uk.commands.language.chooseLanguage,
 						})
 						.setRequired(true)
 						.addChoices(
@@ -81,7 +81,7 @@ module.exports = {
 
 				const localizedText = await getLocalizedText(interaction);
 				responseContent = mustache.render(
-					localizedText.commands.language.updateLanguage,
+					localizedText.commands.language.languageUpdated,
 					{ flag: languageFlag, language: languageName }
 				);
 				break;

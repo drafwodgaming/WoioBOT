@@ -19,6 +19,8 @@ async function createNewActivityModal(interaction) {
 			placeholder:
 				localizedText.components.modals.newActivity.activityTitleInput
 					.placeholder,
+			minLength: 1,
+			maxLength: 50,
 		},
 		{
 			id: modals.activityDescription,
@@ -28,6 +30,8 @@ async function createNewActivityModal(interaction) {
 			placeholder:
 				localizedText.components.modals.newActivity.activityDescription
 					.placeholder,
+			minLength: 1,
+			maxLength: 1000,
 		},
 		{
 			id: modals.activityPlayersCount,
@@ -37,6 +41,8 @@ async function createNewActivityModal(interaction) {
 			placeholder:
 				localizedText.components.modals.newActivity.activityPlayersCount
 					.placeholder,
+			minLength: 1,
+			maxLength: 1,
 		},
 	];
 
@@ -44,20 +50,20 @@ async function createNewActivityModal(interaction) {
 		.setCustomId(modals.newActivity)
 		.setTitle(localizedText.components.modals.newActivity.title);
 
-	componentsData.forEach(({ id, label, style, placeholder }) => {
-		const inputField = new TextInputBuilder()
-			.setCustomId(id)
-			.setLabel(label)
-			.setStyle(style)
-			.setPlaceholder(placeholder);
+	componentsData.forEach(
+		({ id, label, style, placeholder, minLength, maxLength }) => {
+			const inputField = new TextInputBuilder()
+				.setCustomId(id)
+				.setLabel(label)
+				.setStyle(style)
+				.setPlaceholder(placeholder)
+				.setMinLength(minLength)
+				.setMaxLength(maxLength);
 
-		if (id === modals.activityPlayersCount)
-			inputField.setMinLength(1).setMaxLength(1);
-
-		const row = new ActionRowBuilder().addComponents(inputField);
-
-		newActivityModal.addComponents(row);
-	});
+			const row = new ActionRowBuilder().addComponents(inputField);
+			newActivityModal.addComponents(row);
+		}
+	);
 
 	return newActivityModal;
 }
