@@ -4,7 +4,6 @@ const fileSystem = require('fs');
 const path = require('path');
 const botConfig = require('@config/botConfig.json');
 const botIntents = require('@config/botIntents');
-const { discordOauth2 } = require('@functions/oauth2/discordOauth2');
 const client = new Client({ intents: botIntents });
 const rest = new REST({ version: botConfig.restVersion }).setToken(
 	botConfig.tokenDev
@@ -41,4 +40,3 @@ async function setUpBot() {
 }
 
 setUpBot();
-discordOauth2(client);

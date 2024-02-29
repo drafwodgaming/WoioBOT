@@ -24,16 +24,6 @@
 			"chooseLanguage": "Вибрати мову",
 			"languageUpdated": "{{{flag}}} Мова встановлена на {{language}}"
 		},
-		"settings": {
-			"description": "Переглянути всі налаштування сервера",
-			"serverSettingsTitle": "Налаштування сервера",
-			"generalSettingsFieldName": "Загальні",
-			"languageSetting": "Мова: {{language}}",
-			"welcomeChannelSetting": "Канал привітання: {{{channelId}}}",
-			"leaveChannelSetting": "Канал прощання: {{{channelId}}}",
-			"joinToCreateChannelSetting": "Канал \"Join To Create\"  {{{channelId}}}",
-			"noChannelSet": "Не Встановлено"
-		},
 		"serverInfo": {
 			"title": "Інформація про сервер",
 			"description": "Показати загальну інформацію про сервер",

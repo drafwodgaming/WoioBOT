@@ -24,16 +24,6 @@
 			"chooseLanguage": "Выбрать язык",
 			"languageUpdated": "{{{flag}}} Язык установлен на {{language}}"
 		},
-		"settings": {
-			"description": "Посмотреть все настройки сервера",
-			"serverSettingsTitle": "Настройки сервера",
-			"generalSettingsFieldName": "Общие",
-			"languageSetting": "Язык {{language}}",
-			"welcomeChannelSetting": "Канал приветствия: {{{channelId}}}",
-			"leaveChannelSetting": "Канал прощания: {{{channelId}}}",
-			"joinToCreateChannelSetting": "Канал \"Join To Create\": {{{channelId}}}",
-			"noChannelSet": "Не Установлено"
-		},
 		"serverInfo": {
 			"title": "Информация о сервере",
 			"description": "Показать общую информацию о сервере",

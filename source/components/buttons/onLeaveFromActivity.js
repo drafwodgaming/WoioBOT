@@ -1,16 +1,11 @@
 const { buttons } = require('@config/componentsId.json');
 const { getLocalizedText } = require('@functions/locale/getLocale');
 const {
-	generateActivityEmbed,
-} = require('@functions/embeds/generateActivityEmbed');
-const {
 	updateRecordField,
 } = require('@functions/utils/database/updateRecordField');
-const { activityButtons } = require('@functions/buttons/setUpActivityButtons');
 const {
-	getColorByPercentage,
-} = require('@functions/utils/activity/getColorByPercentage');
-
+	editActivityMessage,
+} = require('@functions/utils/activity/editActivityMessage');
 module.exports = {
 	data: {
 		name: buttons.leaveFromActivityButton,
@@ -53,32 +48,7 @@ module.exports = {
 			{ new: true }
 		);
 
-		const percentage =
-			(updatedEvent.acceptedPlayers.length / updatedEvent.maxPlayersCount) *
-			100;
-
-		const colorActivity = getColorByPercentage(percentage);
-
-		const participantsFieldName =
-			localizedText.components.modals.newActivity.activityInfo.playersField;
-		const creatorIdFieldName =
-			localizedText.components.modals.newActivity.activityInfo.creatorField;
-
-		const embed = generateActivityEmbed(
-			updatedEvent.name,
-			updatedEvent.description,
-			participantsFieldName,
-			updatedEvent.acceptedPlayers,
-			updatedEvent.maxPlayersCount,
-			updatedEvent.ownerId,
-			creatorIdFieldName,
-			colorActivity
-		);
-
-		await interaction.message.edit({
-			embeds: [embed],
-			components: [await activityButtons(interaction, true)],
-		});
+		await editActivityMessage(interaction, updatedEvent, localizedText, false);
 
 		await interaction.reply({
 			content: languageConfig.successLeaveFromActivity,

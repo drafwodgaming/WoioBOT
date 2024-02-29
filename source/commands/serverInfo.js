@@ -35,14 +35,6 @@ module.exports = {
 
 		const guildIcon = guild.iconURL();
 
-		const guildChannels = channels.cache.size;
-		const guildCategories = channels.cache.filter(
-			c => c.type === ChannelType.GuildCategory
-		).size;
-		const textChannels = channels.cache.filter(
-			c => c.type === ChannelType.GuildText
-		).size;
-
 		const textChannelsIco = emojis.textChannel;
 		const voiceChannelsIco = emojis.voiceChannel;
 		const categoriesIco = emojis.category;
@@ -50,6 +42,13 @@ module.exports = {
 		const stageChannelIco = emojis.stage;
 		const forumIco = emojis.forum;
 
+		const guildChannels = channels.cache.size;
+		const guildCategories = channels.cache.filter(
+			c => c.type === ChannelType.GuildCategory
+		).size;
+		const textChannels = channels.cache.filter(
+			c => c.type === ChannelType.GuildText
+		).size;
 		const voiceChannels = channels.cache.filter(
 			channel => channel.type === ChannelType.GuildVoice
 		).size;

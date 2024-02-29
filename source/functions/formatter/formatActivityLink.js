@@ -25,12 +25,17 @@ function formatActivityLink(interaction, activity, index, localizedText) {
 		{ playersInfo }
 	);
 
-	const activityLink = `[${
+	const activityLinkText = `${
 		index + 1
-	}. ${nameActivity} | ${descriptionActivity} | ${playersCountActivity}]`;
+	}. ${nameActivity} | ${descriptionActivity} | ${playersCountActivity}`;
+
+	const activityLink = `[${activityLinkText}]`;
+
 	const messageLink = `(https://discord.com/channels/${interaction.guild.id}/${channelId}/${messageId})`;
 
-	return `**${activityLink}${messageLink}**`;
+	const finalFormattedLink = `**${activityLink}${messageLink}**`;
+
+	return finalFormattedLink;
 }
 
 module.exports = { formatActivityLink };

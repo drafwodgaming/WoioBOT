@@ -14,13 +14,16 @@ module.exports = {
 			uk: uk.commands.help.description,
 		})
 		.setDMPermission(false),
-
-	async execute(interaction) {
+	async execute(interaction, client) {
 		const localizedText = await getLocalizedText(interaction);
 
 		const defaultBotColor = getColor('default');
 		const helpTitle = localizedText.commands.help.title;
 
+		/**
+		 * @param {Command[]} commandsArray - The array of commands.
+		 * @returns {string}
+		 */
 		const buildCommandDescription = commandsArray =>
 			commandsArray
 				.map(({ name, description }) => `/${bold(name)}\n${description}\n`)

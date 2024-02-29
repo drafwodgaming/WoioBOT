@@ -61,14 +61,10 @@ module.exports = {
 		const interactionLocale = options.getString(
 			en.commands.options.languageOption
 		);
-
 		const interactionGuildId = guild.id;
-
 		const languageName = getLanguageName(interactionLocale);
 		const languageFlag = getLanguageFlag(interactionLocale);
-
 		const serverLocaleSchema = interaction.client.models.get('serverLocale');
-
 		let responseContent;
 
 		switch (subCommand) {

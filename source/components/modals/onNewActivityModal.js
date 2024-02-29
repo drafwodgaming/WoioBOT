@@ -14,25 +14,23 @@ module.exports = {
 		name: modals.newActivity,
 	},
 	async execute(interaction) {
+		const { fields } = interaction;
+		const { activityTitle, activityDescription, activityPlayersCount } = modals;
+
 		const localizedText = await getLocalizedText(interaction);
 
-		const activityTitle = interaction.fields.getTextInputValue(
-			modals.activityTitle
-		);
-		const activityDescription = interaction.fields.getTextInputValue(
-			modals.activityDescription
-		);
-
-		const activityPlayersCount = interaction.fields.getTextInputValue(
-			modals.activityPlayersCount
-		);
+		const activityData = {
+			title: fields.getTextInputValue(activityTitle),
+			description: fields.getTextInputValue(activityDescription),
+			playersCount: parseInt(
+				fields.getTextInputValue(activityPlayersCount),
+				10
+			),
+		};
 
 		const colorActivity = getColor('activity.redColor');
 
-		if (
-			!/^\d+$/.test(activityPlayersCount) ||
-			parseInt(activityPlayersCount) <= 0
-		)
+		if (isNaN(activityData.playersCount) || activityData.playersCount <= 0)
 			return interaction.reply({
 				content:
 					localizedText.components.modals.newActivity.activityPlayersCount
@@ -47,15 +45,19 @@ module.exports = {
 		const creatorIdFieldName =
 			localizedText.components.modals.newActivity.activityInfo.creatorField;
 
+		const creatorUser = await interaction.client.users.fetch(creatorId);
+		const creatorAvatar = creatorUser.avatarURL();
+
 		const embed = generateActivityEmbed(
-			activityTitle,
-			activityDescription,
+			activityData.title,
+			activityData.description,
 			participantsFieldName,
 			[],
-			activityPlayersCount,
+			activityData.playersCount,
 			creatorId,
 			creatorIdFieldName,
-			colorActivity
+			colorActivity,
+			creatorAvatar
 		);
 
 		await interaction.reply({
@@ -70,9 +72,9 @@ module.exports = {
 				{ ownerId: interaction.user.id },
 				{
 					$set: {
-						name: activityTitle,
-						description: activityDescription,
-						maxPlayersCount: parseInt(activityPlayersCount),
+						name: activityData.title,
+						description: activityData.description,
+						maxPlayersCount: activityData.playersCount,
 						messageId: reply.id,
 						guildId: interaction.guild.id,
 						channelId: interaction.channel.id,

@@ -6,7 +6,8 @@ function generateActivityEmbed(
 	maxPlayersCount,
 	creatorId,
 	creatorIdFieldName,
-	colorActivity
+	colorActivity,
+	ownerAvatar
 ) {
 	return {
 		title: activityTitle,
@@ -23,6 +24,7 @@ function generateActivityEmbed(
 			},
 		],
 		color: colorActivity,
+		thumbnail: { url: ownerAvatar },
 	};
 }
 

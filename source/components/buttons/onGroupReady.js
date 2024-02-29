@@ -3,13 +3,10 @@ const {
 	deleteRecordField,
 } = require('@functions/utils/database/deleteRecordField');
 const { getLocalizedText } = require('@functions/locale/getLocale');
-const {
-	generateActivityEmbed,
-} = require('@functions/embeds/generateActivityEmbed');
 const mustache = require('mustache');
 const {
-	getColorByPercentage,
-} = require('@functions/utils/activity/getColorByPercentage');
+	editActivityMessage,
+} = require('@functions/utils/activity/editActivityMessage');
 
 module.exports = {
 	data: {
@@ -25,9 +22,6 @@ module.exports = {
 			messageId: message.id,
 		});
 
-		const deletionTimestamp = Date.now() + 10000;
-		const deletionTimestampInSeconds = Math.floor(deletionTimestamp / 1000);
-
 		const acceptedPlayer = user.id;
 
 		const isOwner = activityRecord.ownerId === acceptedPlayer;
@@ -38,45 +32,14 @@ module.exports = {
 				ephemeral: true,
 			});
 
-		const percentage =
-			(activityRecord.acceptedPlayers.length / activityRecord.maxPlayersCount) *
-			100;
-
-		const colorActivity = getColorByPercentage(percentage);
-
 		const acceptedPlayers = activityRecord.acceptedPlayers
 			.map(playerId => `<@${playerId}>`)
 			.join(', ');
 
-		const participantsFieldName =
-			localizedText.components.modals.newActivity.activityInfo.playersField;
-		const creatorIdFieldName =
-			localizedText.components.modals.newActivity.activityInfo.creatorField;
-
-		const descriptionWithTimestamp = `${
-			activityRecord.description
-		} (${mustache.render(languageConfig.deleteAfterTime, {
-			deletionTimestampInSeconds,
-		})})`;
-
-		const embed = generateActivityEmbed(
-			activityRecord.name,
-			descriptionWithTimestamp,
-			participantsFieldName,
-			activityRecord.acceptedPlayers,
-			activityRecord.maxPlayersCount,
-			activityRecord.ownerId,
-			creatorIdFieldName,
-			colorActivity
-		);
-
-		const embedMessage = await message.edit({
-			embeds: [embed],
-			components: [],
-		});
+		await editActivityMessage(interaction, activityRecord, localizedText, true);
 
 		setTimeout(async () => {
-			await embedMessage.delete();
+			await message.delete();
 
 			await deleteRecordField(activitySchema, { messageId: message.id });
 		}, 10000);

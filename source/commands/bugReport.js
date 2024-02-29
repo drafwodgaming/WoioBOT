@@ -14,7 +14,6 @@ module.exports = {
 			uk: uk.commands.bugReport.description,
 		})
 		.setDMPermission(false),
-
 	async execute(interaction) {
 		const { user } = interaction;
 		const { id: userId } = user;
@@ -23,11 +22,12 @@ module.exports = {
 		const existingReport = await reportBug.findOne({ userId });
 		const localizedText = await getLocalizedText(interaction);
 
-		if (existingReport)
+		if (existingReport) {
 			return await interaction.reply({
 				content: localizedText.commands.bugReport.reportExists,
 				ephemeral: true,
 			});
+		}
 
 		const modal = await createBugReportModal(interaction);
 		await interaction.showModal(modal);

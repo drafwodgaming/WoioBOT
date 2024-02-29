@@ -1,4 +1,8 @@
-const { SlashCommandBuilder } = require('discord.js');
+const {
+	SlashCommandBuilder,
+	CommandInteraction,
+	Client,
+} = require('discord.js');
 const {
 	createNewActivityModal,
 } = require('@functions/modals/setUpNewActivity');
@@ -38,8 +42,7 @@ module.exports = {
 					uk: uk.commands.activity.searchActivity.description,
 				})
 		),
-
-	async execute(interaction) {
+	async execute(interaction, client) {
 		const { options } = interaction;
 		const localizedText = await getLocalizedText(interaction);
 		const linksColor = getColor('linksBlue');

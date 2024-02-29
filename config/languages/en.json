@@ -39,17 +39,6 @@
 			"chooseLanguage": "Choose the language",
 			"languageUpdated": "{{{flag}}} Language set to {{language}}"
 		},
-		"settings": {
-			"name": "settings",
-			"description": "Check all server's settigns",
-			"serverSettingsTitle": "Server Settings",
-			"generalSettingsFieldName": "General",
-			"languageSetting": "Language {{language}}",
-			"welcomeChannelSetting": "Welcome channel: {{{channelId}}}",
-			"leaveChannelSetting": "Leave channel: {{{channelId}}}",
-			"joinToCreateChannelSetting": "Join To Create channel: {{{channelId}}}",
-			"noChannelSet": "No Installed"
-		},
 		"serverInfo": {
 			"name": "serverinfo",
 			"title": "About Server",
