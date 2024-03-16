@@ -1,41 +1,36 @@
 const mustache = require('mustache');
 
-function formatActivityLink(interaction, activity, index, localizedText) {
+function formatActivityLink(interaction, activity, index, localization) {
 	const {
-		name,
-		description,
-		acceptedPlayers,
+		name: activityName,
+		description: activityDescription,
+		acceptedPlayers: joinedPlayers,
 		maxPlayersCount,
-		channelId,
-		messageId,
+		channelId: channelIdValue,
+		messageId: messageIdValue,
 	} = activity;
 
-	const playersInfo = `${acceptedPlayers.length}/${maxPlayersCount}`;
+	const playerInfo = `${joinedPlayers.length}/${maxPlayersCount}`;
 
-	const nameActivity = mustache.render(
-		localizedText.commands.activity.searchActivity.nameSearchLabel,
-		{ name }
+	const formattedName = mustache.render(
+		localization.commands.activity.searchActivity.nameLabel,
+		{ name: activityName }
 	);
-	const descriptionActivity = mustache.render(
-		localizedText.commands.activity.searchActivity.descriptionSearchLabel,
-		{ description }
+	const formattedDescription = mustache.render(
+		localization.commands.activity.searchActivity.descriptionLabel,
+		{ description: activityDescription }
 	);
-	const playersCountActivity = mustache.render(
-		localizedText.commands.activity.searchActivity.playersCountLabel,
-		{ playersInfo }
+	const formattedPlayers = mustache.render(
+		localization.commands.activity.searchActivity.playersCountLabel,
+		{ playersInfo: playerInfo }
 	);
 
-	const activityLinkText = `${
+	const linkText = `${
 		index + 1
-	}. ${nameActivity} | ${descriptionActivity} | ${playersCountActivity}`;
+	}. ${formattedName} | ${formattedDescription} | ${formattedPlayers}`;
+	const activityLink = `[${linkText}](https://discord.com/channels/${interaction.guild.id}/${channelIdValue}/${messageIdValue})`;
 
-	const activityLink = `[${activityLinkText}]`;
-
-	const messageLink = `(https://discord.com/channels/${interaction.guild.id}/${channelId}/${messageId})`;
-
-	const finalFormattedLink = `**${activityLink}${messageLink}**`;
-
-	return finalFormattedLink;
+	return `**${activityLink}**`;
 }
 
 module.exports = { formatActivityLink };

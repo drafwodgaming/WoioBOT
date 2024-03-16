@@ -15,33 +15,20 @@ module.exports = {
 		})
 		.setDMPermission(false),
 	async execute(interaction, client) {
-		const localizedText = await getLocalizedText(interaction);
+		const localizedHelpText = await getLocalizedText(interaction);
+		const defaultColor = getColor('default');
 
-		const defaultBotColor = getColor('default');
-		const helpTitle = localizedText.commands.help.title;
+		const embed = {
+			color: defaultColor,
+			title: localizedHelpText.commands.help.title,
+		};
 
-		/**
-		 * @param {Command[]} commandsArray - The array of commands.
-		 * @returns {string}
-		 */
-		const buildCommandDescription = commandsArray =>
-			commandsArray
-				.map(({ name, description }) => `/${bold(name)}\n${description}\n`)
-				.join('\n');
+		const descArr = [];
+		for (const { name, description } of client.commandsArray) {
+			descArr.push(`${bold(name)}\n${description}\n`);
+		}
+		embed.description = descArr.join('');
 
-		const embedDescription = buildCommandDescription(
-			interaction.client.commandsArray
-		);
-
-		await interaction.reply({
-			embeds: [
-				{
-					color: defaultBotColor,
-					title: helpTitle,
-					description: embedDescription,
-				},
-			],
-			ephemeral: true,
-		});
+		await interaction.reply({ embeds: [embed], ephemeral: true });
 	},
 };

@@ -21,10 +21,11 @@
 			},
 			"searchActivity": {
 				"description": "Searching for existing activities on the server",
-				"nameSearchLabel": "Name: {{name}}",
-				"descriptionSearchLabel": "Description: {{description}}",
+				"nameLabel": "Name: {{name}}",
+				"descriptionLabel": "Description: {{description}}",
 				"playersCountLabel": "Players: {{{playersInfo}}}",
-				"activityLinksTitle": "Activity Links"
+				"title": "Activity Links",
+				"noActivities": "{{{warningEmoji}}} **No activities found**"
 			}
 		},
 		"help": {
@@ -75,16 +76,16 @@
 			"joinedTime": "{{{memberJoinedTime}}}",
 			"memberRoles": "Roles",
 			"emptyRolesList": "No roles",
-			"online": "Online",
-			"idle": "Idle",
-			"offline": "Offline",
-			"dnd": "Do not Disturb"
+			"online": "{{onlineEmoji}} Online",
+			"idle": "{{idleEmoji}} Idle",
+			"offline": "{{offlineEmoji}} Offline",
+			"dnd": "{{dndEmoji}} Do not Disturb"
 		},
 		"welcomeChannel": {
 			"name": "welcomechannel",
 			"editedChannel": "Welcome channel changed to <#{{channelId}}>",
 			"installedChannel": "Welcome channel set to <#{{channelId}}>. To disable run /welcomechannel disable",
-			"noChannel": "{{{warningEmoji}}} Welcome channel not set",
+			"noChannel": "{{{warningEmoji}}} **Welcome channel not set**",
 			"deletedChannel": "Welcome channel deleted",
 			"selectChannel": "Select channel for welcome message",
 			"setupChannel": "Setup channel for welcome message",
@@ -95,7 +96,7 @@
 			"name": "leavechannel",
 			"editedChannel": "Leave channel changed to <#{{channelId}}>",
 			"installedChannel": "Leave channel set to <#{{channelId}}>. To disabled run /leavechannel disable",
-			"noChannel": "{{{warningEmoji}}} Leave channel not set",
+			"noChannel": "{{{warningEmoji}}} **Leave channel not set**",
 			"deletedChannel": "Leave channel deleted",
 			"selectChannel": "Select channel for leave message",
 			"setupChannel": "Setup channel for leave message",
@@ -106,7 +107,7 @@
 			"name": "jointocreate",
 			"editedChannel": "\"Join To Create\" channel changed to <#{{channelId}}>",
 			"installedChannel": "\"Join To Create\" channel set to <#{{channelId}}>. To disabled run /jointocreate disable",
-			"noChannel": "{{{warningEmoji}}} \"Join To Create\" channel not set",
+			"noChannel": "{{{warningEmoji}}} **\"Join To Create\" channel not set**",
 			"deletedChannel": "\"Join To Create\" channel deleted",
 			"selectChannel": "Select \"Join To Create\"",
 			"setupChannel": "Setup \"Join To Create\" channel",

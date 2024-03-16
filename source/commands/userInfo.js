@@ -10,6 +10,9 @@ const ru = require('@config/languages/ru.json');
 const uk = require('@config/languages/uk.json');
 const { getLocalizedText } = require('@source/functions/locale/getLocale');
 const mustache = require('mustache');
+const {
+	getStatusText,
+} = require('@source/functions/utils/userInfo/getStatusText');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -61,15 +64,9 @@ module.exports = {
 			.join(' ');
 
 		const userRolesCount = targetUser.roles.cache.size;
-		const userStatus = {
-			online: mustache.render(localizedText.commands.userInfo.online),
-			idle: mustache.render(localizedText.commands.userInfo.idle),
-			offline: mustache.render(localizedText.commands.userInfo.offline),
-			dnd: mustache.render(localizedText.commands.userInfo.dnd),
-		};
-		const statusList =
-			userStatus[targetUser.presence ? targetUser.presence.status : 'offline'];
 
+		const { status = 'offline' } = targetUser.presence || {};
+		const statusText = getStatusText(status, localizedText);
 		const userInfoTitle = mustache.render(
 			localizedText.commands.userInfo.title
 		);
@@ -106,9 +103,7 @@ module.exports = {
 				},
 				{
 					name: mustache.render(localizedText.commands.userInfo.statusLabel),
-					value: mustache.render(localizedText.commands.userInfo.userStatus, {
-						statusList,
-					}),
+					value: statusText,
 					inline: true,
 				},
 			],

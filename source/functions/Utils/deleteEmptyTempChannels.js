@@ -1,7 +1,3 @@
-const {
-	deleteRecordField,
-} = require('@functions/utils/database/deleteRecordField');
-
 async function deleteEmptyTempChannels(guild) {
 	const temporaryChannelsSchema = guild.client.models.get('temporaryChannels');
 	const tempChannels = await temporaryChannelsSchema.find({
@@ -15,7 +11,7 @@ async function deleteEmptyTempChannels(guild) {
 
 		if (channel && channel.members.size === 0) {
 			await channel.delete();
-			await deleteRecordField(temporaryChannelsSchema, { guildId, creatorId });
+			await temporaryChannelsSchema.findOneAndDelete({ guildId, creatorId });
 		}
 	}
 }

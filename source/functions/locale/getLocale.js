@@ -1,13 +1,11 @@
 const { getGuildLanguage } = require('@functions/utils/getGuildLanguage');
 
 async function getLocalizedText(interaction) {
-	const serverLocaleSchema = interaction.client.models.get('serverLocale');
-	const guildId = interaction.guild
-		? interaction.guild.id
-		: interaction.user.id;
+	const localeSchema = interaction.client.models.get('serverLocale');
+	const id = interaction.guild ? interaction.guild.id : interaction.user.id;
 
-	const userLanguageCode = await getGuildLanguage(guildId, serverLocaleSchema);
+	const localeCode = await getGuildLanguage(id, localeSchema);
 
-	return interaction.client.languages.get(userLanguageCode);
+	return interaction.client.languages.get(localeCode);
 }
 module.exports = { getLocalizedText };

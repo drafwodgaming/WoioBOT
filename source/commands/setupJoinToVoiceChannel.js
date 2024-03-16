@@ -2,15 +2,9 @@ const {
 	SlashCommandBuilder,
 	ChannelType,
 	PermissionFlagsBits,
-	ChatInputCommandInteraction,
 } = require('discord.js');
 const { getColor } = require('@functions/utils/getColor');
-const {
-	updateRecordField,
-} = require('@functions/utils/database/updateRecordField');
-const {
-	deleteRecordField,
-} = require('@functions/utils/database/deleteRecordField');
+
 const emojis = require('@config/emojis.json');
 const en = require('@config/languages/en.json');
 const ru = require('@config/languages/ru.json');
@@ -59,9 +53,6 @@ module.exports = {
 		)
 		.setDMPermission(false),
 
-	/**
-	 * @param {ChatInputCommandInteraction} interaction
-	 */
 	async execute(interaction) {
 		const { guild, options } = interaction;
 		const localizedText = await getLocalizedText(interaction);
@@ -73,48 +64,42 @@ module.exports = {
 				editBlueColor: getColor('editBlue'),
 				errorRedColor: getColor('errorRed'),
 			};
-
-		const interactionChannel = options.getChannel(
-			en.commands.options.channelOption
-		);
-
-		const interactionGuildId = guild.id;
 		const warningEmoji = emojis.goldWarning;
 
 		const joinToCreateSchema = interaction.client.models.get('joinToCreate');
+
+		const guildId = guild.id;
+		const channelOption = options.getChannel(en.commands.options.channelOption);
 
 		let responseEmbed;
 		let description;
 
 		switch (subCommand) {
 			case en.commands.subcommands.setup:
-				const updateData = await updateRecordField(
-					joinToCreateSchema,
-					{ guildId: interactionGuildId },
-					{ $set: { channelId: interactionChannel.id } }
+				const updateData = await joinToCreateSchema.findOneAndUpdate(
+					{ guildId },
+					{ $set: { channelId: channelOption.id } },
+					{ upsert: true }
 				);
 
 				description = updateData
 					? mustache.render(
 							localizedText.commands.joinToCreateChannel.editedChannel,
-							{ channelId: interactionChannel.id }
+							{ channelId: channelOption.id }
 					  )
 					: mustache.render(
 							localizedText.commands.joinToCreateChannel.installedChannel,
-							{ channelId: interactionChannel.id }
+							{ channelId: channelOption.id }
 					  );
-
 				responseEmbed = {
 					color: updateData ? editBlueColor : installGreenColor,
 					description,
 				};
 				break;
-
 			case en.commands.subcommands.disable:
-				const deletedData = await deleteRecordField(joinToCreateSchema, {
-					guildId: interactionGuildId,
+				const deletedData = await joinToCreateSchema.findOneAndDelete({
+					guildId,
 				});
-
 				description = deletedData
 					? mustache.render(
 							localizedText.commands.joinToCreateChannel.deletedChannel
@@ -123,16 +108,12 @@ module.exports = {
 							localizedText.commands.joinToCreateChannel.noChannel,
 							{ warningEmoji }
 					  );
-
 				responseEmbed = {
 					color: deletedData ? errorRedColor : defaultBotColor,
 					description,
 				};
 				break;
 		}
-		await interaction.reply({
-			embeds: [responseEmbed],
-			ephemeral: true,
-		});
+		await interaction.reply({ embeds: [responseEmbed], ephemeral: true });
 	},
 };

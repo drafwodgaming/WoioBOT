@@ -8,10 +8,11 @@
 			},
 			"searchActivity": {
 				"description": "Пошук існуючих активностей на сервері",
-				"nameSearchLabel": "Назва: {{name}}",
-				"descriptionSearchLabel": "Опис: {{description}}",
+				"nameLabel": "Назва: {{name}}",
+				"descriptionLabel": "Опис: {{description}}",
 				"playersCountLabel": "Гравці: {{{playersInfo}}}",
-				"activityLinksTitle": "Посилання на активності"
+				"title": "Посилання на активності",
+				"noActivities": "{{{warningEmoji}}} **No activities found**"
 			}
 		},
 		"help": {
@@ -60,15 +61,15 @@
 			"joinedTime": "{{{memberJoinedTime}}}",
 			"memberRoles": "Ролі",
 			"emptyRolesList": "Немає ролей",
-			"online": "В мережi",
-			"idle": "Відійшов",
-			"offline": "Не в мережі",
-			"dnd": "Не турбувати"
+			"online": "{{onlineEmoji}} В мережi",
+			"idle": "{{idleEmoji}} Відійшов",
+			"offline": "{{offlineEmoji}} Не в мережі",
+			"dnd": "{{dndEmoji}} Не турбувати"
 		},
 		"welcomeChannel": {
 			"editedChannel": "Канал для привітання змінено на <#{{channelId}}>",
 			"installedChannel": "Канал для привітання встановлено на <#{{channelId}}>. Для відключення введіть /welcomechannel disable",
-			"noChannel": "{{{warningEmoji}}} Канал для привітання ще не встановлено",
+			"noChannel": "{{{warningEmoji}}} **Канал для привітання ще не встановлено**",
 			"deletedChannel": "Канал для вітання видалено",
 			"selectChannel": "Виберіть канал для привітальних повідомлень",
 			"setupChannel": "Встановіть канал для привітальних повідомлень",
@@ -78,7 +79,7 @@
 		"leaveChannel": {
 			"editedChannel": "Канал для прощання змінено на <#{{channelId}}>",
 			"installedChannel": "Канал для прощання встановлено на <#{{channelId}}>. Для відключення введіть /leavechannel disable",
-			"noChannel": "{{{warningEmoji}}} Канал для прощання ще не встановлено",
+			"noChannel": "{{{warningEmoji}}} **Канал для прощання ще не встановлено**",
 			"deletedChannel": "Канал для прощання видалено",
 			"selectChannel": "Виберіть канал для прощальних повідомлень",
 			"setupChannel": "Встановіть канал для прощальних повідомлень",
@@ -88,7 +89,7 @@
 		"joinToCreateChannel": {
 			"editedChannel": "Канал \"Join To Create\" змінено на <#{{channelId}}>",
 			"installedChannel": "Канал \"Join To Create\" встановлено на <#{{channelId}}>. Для відключення введіть /jointocreate disable",
-			"noChannel": "{{{warningEmoji}}} Канал \"Join To Create\" ще не встановлено",
+			"noChannel": "{{{warningEmoji}}} **Канал \"Join To Create\" ще не встановлено**",
 			"deletedChannel": "Канал \"Join To Create\" видалено",
 			"selectChannel": "Виберіть канал \"Join To Create\"",
 			"setupChannel": "Встановіть канал \"Join To Create\"",

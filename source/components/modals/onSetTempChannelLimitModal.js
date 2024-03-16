@@ -1,8 +1,5 @@
 const { modals } = require('@config/componentsId.json');
 const { getLocalizedText } = require('@source/functions/locale/getLocale');
-const {
-	updateRecordField,
-} = require('@functions/utils/database/updateRecordField');
 
 module.exports = {
 	data: {
@@ -28,10 +25,10 @@ module.exports = {
 		const guildId = interaction.guild.id;
 		const memberId = interaction.user.id;
 
-		const updatedChannel = await updateRecordField(
-			temporaryChannelsSchema,
+		const updatedChannel = await temporaryChannelsSchema.findOneAndUpdate(
 			{ guildId, creatorId: memberId },
-			{ $set: { userLimit: newUserLimit } }
+			{ $set: { userLimit: newUserLimit } },
+			{ upsert: true }
 		);
 
 		if (updatedChannel) {

@@ -4,9 +4,6 @@ const { getLocalizedText } = require('@functions/locale/getLocale');
 const {
 	generateActivityEmbed,
 } = require('@functions/embeds/generateActivityEmbed');
-const {
-	updateRecordField,
-} = require('@functions/utils/database/updateRecordField');
 const { getColor } = require('@functions/utils/getColor');
 
 module.exports = {
@@ -66,9 +63,8 @@ module.exports = {
 		});
 
 		await interaction.fetchReply().then(async reply => {
-			const activitySchema = interaction.client.models.get('activity');
-			await updateRecordField(
-				activitySchema,
+			const activityModel = interaction.client.models.get('activity');
+			await activityModel.findOneAndUpdate(
 				{ ownerId: interaction.user.id },
 				{
 					$set: {
@@ -79,7 +75,8 @@ module.exports = {
 						guildId: interaction.guild.id,
 						channelId: interaction.channel.id,
 					},
-				}
+				},
+				{ upsert: true }
 			);
 		});
 	},

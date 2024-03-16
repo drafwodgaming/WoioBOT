@@ -1,7 +1,4 @@
 const { buttons } = require('@config/componentsId.json');
-const {
-	deleteRecordField,
-} = require('@functions/utils/database/deleteRecordField');
 const { getLocalizedText } = require('@functions/locale/getLocale');
 const mustache = require('mustache');
 const {
@@ -41,7 +38,7 @@ module.exports = {
 		setTimeout(async () => {
 			await message.delete();
 
-			await deleteRecordField(activitySchema, { messageId: message.id });
+			await activitySchema.findOneAndDelete({ messageId: message.id });
 		}, 10000);
 
 		await interaction.reply({

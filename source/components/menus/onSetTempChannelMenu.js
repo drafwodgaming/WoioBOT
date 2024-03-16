@@ -9,8 +9,11 @@ const {
 	settingsTempChannel,
 } = require('@functions/menus/setUpSettingsTempChannels');
 const {
-	handleLockUnlock,
-} = require('@source/functions/utils/handleLockUnlock');
+	lockChannel,
+} = require('@source/functions/utils/JTCSystem/lockChannel');
+const {
+	unlockChannel,
+} = require('@source/functions/utils/JTCSystem/unlockChannel');
 const { getLocalizedText } = require('@source/functions/locale/getLocale');
 
 module.exports = {
@@ -49,10 +52,18 @@ module.exports = {
 					);
 					break;
 				case menus.values.tempChannelLock:
-					await handleLockUnlock(interaction, false);
+					await lockChannel(
+						interaction,
+						temporaryChannelsSchema,
+						localizedText
+					);
 					break;
 				case menus.values.tempChannelUnlock:
-					await handleLockUnlock(interaction, true);
+					await unlockChannel(
+						interaction,
+						temporaryChannelsSchema,
+						localizedText
+					);
 					break;
 			}
 

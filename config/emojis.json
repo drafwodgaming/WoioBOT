@@ -17,5 +17,12 @@
 
 	"russianFlag": "<:russiaFlag:1191242997401137233>",
 	"ukraineFlag": "<:ukraineFlag:1191242995836669982>",
-	"englishFlag": "<:englandFlag:1191242993089388554>"
+	"englishFlag": "<:englandFlag:1191242993089388554>",
+
+	"online": "🟢",
+	"idle": "🟡",
+	"dnd": "🔴",
+	"offline": "⚫",
+	"invisible": "⚫",
+	"unknown": "❓"
 }

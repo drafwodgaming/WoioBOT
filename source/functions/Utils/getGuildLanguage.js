@@ -1,9 +1,9 @@
-async function getGuildLanguage(guildId, serverLocaleModel) {
+async function getGuildLanguage(guildId, localeModel) {
 	const defaultLanguage = 'en';
 
-	const serverDoc = await serverLocaleModel.findOne({ guildId });
+	const localeDoc = await localeModel.findOne({ guildId });
 
-	return serverDoc ? serverDoc.language : defaultLanguage;
+	return localeDoc?.language || defaultLanguage;
 }
 
 module.exports = { getGuildLanguage };

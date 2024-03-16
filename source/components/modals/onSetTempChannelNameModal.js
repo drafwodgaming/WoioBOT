@@ -1,8 +1,5 @@
 const { modals } = require('@config/componentsId.json');
 const { getLocalizedText } = require('@source/functions/locale/getLocale');
-const {
-	updateRecordField,
-} = require('@functions/utils/database/updateRecordField');
 
 module.exports = {
 	data: {
@@ -29,15 +26,15 @@ module.exports = {
 		const durationInMinutes = 5;
 		const futureTime = Date.now() + durationInMinutes * 60 * 1000;
 
-		const updatedChannel = await updateRecordField(
-			temporaryChannelsSchema,
+		const updatedChannel = await temporaryChannelsSchema.findOneAndUpdate(
 			{ guildId, creatorId: memberId },
 			{
 				$set: {
 					channelName: newChannelName,
 					renameTime: futureTime,
 				},
-			}
+			},
+			{ upsert: true }
 		);
 
 		if (existingChannel && existingChannel.renameTime > Date.now()) {

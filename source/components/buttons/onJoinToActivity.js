@@ -1,7 +1,4 @@
 const { buttons } = require('@config/componentsId.json');
-const {
-	updateRecordField,
-} = require('@functions/utils/database/updateRecordField');
 const { getLocalizedText } = require('@functions/locale/getLocale');
 const {
 	editActivityMessage,
@@ -13,55 +10,50 @@ module.exports = {
 	},
 	async execute(interaction) {
 		const { user, message } = interaction;
-
-		const localizedText = await getLocalizedText(interaction);
-		const languageConfig =
-			localizedText.components.buttons.activity.joinToActivity;
-
-		const activitySchema = interaction.client.models.get('activity');
-		const activityRecord = await activitySchema.findOne({
+		const localeText = await getLocalizedText(interaction);
+		const langConfig = localeText.components.buttons.activity.joinToActivity;
+		const activityModel = interaction.client.models.get('activity');
+		const activityRecord = await activityModel.findOne({
 			messageId: message.id,
 		});
 
-		if (!activityRecord)
+		if (!activityRecord) {
 			return interaction.reply({
-				content: languageConfig.deletedActivity,
+				content: langConfig.deletedActivity,
 				ephemeral: true,
 			});
+		}
 
-		const acceptedPlayer = user.id;
-
-		const isUserInGroup =
-			activityRecord.acceptedPlayers.includes(acceptedPlayer);
-		const isOwner = activityRecord.ownerId === acceptedPlayer;
+		const playerId = user.id;
+		const isPlayerInGroup = activityRecord.acceptedPlayers.includes(playerId);
+		const isOwner = activityRecord.ownerId === playerId;
 		const isGroupFull =
 			activityRecord.acceptedPlayers.length === activityRecord.maxPlayersCount;
 
-		if (isUserInGroup || isOwner)
+		if (isPlayerInGroup || isOwner) {
+			const replyContent = isOwner
+				? langConfig.ownerCannotJoin
+				: langConfig.alreadyInGroup;
+			return interaction.reply({ content: replyContent, ephemeral: true });
+		}
+
+		if (isGroupFull) {
 			return interaction.reply({
-				content: isOwner
-					? languageConfig.ownerCannotJoin
-					: languageConfig.alreadyInGroup,
+				content: langConfig.groupFull,
 				ephemeral: true,
 			});
+		}
 
-		if (isGroupFull)
-			return interaction.reply({
-				content: languageConfig.groupFull,
-				ephemeral: true,
-			});
-
-		const updatedEvent = await updateRecordField(
-			activitySchema,
+		const updatedEvent = await activityModel.findOneAndUpdate(
 			{ messageId: message.id },
-			{ $push: { acceptedPlayers: acceptedPlayer } },
-			{ new: true }
+			{ $push: { acceptedPlayers: playerId } },
+			{ upsert: true, new: true }
 		);
 
-		await editActivityMessage(interaction, updatedEvent, localizedText, false);
+		await editActivityMessage(interaction, updatedEvent, localeText, false);
 
 		await interaction.reply({
-			content: languageConfig.successJoinToActivity,
+			content: langConfig.successJoinToActivity,
 			ephemeral: true,
 		});
 	},

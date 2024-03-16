@@ -7,6 +7,7 @@ const temporaryChannels = new Schema({
 	channelName: { type: String, required: true },
 	userLimit: { type: Number },
 	renameTime: { type: Number, default: 0 },
+	isLocked: { type: Boolean, default: false },
 });
 
 module.exports = model('temporarychannels', temporaryChannels);

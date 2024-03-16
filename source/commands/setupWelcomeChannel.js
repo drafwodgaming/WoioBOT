@@ -5,12 +5,6 @@ const {
 	ChatInputCommandInteraction,
 } = require('discord.js');
 const { getColor } = require('@functions/utils/getColor');
-const {
-	updateRecordField,
-} = require('@functions/utils/database/updateRecordField');
-const {
-	deleteRecordField,
-} = require('@functions/utils/database/deleteRecordField');
 const emojis = require('@config/emojis.json');
 const en = require('@config/languages/en.json');
 const ru = require('@config/languages/ru.json');
@@ -74,42 +68,32 @@ module.exports = {
 				errorRedColor: getColor('errorRed'),
 			};
 
-		const interactionChannel = options.getChannel(
-			en.commands.options.channelOption
-		);
-		const interactionGuildId = guild.id;
+		const channelOption = options.getChannel(en.commands.options.channelOption);
+		const guildId = guild.id;
 		const warningEmoji = emojis.goldWarning;
 
 		const welcomeChannelSchema =
 			interaction.client.models.get('welcomeChannel');
-
-		const noChannelMessage = mustache.render(
-			localizedText.commands.welcomeChannel.noChannel,
-			{ warningEmoji }
-		);
-		const deletedChannelMessage = mustache.render(
-			localizedText.commands.welcomeChannel.deletedChannel
-		);
 
 		let responseEmbed;
 		let description;
 
 		switch (subCommand) {
 			case en.commands.subcommands.setup:
-				const updateData = await updateRecordField(
-					welcomeChannelSchema,
-					{ guildId: interactionGuildId },
-					{ $set: { channelId: interactionChannel.id } }
+				const updateData = await welcomeChannelSchema.findOneAndUpdate(
+					{ guildId },
+					{ $set: { channelId: channelOption.id } },
+					{ upsert: true }
 				);
 
 				description = updateData
 					? mustache.render(
 							localizedText.commands.welcomeChannel.editedChannel,
-							{ channelId: interactionChannel.id }
+							{ channelId: channelOption.id }
 					  )
 					: mustache.render(
 							localizedText.commands.welcomeChannel.installedChannel,
-							{ channelId: interactionChannel.id }
+							{ channelId: channelOption.id }
 					  );
 
 				responseEmbed = {
@@ -119,8 +103,8 @@ module.exports = {
 				break;
 
 			case en.commands.subcommands.disable:
-				const deletedData = await deleteRecordField(welcomeChannelSchema, {
-					guildId: interactionGuildId,
+				const deletedData = await welcomeChannelSchema.findOneAndDelete({
+					guildId,
 				});
 
 				description = deletedData

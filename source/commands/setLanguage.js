@@ -11,9 +11,6 @@ const mustache = require('mustache');
 const { getLocalizedText } = require('@source/functions/locale/getLocale');
 const { getLanguageName } = require('@functions/utils/getLanguageName');
 const { getLanguageFlag } = require('@functions/utils/getLanguageFlag');
-const {
-	updateRecordField,
-} = require('@functions/utils/database/updateRecordField');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -23,7 +20,6 @@ module.exports = {
 			ru: ru.commands.language.description,
 			uk: uk.commands.language.description,
 		})
-
 		.setDMPermission(false)
 		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
 		.addSubcommand(subcommand =>
@@ -53,35 +49,34 @@ module.exports = {
 		.setDMPermission(false),
 
 	/**
-	 * @param {ChatInputCommandInteraction} interaction
+	 * Sets the language of a guild.
+	 * @param {ChatInputCommandInteraction} interaction - The interaction instance.
 	 */
 	async execute(interaction) {
 		const { guild, options } = interaction;
 		const subCommand = options.getSubcommand();
-		const interactionLocale = options.getString(
+		const selectedLocale = options.getString(
 			en.commands.options.languageOption
 		);
-		const interactionGuildId = guild.id;
-		const languageName = getLanguageName(interactionLocale);
-		const languageFlag = getLanguageFlag(interactionLocale);
-		const serverLocaleSchema = interaction.client.models.get('serverLocale');
-		let responseContent;
+		const guildId = guild.id;
 
-		switch (subCommand) {
-			case en.commands.subcommands.setLanguage:
-				await updateRecordField(
-					serverLocaleSchema,
-					{ guildId: interactionGuildId },
-					{ $set: { language: interactionLocale } }
-				);
+		if (subCommand !== en.commands.subcommands.setLanguage) return;
 
-				const localizedText = await getLocalizedText(interaction);
-				responseContent = mustache.render(
-					localizedText.commands.language.languageUpdated,
-					{ flag: languageFlag, language: languageName }
-				);
-				break;
-		}
+		const localeSchema = interaction.client.models.get('serverLocale');
+		await localeSchema.updateOne(
+			{ guildId },
+			{ $set: { language: selectedLocale } },
+			{ upsert: true }
+		);
+
+		const localizedText = await getLocalizedText(interaction);
+		const languageName = getLanguageName(selectedLocale);
+		const languageFlag = getLanguageFlag(selectedLocale);
+
+		const responseContent = mustache.render(
+			localizedText.commands.language.languageUpdated,
+			{ flag: languageFlag, language: languageName }
+		);
 
 		await interaction.reply({
 			content: responseContent,

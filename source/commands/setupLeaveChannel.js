@@ -5,12 +5,6 @@ const {
 	ChatInputCommandInteraction,
 } = require('discord.js');
 const { getColor } = require('@functions/utils/getColor');
-const {
-	updateRecordField,
-} = require('@functions/utils/database/updateRecordField');
-const {
-	deleteRecordField,
-} = require('@functions/utils/database/deleteRecordField');
 const emojis = require('@config/emojis.json');
 const en = require('@config/languages/en.json');
 const ru = require('@config/languages/ru.json');
@@ -74,11 +68,9 @@ module.exports = {
 				errorRedColor: getColor('errorRed'),
 			};
 
-		const interactionChannel = options.getChannel(
-			en.commands.options.channelOption
-		);
+		const channelOption = options.getChannel(en.commands.options.channelOption);
 
-		const interactionGuildId = guild.id;
+		const guildId = guild.id;
 		const warningEmoji = emojis.goldWarning;
 
 		const leaveChannelSchema = interaction.client.models.get('leaveChannel');
@@ -88,19 +80,19 @@ module.exports = {
 
 		switch (subCommand) {
 			case en.commands.subcommands.setup:
-				const updateData = await updateRecordField(
-					leaveChannelSchema,
-					{ guildId: interactionGuildId },
-					{ $set: { channelId: interactionChannel.id } }
+				const updateData = await leaveChannelSchema.findOneAndUpdate(
+					{ guildId },
+					{ $set: { channelId: channelOption.id } },
+					{ upsert: true }
 				);
 
 				description = updateData
 					? mustache.render(localizedText.commands.leaveChannel.editedChannel, {
-							channelId: interactionChannel.id,
+							channelId: channelOption.id,
 					  })
 					: mustache.render(
 							localizedText.commands.leaveChannel.installedChannel,
-							{ channelId: interactionChannel.id }
+							{ channelId: channelOption.id }
 					  );
 
 				responseEmbed = {
@@ -110,8 +102,8 @@ module.exports = {
 				break;
 
 			case en.commands.subcommands.disable:
-				const deletedData = await deleteRecordField(leaveChannelSchema, {
-					guildId: interactionGuildId,
+				const deletedData = await leaveChannelSchema.findOneAndDelete({
+					guildId,
 				});
 
 				description = deletedData
