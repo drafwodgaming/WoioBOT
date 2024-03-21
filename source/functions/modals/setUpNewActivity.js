@@ -7,7 +7,7 @@ const {
 const { modals } = require('@config/componentsId.json');
 const { getLocalizedText } = require('@source/functions/locale/getLocale');
 
-async function createNewActivityModal(interaction) {
+async function createNewActivityModal(interaction, roles) {
 	const localizedText = await getLocalizedText(interaction);
 
 	const componentsData = [
@@ -44,6 +44,15 @@ async function createNewActivityModal(interaction) {
 			minLength: 1,
 			maxLength: 1,
 		},
+		{
+			id: modals.roleId,
+			label: localizedText.components.modals.newActivity.activityPingRole.label,
+			style: TextInputStyle.Short,
+			placeholder: '',
+			minLength: 1,
+			maxLength: 1000,
+			value: roles.id,
+		},
 	];
 
 	const newActivityModal = new ModalBuilder()
@@ -51,14 +60,16 @@ async function createNewActivityModal(interaction) {
 		.setTitle(localizedText.components.modals.newActivity.title);
 
 	componentsData.forEach(
-		({ id, label, style, placeholder, minLength, maxLength }) => {
+		({ id, label, style, placeholder, minLength, maxLength, value }) => {
 			const inputField = new TextInputBuilder()
 				.setCustomId(id)
 				.setLabel(label)
 				.setStyle(style)
-				.setPlaceholder(placeholder)
+				.setPlaceholder(placeholder || '')
 				.setMinLength(minLength)
 				.setMaxLength(maxLength);
+
+			if (value !== undefined) inputField.setValue(value);
 
 			const row = new ActionRowBuilder().addComponents(inputField);
 			newActivityModal.addComponents(row);

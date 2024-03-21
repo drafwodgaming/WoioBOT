@@ -5,8 +5,7 @@ function serverRulesEmbed() {
 	const politeColor = getColor('rules.politeColor');
 	const noSpamColor = getColor('rules.noSpamColor');
 	const personalDataColor = getColor('rules.personalDataColor');
-	const adultContentColor = getColor('rules.adultContentColor');
-	const streamingBehaviorColor = getColor('rules.streamingBehaviorColor');
+	const gameRoleColor = getColor('rules.gameRoleColor');
 	const reportToUsColor = getColor('rules.reportToUsColor');
 
 	const rules = [
@@ -26,15 +25,9 @@ function serverRulesEmbed() {
 			description: ru.myServer.embeds.serverRules.personalDataEmbed.description,
 		},
 		{
-			color: adultContentColor,
-			title: ru.myServer.embeds.serverRules.adultContentEmbed.title,
-			description: ru.myServer.embeds.serverRules.adultContentEmbed.description,
-		},
-		{
-			color: streamingBehaviorColor,
-			title: ru.myServer.embeds.serverRules.streamingBehaviorEmbed.title,
-			description:
-				ru.myServer.embeds.serverRules.streamingBehaviorEmbed.description,
+			color: gameRoleColor,
+			title: ru.myServer.embeds.serverRules.gameCommunity.title,
+			description: ru.myServer.embeds.serverRules.gameCommunity.description,
 		},
 		{
 			color: reportToUsColor,

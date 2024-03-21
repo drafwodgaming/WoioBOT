@@ -103,29 +103,6 @@
 	},
 	"components": {
 		"modals": {
-			"bugReport": {
-				"title": "ПОШУК БАГІВ",
-				"reportSent": "Ваш звіт успішно відправлено розробнику",
-				"userReport": {
-					"reportFrom": "Репорт от {{userId}}",
-					"reportDetails": {
-						"title": "Ваш звіт про баг",
-						"description": "Дякуємо вам за надсилання звіту про помилку! Ось деталі:"
-					},
-					"userId": "ID користувача",
-					"reportId": "ID звіту",
-					"reportTitle": "Баг",
-					"reportDescription": "Опис"
-				},
-				"reportTitleInput": {
-					"label": "Причина відправки звіту",
-					"placeholder": "Введіть опис знайденої помилки"
-				},
-				"reportDescriptionInput": {
-					"label": "Докладний опис проблеми",
-					"placeholder": "Будь ласка, надайте докладний опис того, що некоректно працює у бота"
-				}
-			},
 			"setNameTempChannel": {
 				"title": "Змінити ім'я каналу",
 				"label": "Введіть нове ім'я каналу",
@@ -155,7 +132,10 @@
 					"placeholder": "Від 1 до 9",
 					"invalidNumberMessage": "Будь ласка, введіть правильне число для поля кількості учасників"
 				},
-
+				"activityPingRole": {
+					"label": "Role",
+					"roleNotFoundMessage": "{{{warningEmoji}}} Роль на сервере не найдена"
+				},
 				"activityInfo": {
 					"playersField": "Учасники",
 					"creatorField": "Творець"
@@ -210,7 +190,7 @@
 					"ownerCannotLeave": "Творець не може вийти з активності. Спочатку її потрібно закрити"
 				},
 				"groupReady": {
-					"name": "{{{acceptedPlayers}}} группа готова",
+					"name": "Группа готова",
 					"pingPlayers": "Група {{{acceptedPlayers}}} готова!",
 					"deleteAfterTime": "Видалення <t:{{deletionTimestampInSeconds}}:R>",
 					"ownerOnly": "Ця дія доступна лише власнику активності"

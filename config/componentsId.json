@@ -11,7 +11,8 @@
 		"newActivity": "newActivity",
 		"activityTitle": "activityTitle",
 		"activityDescription": "activityDescription",
-		"activityPlayersCount": "activityPlayersCount"
+		"activityPlayersCount": "activityPlayersCount",
+		"roleId": "roleId"
 	},
 	"menus": {
 		"settingTempChannel": "settingTempChannel",

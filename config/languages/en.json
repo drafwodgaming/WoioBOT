@@ -122,29 +122,6 @@
 	},
 	"components": {
 		"modals": {
-			"bugReport": {
-				"title": "BUG FINDER",
-				"reportSent": "Your report has been successfully sent to the developer",
-				"userReport": {
-					"reportFrom": "Bug Report From {{userId}}",
-					"reportDetails": {
-						"title": "Your Bug Report",
-						"description": "Thank you for submitting a bug report! Here are the details:"
-					},
-					"userId": "User ID",
-					"reportId": "Report ID",
-					"reportTitle": "Bug",
-					"reportDescription": "Description"
-				},
-				"reportTitleInput": {
-					"label": "Reason for reporting bug",
-					"placeholder": "Enter the discovered issue"
-				},
-				"reportDescriptionInput": {
-					"label": "Detailed description of the problem",
-					"placeholder": "Please provide a detailed description of what is not working correctly with the bot"
-				}
-			},
 			"setNameTempChannel": {
 				"title": "Change Channel Name",
 				"label": "Enter the new channel name",
@@ -173,6 +150,10 @@
 					"label": "Number of participants for search",
 					"placeholder": "From 1 to 9",
 					"invalidNumberMessage": "Please enter a valid number for the participant count field"
+				},
+				"activityPingRole": {
+					"label": "Role",
+					"roleNotFoundMessage": "{{{warningEmoji}}} Role not found"
 				},
 				"activityInfo": {
 					"playersField": "Participants",

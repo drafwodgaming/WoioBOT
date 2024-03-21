@@ -30,6 +30,10 @@ const activitySchema = new Schema({
 		type: String,
 		required: true,
 	},
+	roleId: {
+		type: String,
+		required: true,
+	},
 });
 
 module.exports = model('Activity', activitySchema);

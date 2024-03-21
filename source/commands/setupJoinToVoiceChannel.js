@@ -64,7 +64,7 @@ module.exports = {
 				editBlueColor: getColor('editBlue'),
 				errorRedColor: getColor('errorRed'),
 			};
-		const warningEmoji = emojis.goldWarning;
+		const warningEmoji = emojis.warning;
 
 		const joinToCreateSchema = interaction.client.models.get('joinToCreate');
 

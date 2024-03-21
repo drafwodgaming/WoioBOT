@@ -71,7 +71,7 @@ module.exports = {
 		const channelOption = options.getChannel(en.commands.options.channelOption);
 
 		const guildId = guild.id;
-		const warningEmoji = emojis.goldWarning;
+		const warningEmoji = emojis.warning;
 
 		const leaveChannelSchema = interaction.client.models.get('leaveChannel');
 

@@ -5,6 +5,8 @@ const {
 	generateActivityEmbed,
 } = require('@functions/embeds/generateActivityEmbed');
 const { getColor } = require('@functions/utils/getColor');
+const emojis = require('@config/emojis.json');
+const mustache = require('mustache');
 
 module.exports = {
 	data: {
@@ -12,7 +14,8 @@ module.exports = {
 	},
 	async execute(interaction) {
 		const { fields } = interaction;
-		const { activityTitle, activityDescription, activityPlayersCount } = modals;
+		const { activityTitle, activityDescription, activityPlayersCount, roleId } =
+			modals;
 
 		const localizedText = await getLocalizedText(interaction);
 
@@ -23,7 +26,24 @@ module.exports = {
 				fields.getTextInputValue(activityPlayersCount),
 				10
 			),
+			role: fields.getTextInputValue(roleId).trim(),
 		};
+
+		await interaction.guild.roles.fetch();
+		const role = interaction.guild.roles.cache.get(activityData.role);
+
+		if (!role)
+			return interaction.reply({
+				content:
+					localizedText.components.modals.newActivity.activityPingRole
+						.roleNotFoundMessage,
+				ephemeral: true,
+			});
+
+		const pingRole =
+			role.name === '@everyone' || role.name === '@here'
+				? role.name
+				: `<@&${role.id}>`;
 
 		const colorActivity = getColor('activity.redColor');
 
@@ -58,6 +78,7 @@ module.exports = {
 		);
 
 		await interaction.reply({
+			content: pingRole,
 			embeds: [embed],
 			components: [await activityButtons(interaction, true)],
 		});
@@ -74,6 +95,7 @@ module.exports = {
 						messageId: reply.id,
 						guildId: interaction.guild.id,
 						channelId: interaction.channel.id,
+						roleId: role.id,
 					},
 				},
 				{ upsert: true }

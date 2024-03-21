@@ -70,7 +70,7 @@ module.exports = {
 
 		const channelOption = options.getChannel(en.commands.options.channelOption);
 		const guildId = guild.id;
-		const warningEmoji = emojis.goldWarning;
+		const warningEmoji = emojis.warning;
 
 		const welcomeChannelSchema =
 			interaction.client.models.get('welcomeChannel');

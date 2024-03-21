@@ -31,6 +31,12 @@ module.exports = {
 					ru: ru.commands.activity.newActivity.description,
 					uk: uk.commands.activity.newActivity.description,
 				})
+				.addRoleOption(option =>
+					option
+						.setName('roles')
+						.setDescription('Select roles for the activity.')
+						.setRequired(true)
+				)
 		)
 		.addSubcommand(subcommand =>
 			subcommand
@@ -44,6 +50,8 @@ module.exports = {
 	async execute(interaction) {
 		const subCommand = interaction.options.getSubcommand();
 		const localizedText = await getLocalizedText(interaction);
+		const roleId = interaction.options.getRole('roles');
+
 		const linksColor = getColor('linksBlue');
 		const defaultBotColor = getColor('default');
 		const warningEmoji = emojis.goldWarning;
@@ -51,7 +59,7 @@ module.exports = {
 
 		switch (subCommand) {
 			case en.commands.subcommands.newActivity:
-				const modal = await createNewActivityModal(interaction);
+				const modal = await createNewActivityModal(interaction, roleId);
 				return await interaction.showModal(modal);
 			case en.commands.subcommands.searchActivity:
 				const activitySchema = interaction.client.models.get('activity');
