@@ -5,8 +5,6 @@ const {
 	generateActivityEmbed,
 } = require('@functions/embeds/generateActivityEmbed');
 const { getColor } = require('@functions/utils/getColor');
-const emojis = require('@config/emojis.json');
-const mustache = require('mustache');
 
 module.exports = {
 	data: {

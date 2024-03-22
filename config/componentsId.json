@@ -24,8 +24,7 @@
 		}
 	},
 	"buttons": {
-		"fixedButton": "fixedButton",
-		"rejectedButton": "rejectedButton",
+		"sendReport": "sendReport",
 		"rulesButton": "rulesButton",
 		"joinToActivityButton": "joinToActivityButton",
 		"leaveFromActivityButton": "leaveFromActivityButton",

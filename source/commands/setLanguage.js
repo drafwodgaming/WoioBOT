@@ -8,7 +8,7 @@ const ru = require('@config/languages/ru.json');
 const uk = require('@config/languages/uk.json');
 const mustache = require('mustache');
 
-const { getLocalizedText } = require('@source/functions/locale/getLocale');
+const { getLocalizedText } = require('@functions/locale/getLocale');
 const { getLanguageName } = require('@functions/utils/getLanguageName');
 const { getLanguageFlag } = require('@functions/utils/getLanguageFlag');
 

@@ -2,7 +2,7 @@ const { StringSelectMenuBuilder, ActionRowBuilder } = require('discord.js');
 const emojis = require('@config/emojis.json');
 const { menus } = require('@config/componentsId.json');
 const { createOption } = require('@functions/utils/createSelectMenuOption');
-const { getLocalizedText } = require('@source/functions/locale/getLocale');
+const { getLocalizedText } = require('@functions/locale/getLocale');
 
 async function settingsTempChannel(interaction) {
 	const selectorId = menus.settingTempChannel;

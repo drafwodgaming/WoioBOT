@@ -4,7 +4,8 @@
 		"activity": {
 			"description": "Управление активностями",
 			"newActivity": {
-				"description": "Создание новой активности"
+				"description": "Создание новой активности",
+				"selectPingRole": "Выбери роль"
 			},
 			"searchActivity": {
 				"description": "Поиск существующих активностей на сервере",
@@ -96,9 +97,19 @@
 			"disableChannel": "Отключить канал \"Join To Create\"",
 			"channelOption": "Установить канал \"Join To Create\""
 		},
-		"bugReport": {
-			"description": "Сообщить о баге",
-			"reportExists": "Вы уже отправили отчёт об ошибке"
+		"report": {
+			"description": "Напищи сообщению создателю бота",
+			"typeDescription": "Выбери тип",
+			"reportDescription": "Опиши свю ошибку или предложение",
+			"bugTitle": "{{{bug}}} | Ошибка",
+			"suggestionTitle": "{{{suggestion}}} | Предложение",
+			"otherTitle": "{{{other}}} | Другое",
+			"reportBy": "Репорт отправил {{user}} (Сервер: {{guild}})",
+			"succesSendReport": "Репорт успешно отправлен",
+			"fields": {
+				"description": "Описание"
+			},
+			"preview": "Предпросмотр репорта"
 		}
 	},
 	"components": {
@@ -167,10 +178,10 @@
 			}
 		},
 		"buttons": {
-			"bugReport": {
-				"fixedBug": {
-					"name": "Исправить",
-					"succesFix": "Ваш отчет об ошибке был решен. Спасибо за помощь в улучшении!"
+			"report": {
+				"sendReport": {
+					"name": "Отправить репорт",
+					"successSent": "Репорт был отправлен"
 				}
 			},
 			"activity": {

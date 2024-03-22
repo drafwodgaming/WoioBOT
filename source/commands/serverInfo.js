@@ -1,11 +1,11 @@
 const { SlashCommandBuilder, ChannelType, bold } = require('discord.js');
 const mustache = require('mustache');
-const { getColor } = require('@source/functions/utils/getColor');
+const { getColor } = require('@functions/utils/getColor');
 const en = require('@config/languages/en.json');
 const ru = require('@config/languages/ru.json');
 const uk = require('@config/languages/uk.json');
 const emojis = require('@config/emojis.json');
-const { getLocalizedText } = require('@source/functions/locale/getLocale');
+const { getLocalizedText } = require('@functions/locale/getLocale');
 
 module.exports = {
 	data: new SlashCommandBuilder()

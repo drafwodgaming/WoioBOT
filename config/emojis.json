@@ -13,8 +13,6 @@
 	"stage": "<:stage:1190840226936016906>",
 	"forum": "<:forum:1190840225405087885>",
 
-	"crown": "<:crown:1191023284117061682>",
-
 	"russianFlag": "<:russiaFlag:1191242997401137233>",
 	"ukraineFlag": "<:ukraineFlag:1191242995836669982>",
 	"englishFlag": "<:englandFlag:1191242993089388554>",
@@ -24,5 +22,9 @@
 	"dnd": "🔴",
 	"offline": "⚫",
 	"invisible": "⚫",
-	"unknown": "❓"
+	"unknown": "❓",
+
+	"bug": "<:bug:1220489594257018960>",
+	"suggestion": "<:suggestion:1220630141747724401>",
+	"other": "<:other:1220637133119688734>"
 }

@@ -1,6 +1,6 @@
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { buttons } = require('@config/componentsId.json');
-const { getLocalizedText } = require('@source/functions/locale/getLocale');
+const { getLocalizedText } = require('@functions/locale/getLocale');
 
 async function activityButtons(interaction, disableGroupReadyButton) {
 	const joinToActivityId = buttons.joinToActivityButton;

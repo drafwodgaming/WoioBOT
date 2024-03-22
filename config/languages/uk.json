@@ -4,7 +4,8 @@
 		"activity": {
 			"description": "Управління активностями",
 			"newActivity": {
-				"description": "Створення нової активності"
+				"description": "Створення нової активності",
+				"selectPingRole": "Оберіть роль"
 			},
 			"searchActivity": {
 				"description": "Пошук існуючих активностей на сервері",
@@ -96,9 +97,19 @@
 			"disableChannel": "Відключіть канал \"Join To Create\"",
 			"channelOption": "Встановіть канал \"Join To Create\""
 		},
-		"bugReport": {
-			"description": "Розповісти про баг",
-			"reportExists": "Ви вже відправили звіт про баг"
+		"report": {
+			"description": "Напиши повідомлення адміністратору бота",
+			"typeDescription": "Виберіть тип",
+			"reportDescription": "Опишіть свою помилку або пропозицію",
+			"bugTitle": "{{{bug}}} | Помилка",
+			"suggestionTitle": "{{{suggestion}}} | Пропозиція",
+			"otherTitle": "{{{other}}} | Інше",
+			"reportBy": "Репорт відправив {{user}} (Сервер: {{guild}})",
+			"succesSendReport": "Репорт успешно отправлен",
+			"fields": {
+				"description": "Опис"
+			},
+			"preview": "Попередній перегляд звіту"
 		}
 	},
 	"components": {
@@ -134,7 +145,7 @@
 				},
 				"activityPingRole": {
 					"label": "Role",
-					"roleNotFoundMessage": "{{{warningEmoji}}} Роль на сервере не найдена"
+					"roleNotFoundMessage": "{{{warningEmoji}}} Роль на сервері не знайдено"
 				},
 				"activityInfo": {
 					"playersField": "Учасники",
@@ -167,10 +178,10 @@
 			}
 		},
 		"buttons": {
-			"bugReport": {
-				"fixedBug": {
-					"name": "Fix",
-					"succesFix": "Ваш звіт про помилку було вирішено. Дякуємо за допомогу в поліпшенні!"
+			"report": {
+				"sendReport": {
+					"name": "Send Report",
+					"successSent": "Report was sent"
 				}
 			},
 			"activity": {

@@ -9,7 +9,7 @@ const ru = require('@config/languages/ru.json');
 const uk = require('@config/languages/uk.json');
 const {
 	formatActivityLink,
-} = require('@source/functions/formatter/formatActivityLink');
+} = require('@functions/formatter/formatActivityLink');
 const { getLocalizedText } = require('@functions/locale/getLocale');
 const { getColor } = require('@functions/utils/getColor');
 const mustache = require('mustache');
@@ -33,8 +33,12 @@ module.exports = {
 				})
 				.addRoleOption(option =>
 					option
-						.setName('roles')
-						.setDescription('Select roles for the activity.')
+						.setName(en.commands.options.roleOption)
+						.setDescription(en.commands.activity.newActivity.selectPingRole)
+						.setDescriptionLocalizations({
+							ru: ru.commands.activity.newActivity.selectPingRole,
+							uk: uk.commands.activity.newActivity.selectPingRole,
+						})
 						.setRequired(true)
 				)
 		)
@@ -50,11 +54,11 @@ module.exports = {
 	async execute(interaction) {
 		const subCommand = interaction.options.getSubcommand();
 		const localizedText = await getLocalizedText(interaction);
-		const roleId = interaction.options.getRole('roles');
+		const roleId = interaction.options.getRole(en.commands.options.roleOption);
 
 		const linksColor = getColor('linksBlue');
 		const defaultBotColor = getColor('default');
-		const warningEmoji = emojis.goldWarning;
+		const warningEmoji = emojis.warning;
 		let responseEmbed;
 
 		switch (subCommand) {

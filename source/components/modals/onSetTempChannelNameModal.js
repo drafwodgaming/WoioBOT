@@ -1,5 +1,5 @@
 const { modals } = require('@config/componentsId.json');
-const { getLocalizedText } = require('@source/functions/locale/getLocale');
+const { getLocalizedText } = require('@functions/locale/getLocale');
 
 module.exports = {
 	data: {

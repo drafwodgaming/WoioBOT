@@ -4,7 +4,10 @@
 		"options": {
 			"userOption": "user",
 			"channelOption": "channel",
-			"languageOption": "language"
+			"languageOption": "language",
+			"roleOption": "role",
+			"typeReportOption": "type",
+			"reportDescriptionOption": "description"
 		},
 		"subcommands": {
 			"setup": "setup",
@@ -17,7 +20,8 @@
 			"name": "activity",
 			"description": "Managing activities",
 			"newActivity": {
-				"description": "Creating a new activity"
+				"description": "Creating a new activity",
+				"selectPingRole": "Select role"
 			},
 			"searchActivity": {
 				"description": "Searching for existing activities on the server",
@@ -114,10 +118,20 @@
 			"disableChannel": "Disable \"Join To Create\"",
 			"channelOption": "Setup \"Join To Create\" channel"
 		},
-		"bugReport": {
+		"report": {
 			"name": "report",
-			"description": "Report a bug to the developer",
-			"reportExists": "You have already submitted a bug report"
+			"description": "Write a message to the owner of the bot",
+			"typeDescription": "Select type",
+			"reportDescription": "Describe your bug/suggestion",
+			"bugTitle": "{{{bug}}} | Bug",
+			"suggestionTitle": "{{{suggestion}}} | Suggestion",
+			"otherTitle": "{{{other}}} | Other",
+			"reportBy": "Report by {{user}} (Server: {{guild}})",
+			"succesSendReport": "Репорт успешно отправлен",
+			"fields": {
+				"description": "Description"
+			},
+			"preview": "Report Preview:"
 		}
 	},
 	"components": {
@@ -153,7 +167,7 @@
 				},
 				"activityPingRole": {
 					"label": "Role",
-					"roleNotFoundMessage": "{{{warningEmoji}}} Role not found"
+					"roleNotFoundMessage": "{{{warningEmoji}}} Role not found on the server"
 				},
 				"activityInfo": {
 					"playersField": "Participants",
@@ -186,10 +200,10 @@
 			}
 		},
 		"buttons": {
-			"bugReport": {
-				"fixedBug": {
-					"name": "Fix",
-					"succesFix": "Your bug report has been resolved. Thank you for helping us improve!"
+			"report": {
+				"sendReport": {
+					"name": "Send Report",
+					"successSent": "Report was sent"
 				}
 			},
 			"activity": {

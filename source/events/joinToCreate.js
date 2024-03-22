@@ -7,7 +7,7 @@ const {
 	settingsTempChannel,
 } = require('@functions/menus/setUpSettingsTempChannels');
 const { getColor } = require('@functions/utils/getColor');
-const { getLocalizedText } = require('@source/functions/locale/getLocale');
+const { getLocalizedText } = require('@functions/locale/getLocale');
 const mustache = require('mustache');
 
 module.exports = {

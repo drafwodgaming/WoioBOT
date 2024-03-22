@@ -8,13 +8,9 @@ const {
 const {
 	settingsTempChannel,
 } = require('@functions/menus/setUpSettingsTempChannels');
-const {
-	lockChannel,
-} = require('@source/functions/utils/JTCSystem/lockChannel');
-const {
-	unlockChannel,
-} = require('@source/functions/utils/JTCSystem/unlockChannel');
-const { getLocalizedText } = require('@source/functions/locale/getLocale');
+const { lockChannel } = require('@functions/utils/JTCSystem/lockChannel');
+const { unlockChannel } = require('@functions/utils/JTCSystem/unlockChannel');
+const { getLocalizedText } = require('@functions/locale/getLocale');
 
 module.exports = {
 	data: { name: menus.settingTempChannel },

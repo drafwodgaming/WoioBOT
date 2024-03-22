@@ -5,7 +5,7 @@ const {
 	TextInputStyle,
 } = require('discord.js');
 const { modals } = require('@config/componentsId.json');
-const { getLocalizedText } = require('@source/functions/locale/getLocale');
+const { getLocalizedText } = require('@functions/locale/getLocale');
 
 async function createTempChannelLimit(interaction) {
 	const localizedText = await getLocalizedText(interaction);
